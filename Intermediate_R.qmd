@@ -1,0 +1,158 @@
+---
+title: "Intermediate R"
+format: html
+editor: visual
+---
+
+## Prerequisites
+
+You should have a basic working knowledge of R/RStudio, up to the level covered in the **Getting Started with R & RStudio** workshop \[link\].
+
+## Exercises
+
+Exercises...... \[see LMMs\]
+
+## Data
+
+The data used in these materials is the `penguins` data from the palmerpenguins package.
+
+```{r}
+#| eval: false
+install.packages("palmerpenguins")
+```
+
+Load
+
+```{r}
+library(palmerpenguins)
+
+penguins <- data.frame(penguins)
+```
+
+\^ check I want to do this way
+
+## Exploring the data
+
+## The dplyr package
+
+The `dplyr` package includes various functions for common data manipulation tasks, such as filtering rows, selecting specific columns, sorting, modifying or removing columns, and summarising data.
+
+This kind of data manipulation is possible in base R, but `dplyr` makes data exploration and data analysis easy and fast in R.
+
+If you have not previously installed `dplyr`.............
+
+```{r}
+#| eval: false
+install.packages("dplyr")
+library(dplyr)
+```
+
+### Useful functions in dplyr
+
+`dplyr` offers a range of useful functions, each designed to perform a different data manipulation task. Some key ones are grouped below, grouped by the component of the data they work with (rows, columns, or groups of rows): \[\[EDIT\]\]
+
+|   | dplyr function | Description |
+|-------------------|-------------------|------------------------------------|
+| 3.1 Row operations | `filter(...)` | Filter rows (choose rows based on column values) |
+|  | `slice(...)` | Choose rows based on location |
+|  | `arrange(...)` | Sort the data (change the order of the rows) |
+|  | `desc(...)` |  |
+|  | `distinct(...)` |  |
+| Column operations | `select(...)` | Select columns to be included in the data |
+|  | `rename(...)` | Change the name of columns |
+|  | `mutate(...)` | Create new columns |
+| Summarisation | `group_by(...)` | Group the data by the values of (a) column(s) |
+|  | `summarise(...)` | Summarise (or aggregate the data - collapse a group into a single row |
+|  | `ungroup(...)` |  |
+| Joins | `left_join(...)` |  |
+|  | `right_join(...)` |  |
+|  | `inner_join(...)` |  |
+|  | `full_join(...)` |  |
+|  |  |  |
+
+For a complete list of all dplyr functions, you can check official `dplyr` documentation directly:
+
+-   dplyr Package Reference: <https://dplyr.tidyverse.org/reference/index.html>
+
+-   CRAN Package Page: <https://cran.r-project.org/web/packages/dplyr/>
+
+### 3.0 General syntax 
+
+Do general syntax?
+
+### The pipe operator
+
+An operator in R is a symbol that perform an operation (action) on values or objects.
+
+The `%>%` operator in R is called the pipe operator, and it comes from the `magrittr` package (which is included in `dplyr`). It allows for cleaner and more readable code by avoiding nested function calls or the need to save intermediate objects.
+
+It passes the result of one function as the first argument to the next function; the result from one step is then “piped” into the next step You can use the pipe to rewrite multiple operations that you can read left-to-right, top-to-bottom (reading the pipe operator as “then”)
+
+### 3.1 Row operations
+
+The `filter(...)` function allows you to select a subset of rows in a data frame.
+
+<details>
+
+<summary>When might filtering be useful?</summary>
+
+This text is hidden until expanded.
+
+-   Bullet 1
+-   Bullet 2
+
+You can include **Markdown** here.
+
+</details>
+
+The first argument is the name of the data frame you want to work with.
+
+The second and subsequent arguments refer to variables within that data frame, selecting rows where the expression is true. **Write better**
+
+**General syntax:**
+
+```{r}
+#| eval: false
+filter(data, condition1, condition2, ...)
+```
+
+For example, filter for penguins with body mass greater than 4000g. R checks every row of the data frame `penguins` to see whether the condition `body_mass_g > 4000` to.... and return all rows where TRUE (explain).
+
+```{r}
+#| eval: false
+filter(penguins, body_mass_g > 4000)
+```
+
+Further examples:
+
+If you want to check for equality.....
+
+```{r}
+#| eval: false
+filter(penguins, Species == "Adelie")
+filter(penguins, year == "2007")
+```
+
+Multiple conditions.........
+
+```{r}
+#| eval: false
+filter(penguins, Species == "Adelie", body_mass_g > 4000)
+```
+
+### 3.2 Column operations
+
+\[Do a dropdown linking to base R data manipulation section, and showing that xxx\$xxx is easier than mutate, especially when only doing one variables\]
+
+=====================
+
+\[maybe put this as a general "warning" reminder somwhere - see red in LMMs\]
+
+If you run the above code, the rows will print in the console. Perhaps you want to save this as a new dataset and do some analysis on it, in which case you need to assign it to a new variable name using the assingment operator (`<-`).
+
+```{r}
+#| eval: false
+heavy_penguins <- filter(penguins, body_mass_g > 4000)
+```
+
+## 
