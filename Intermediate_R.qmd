@@ -140,11 +140,13 @@ Multiple conditions.........
 filter(penguins, Species == "Adelie", body_mass_g > 4000)
 ```
 
+\[for each one show base R version\]
+
 ### 3.2 Column operations
 
-\[Do a dropdown linking to base R data manipulation section, and showing that xxx\$xxx is easier than mutate, especially when only doing one variables\]
+\[Do a dropdown linking to base R data manipulation section, and showing that using xx\$xx \<- is easier than mutate, especially when only doing one variable\]
 
-=====================
+===========================
 
 \[maybe put this as a general "warning" reminder somwhere - see red in LMMs\]
 
