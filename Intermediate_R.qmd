@@ -1,8 +1,35 @@
 ---
 title: "Intermediate R"
-format: html
+format:
+  html:
+    theme: default
+    include-in-header:
+      text: |
+        <style>
+        h2 {color: #872046;}
+        </style>
 editor: visual
 ---
+
+## Notes for GSW
+
+::: {.callout-note collapse="true"}
+### When is the c() function useful?
+
+Usually we wouldn't construct raw data manually...
+
+The c() function is very useful and pops up a lot
+
+e.g.
+
+```{r}
+#| eval = FALSE
+par(mfrow = c(2,2))
+
+```
+
+This code tells R....
+:::
 
 ## Prerequisites
 
@@ -33,42 +60,60 @@ penguins <- data.frame(penguins)
 
 ## Exploring the data
 
+## Data "manipulation" with base R
+
+Do a ‘working with data in base R’ chapter with CALL-OUTS (not collapsible) showing the equivalent dplyr functions
+
+N.B. Put MAN1147 code somewhere, + all Biosciences
+
+==============================================
+
 ## The dplyr package
 
 The `dplyr` package includes various functions for common data manipulation tasks, such as filtering rows, selecting specific columns, sorting, modifying or removing columns, and summarising data.
 
 This kind of data manipulation is possible in base R, but `dplyr` makes data exploration and data analysis easy and fast in R.
 
-If you have not previously installed `dplyr`.............
+If you have not previously installed `dplyr` package install it using the `install.packages()`
 
 ```{r}
 #| eval: false
 install.packages("dplyr")
+```
+
+Load the `dplyr` package using the `library()` function as shown below:
+
+```{r}
+#| eval: false
 library(dplyr)
 ```
 
-### Useful functions in dplyr
+### Functions in dplyr
 
-`dplyr` offers a range of useful functions, each designed to perform a different data manipulation task. Some key ones are grouped below, grouped by the component of the data they work with (rows, columns, or groups of rows): \[\[EDIT\]\]
+`dplyr` offers a range of useful functions, each designed to perform a different data manipulation task. These functions are often referred to as "verbs" because they "do things" to data.
 
-|   | dplyr function | Description |
-|-------------------|-------------------|------------------------------------|
-| 3.1 Row operations | `filter(...)` | Filter rows (choose rows based on column values) |
-|  | `slice(...)` | Choose rows based on location |
-|  | `arrange(...)` | Sort the data (change the order of the rows) |
-|  | `desc(...)` |  |
-|  | `distinct(...)` |  |
-| Column operations | `select(...)` | Select columns to be included in the data |
-|  | `rename(...)` | Change the name of columns |
-|  | `mutate(...)` | Create new columns |
-| Summarisation | `group_by(...)` | Group the data by the values of (a) column(s) |
-|  | `summarise(...)` | Summarise (or aggregate the data - collapse a group into a single row |
-|  | `ungroup(...)` |  |
+Some key `dplyr` functions are listed in the table below, grouped into categories according to their roles:
+
+| Category | dplyr function | Description |
+|-------------------|-------------------|----------------------------------|
+| Row operations | `filter(...)` | Filters rows (choose rows based on column values). |
+|  | `slice(...)` | Chooses rows based on location. |
+|  | `distinct(...)` | Removes duplicate rows. |
+| Row ordering | `arrange(...)` | Sorts the data (changes the order of the rows). |
+|  | `desc(...)` | Indicates descending order when arranging rows - typically used inside `arrange()`. |
+| Column operations | `select(...)` | Selects columns to be included in the data. |
+|  | `rename(...)` | Changes the name of columns. |
+|  | `mutate(...)` | Creates new columns. |
+| Summarisation | `group_by(...)` | Groups the data by the values of one or more columns. |
+|  | `summarise(...)` | Aggregates data using summary functions (e.g. `mean()`), reducing it to one row overall or one row per group when used with `group_by()`. |
 | Joins | `left_join(...)` |  |
 |  | `right_join(...)` |  |
 |  | `inner_join(...)` |  |
 |  | `full_join(...)` |  |
-|  |  |  |
+| Other functions | `across(...)` | Applies one or more functions to selected columns (often inside `summarise()` or `mutate()`), letting you transform or summarise many columns in one go. |
+|  | `coalesce(...)` | Returns the first non-missing (`NA`-free) value from a set of vectors or columns, element by element, effectively "filling in" missing values from left to right. |
+|  | `if_else(...)` | Evaluates a logical test and returns one value where the test is true and another where it is false. |
+|  | `case_when(...)` | Evaluates multiple conditions in order and returns a value for the first condition that is true, allowing you to recode or create variables with many conditional rules. |
 
 For a complete list of all dplyr functions, you can check official `dplyr` documentation directly:
 
@@ -76,34 +121,53 @@ For a complete list of all dplyr functions, you can check official `dplyr` docum
 
 -   CRAN Package Page: <https://cran.r-project.org/web/packages/dplyr/>
 
-### 3.0 General syntax 
+### General syntax and the pipe operator: %\>%
 
-Do general syntax?
+All of the dplyr functions take a data frame (or tibble) as the first argument. 
 
-### The pipe operator
+For example, in the `select()` command below, the first argument is `penguins`, telling R that we want to apply the `select()` function to our `penguins` data frame. (Specifically, this command selects the species and island columns.)
 
-An operator in R is a symbol that perform an operation (action) on values or objects.
+```{r}
+#| eval = FALSE
+select(penguins, species, island)
+```
 
-The `%>%` operator in R is called the pipe operator, and it comes from the `magrittr` package (which is included in `dplyr`). It allows for cleaner and more readable code by avoiding nested function calls or the need to save intermediate objects.
+However, we could use the following code to achieve the same thing:
 
-It passes the result of one function as the first argument to the next function; the result from one step is then “piped” into the next step You can use the pipe to rewrite multiple operations that you can read left-to-right, top-to-bottom (reading the pipe operator as “then”)
+```{r}
+#| eval = FALSE
+penguins %>% select(species, island)
+```
 
-### 3.1 Row operations
+In this version, the name of the data frame (`penguins`) is taken outside the function, and followed by '`%>%`' before the function call.
+
+`%>%` is called the pipe operator and comes from the `magrittr` package, which is included in `dplyr`. (Recall that an operator in R is a symbol that performs an operation (action) on values or objects.)
+
+The pipe operator passes the result of one function as the first argument to the next function; the result from one step is then "piped" into the next step.
+
+An easier way to think about it is to read '`%>%`' as 'then'. So in the example above, the code is telling R to: take the penguins data frame, *then*, select the species and island columns.
+
+The real benefit of using `%>%` comes when combining multiple dplyr functions together. It allows for cleaner and more readable code by avoiding nested function calls or the need to save intermediate objects - more on this later.
+
+We will start by using single dplyr functions, but will still use the %\>% version to keep the syntax consistent.
+
+::: {.callout-note collapse="true"}
+### Why are we not using \$?
+
+When we first talked about selecting columns in data frames, we said we had to use \$ e.g. `penguins$species`.
+
+With dplyr.......
+:::
+
+### Row operations
 
 The `filter(...)` function allows you to select a subset of rows in a data frame.
 
-<details>
+::: {.callout-note collapse="true"}
+### When is filtering useful?
 
-<summary>When might filtering be useful?</summary>
-
-This text is hidden until expanded.
-
--   Bullet 1
--   Bullet 2
-
-You can include **Markdown** here.
-
-</details>
+Filtering is useful when...
+:::
 
 The first argument is the name of the data frame you want to work with.
 
@@ -142,9 +206,11 @@ filter(penguins, Species == "Adelie", body_mass_g > 4000)
 
 \[for each one show base R version\]
 
-### 3.2 Column operations
+### Column operations
 
 \[Do a dropdown linking to base R data manipulation section, and showing that using xx\$xx \<- is easier than mutate, especially when only doing one variable\]
+
+### Combining multiple dplyr function in a single command
 
 ===========================
 
@@ -152,9 +218,38 @@ filter(penguins, Species == "Adelie", body_mass_g > 4000)
 
 If you run the above code, the rows will print in the console. Perhaps you want to save this as a new dataset and do some analysis on it, in which case you need to assign it to a new variable name using the assingment operator (`<-`).
 
+\[removed from general pipe explanation: You can use the pipe to rewrite multiple operations that you can read left-to-right, top-to-bottom (reading the pipe operator as “then”)\]
+
 ```{r}
 #| eval: false
 heavy_penguins <- filter(penguins, body_mass_g > 4000)
 ```
 
-## 
+===========================
+
+## Glossary
+
+| Term                | Definition |
+|---------------------|------------|
+| assignment operator |            |
+| base R              |            |
+|                     |            |
+| data frame          |            |
+| function            |            |
+| object              |            |
+| operator            |            |
+| package             |            |
+| pipe operator       |            |
+| scalar              |            |
+| tibble              |            |
+|                     |            |
+| variable            |            |
+| vector              |            |
+|                     |            |
+|                     |            |
+|                     |            |
+|                     |            |
+|                     |            |
+|                     |            |
+|                     |            |
+|                     |            |
