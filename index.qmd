@@ -4,4 +4,6 @@ format: html
 editor: visual
 ---
 
-- <a href="Intermediate_R.html" target="_blank">Intermediate R</a>
+# Welcome {.unnumbered}
+
+- [Intermediate R](Intermediate_R.qmd)

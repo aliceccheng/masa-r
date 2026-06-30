@@ -1,0 +1,17 @@
+project:
+  type: book
+  output-dir: _site
+
+book:
+  title: "placeholder"
+  search:
+    location: sidebar
+  chapters:
+    - index.qmd
+    - text: "Intermediate R"
+      href: Intermediate_R.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
