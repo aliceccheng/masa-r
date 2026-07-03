@@ -1,10 +1,6 @@
 project:
   type: book
   output-dir: _site
-  # render:
-  #   - index.qmd
-  #   - Introduction.qmd
-  #   - materials/*
 
 format:
   html:
@@ -34,5 +30,5 @@ book:
   chapters:
     - part: "Welcome"
       chapters:
-        - Overview.qmd
+        - index.qmd
         - Introduction.qmd
