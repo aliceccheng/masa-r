@@ -43,7 +43,7 @@ class(gapminder)
 The output here tells us that gapminder is a data frame, which is R's standard structure for storing tabular data (i.e. data organised into rows and columns). More specifically, the gapminder data is stored as a tibble.
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â tibble vs. data frame - what's the difference?
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  tibble vs. data frame - what's the difference?
 
 A tibble is a modern type of data frame with some additional features, such as printing more cleanly in the console. Throughout these materials, we'll use the general term "data frame".
 :::
@@ -320,7 +320,7 @@ It is therefore important to be aware of any missing values in your data so that
 ## Summary
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Key points
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
 
 - Get to know your data before starting analysis!
 :::

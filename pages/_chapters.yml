@@ -14,3 +14,11 @@ book:
           href: pages/Intermediate_R_5_Plotting_with_ggplot2.qmd
         - text: "Glossary"
           href: pages/Glossary.qmd
+    - part: "BMS1066/7"
+      chapters:
+        - text: "Workshop 1"
+          href: pages/BMS_yr1_workshop1.qmd
+        - text: "Workshop 2"
+          href: pages/BMS_yr1_workshop2.qmd
+        - text: "Workshop 3"
+          href: pages/BMS_yr1_workshop3.qmd

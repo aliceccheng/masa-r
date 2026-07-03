@@ -73,7 +73,7 @@ In the following sections we'll look at these components in more detail, returni
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Link to workshop aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Link to workshop aims
 
 Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to explore how life expectancy differed across continents in 2007. In the `dplyr` [summarisation](Intermediate_R_4_Data_manipulation_with_dplyr.qmd#summarisation) section, we used descriptive statistics to being answering this question (using `group_by()` and `summarise()`). This boxplot now allows us to visualise this information, making it easier to compare distributions across continents.
 :::
@@ -82,7 +82,7 @@ Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Interpreting this boxplot
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Interpreting this boxplot
 
 Note that the medians shown in each boxplot above are not the median life expectancies of the overall populations of each continent. Since the data contains one observation per country, the median represents the median across countries within each continent - countries with larger populations are not weighted any differently to smaller ones.
 
@@ -90,7 +90,7 @@ If presenting this plot formally, it would be worth including a footnote to make
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Where to put the "+"
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Where to put the "+"
 
 When building up a ggplot2 plot, the `+` must be placed at the end of a line, not the beginning. For example:
 
@@ -174,7 +174,7 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Some plots do not require the `y=` argument
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Some plots do not require the `y=` argument
 
 Some plot types only require the `x=` argument. For example, histograms and bar charts of counts map a single variable to the xâ€‘axis, and ggplot2 automatically computes the frequencies for the y-axis).
 
@@ -205,7 +205,7 @@ For example, you could add `geom_point()` on top of `geom_boxplot()` to show the
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Which plot type should I use?
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Which plot type should I use?
 
 The plot type you choose depends on the type of variables you are working with.
 
@@ -238,7 +238,7 @@ We have already used `x=` and `y=` within the `aes()` function to map variables 
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Plot type determines available aesthetics
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Plot type determines available aesthetics
 
 Not all aesthetics apply to all plot types. For example, linetype is only relevant for line-based plots (e.g. `geom_line()`), and fill only applies to plots with filled areas (e.g. `geom_bar()` and `geom_boxplot()`).
 :::
@@ -815,7 +815,7 @@ LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
 ## Summary
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Key points
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
 
 - Plots are built up in layers by combining components using `+`:
   - The first component is `ggplot()`, which specifies the data and maps variables to aesthetics using `aes()` - importantly, it determines which variables go on the axes.

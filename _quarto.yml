@@ -12,8 +12,8 @@ format:
 metadata-files:
   - "pages/_chapters.yml"
 
-params:
-  show_setup: false
+metadata:
+  show-setup: false
 
 book:
   title: "MASA R"

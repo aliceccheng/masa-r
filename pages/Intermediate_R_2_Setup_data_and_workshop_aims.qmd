@@ -75,7 +75,7 @@ From now on, unless you're testing a small piece of code, write all of your code
 The dataset used in these materials is the `gapminder` data frame, contained within the `gapminder` package in R. It is an excerpt of the full <a href = "https://www.gapminder.org/data/" target="_blank" rel="noopener">Gapminder data</a>.
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Importing your own data
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Importing your own data
 
 For these materials we are using the gapminder data that is directly available in R. When working with your own data, you will usually import it from Excel. This is covered in our *Getting Started with R & RStudio* materials \[link\].
 :::
@@ -125,7 +125,7 @@ We can see that we have life expectancy, population and GDP data for multiple co
 The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
 
 - Compare life expectancy across continents in 2007
 - Examine the relationship between population and GDP in 2007

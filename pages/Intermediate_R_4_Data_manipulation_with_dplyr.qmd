@@ -48,7 +48,7 @@ The table below gives an overview of a range of `dplyr` functions, grouped into 
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Where can I find examples of how to use all of these functions?
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Where can I find examples of how to use all of these functions?
 
 We'll explore some of these functions in more detail in the following sections, but for a more extensive list of `dplyr` functions and how to use them, the following website is very helpful:
 
@@ -65,7 +65,7 @@ For a complete list of `dplyr` functions, you can check official `dplyr` documen
 - Reference manual (pdf version): <https://cran.r-project.org/web/packages/dplyr/dplyr.pdf>
 :::
 
-### 4.1.3 Using dplyr functions: general syntax and the pipe operator
+### Using dplyr functions: general syntax and the pipe operator
 
 Most of the dplyr functions in the table above can be used by following the same basic code pattern:
 
@@ -138,7 +138,7 @@ This code is telling R to: take the gapminder data, *then* filter it for records
 In the following sections we'll go over the specific syntax for writing these types of commands in more detail.
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Using dplyr functions without \|\>
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Using dplyr functions without \|\>
 
 Although dplyr functions are often used with the pipe operator, this is not required. Every dplyr function can also be called directly by supplying the dataset as the first argument.
 
@@ -162,7 +162,7 @@ For consistency, we'll use the pipe operator syntax throughout these materials.
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â \|\> versus %\>%
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   \|\> versus %\>%
 
 If you've worked with dplyr before, you may have seen a different pipe operator: `%>%`
 
@@ -174,7 +174,7 @@ Essentially, you can use either!
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Why are we not using \$ to select columns from the data frame (e.g. gapminder\$country)?
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Why are we not using \$ to select columns from the data frame (e.g. gapminder\$country)?
 
 When using dplyr functions, you can usually refer to columns by name without specifying the data frame they belong to. For example:
 
@@ -220,7 +220,7 @@ To do this, you write a **filter condition** that tests each row and returns eit
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Use `==` instead of `=` for filtering for equality
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Use `==` instead of `=` for filtering for equality
 
 Notice from the table above that when filtering for values that are equal to something, you must use `==` rather than `=` in the filter condition.
 
@@ -228,7 +228,7 @@ This is because `filter()` requires a logical condition. The `==` operator *test
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Using the `&` and `|` operators
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Using the `&` and `|` operators
 
 The `&` (and) and `|` (or) operators allow you to combine multiple conditions inside a single logical expression.
 
@@ -275,7 +275,7 @@ ___________ <- ________ |> filter(______________________, ______________________
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}   Aims
 
 Recall that our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) involve exploring data from 2007.
 
@@ -324,7 +324,7 @@ gapminder |> filter(pop < 100000)
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}Â Â Remember to use quotations for character values
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Remember to use quotations for character values
 
 Remember to use quotes (`""` or `''`) when referring to character values (e.g. `country == "France"`) but no quotes when referring a numeric value.
 :::
@@ -333,7 +333,7 @@ Remember to use quotes (`""` or `''`) when referring to character values (e.g. `
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}Â Â Further examples
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Further examples
 
 You can use the `help()` function to open the R help page for a particular function e.g.:
 
@@ -351,7 +351,7 @@ Towards the bottom of the help page there will be lots of examples of using that
 :::
 
 ::::: {.callout-note icon="false" collapse="true"}
-### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}Â Â Checking that filtering has worked
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Checking that filtering has worked
 
 It's always good to check that your filtering has worked as expected before moving on to further analysis.
 
@@ -450,7 +450,7 @@ new data     data               column one     column two    column three
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}   Aims
 
 Recall that our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) involve exploring data from 2007.
 
@@ -488,7 +488,7 @@ gapminder_2007_clean2 <- gapminder_2007 |> select(-year)
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â You can use `select()` with a minus sign to *drop* columns
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   You can use `select()` with a minus sign to *drop* columns
 
 You can also use `select()` with a minus sign (`-`) to **drop** columns instead of keeping them. This is useful when you want to remove just a few columns while keeping all the others.
 :::
@@ -640,7 +640,7 @@ Only use the same data frame or column name if you intentionally want to replace
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}Â Â Base R alternative for mutate()
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Base R alternative for mutate()
 
 Particularly when you want to add or update a column in an existing data frame (i.e. keep the same data frame name), base R can sometimes be simpler.
 
@@ -853,7 +853,7 @@ ___________ <- ________ |> group_by(________________) |>
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}   Aims
 
 Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to compare life expectancy across continents in 2007.
 
@@ -897,7 +897,7 @@ continent_summary_2007
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}   Aims
 
 Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to compare life expectancy across continents in 2007.
 
@@ -934,7 +934,7 @@ You can do the same for `dplyr` functions in general - you can chain as many fun
 This is why in these materials we have always used the `|>` syntax even for single functions - it is consistent with how pipelines are written when chaining multiple functions together, making it easier to add extra steps later without restructuring the code.
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}   Aims
 
 Since our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) involve exploring data from 2007, we previously we filtered the original `gapminder` data for 2007 data using `filter()`, then removed the `year` column using `select`. The example below shows how we could have done this using a single pipeline.
 :::
@@ -1186,7 +1186,7 @@ gapminder |>
 ## Summary
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Key points
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}    Key points
 
 - The dplyr package offers a range of functions that can be used to get your data into the form needed for analysis, or to create summaries of the data.
 - You can chain multiple functions into a single pipeline using the pipe operator `|>`, interpreting each `|>` as â€œthenâ€.

@@ -1,0 +1,73 @@
+# Workshop 2
+
+## Setup
+
+## Basic setup & packages {#setup}
+
+Follow the steps below to get set up for this workshop:
+
+1.  Open RStudio (you do not need to open R separately)
+
+2.  Create a new script and save it in a location you can easily find later
+
+3.  To install all of the packages used in this course, run the following code in your **console**:
+
+::: {.panel-tabset .panel-green group="language"}
+## R
+
+```{r}
+#| eval: false
+install.packages("palmerpenguins")
+install.packages("dplyr")
+install.packages("ggplot2")
+```
+
+{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
+:::
+
+4.  To *load* the required packages, copy and run the following code in your **script**:
+
+::: {.panel-tabset .panel-green group="language"}
+## R
+
+```{r}
+#| message: false
+#| warning: false
+#| results: "hide"
+# Load packages
+install.packages("palmerpenguins"
+library(dplyr)
+library(ggplot2)
+```
+
+{{< fa lightbulb >}} You'll need to load any packages required for your work each time you start a new R session.
+:::
+
+::: {style="margin-top: 2em;"}
+:::
+
+::: callout-important
+### Write code in your script, not the console
+
+From now on, unless you're testing a small piece of code, write all of your code in the script rather than the console. This makes it easier to save, review, and rerun your work later.
+:::
+
+## Reminders
+
+
+## Data:penguins
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
