@@ -12,6 +12,7 @@ metadata-files:
 
 book:
   title: "MASA R"
+  page-navigation: true
   navbar:
     pinned: true
     background: primary
