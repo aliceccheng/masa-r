@@ -62,7 +62,7 @@ Exercises in these materials are labelled according to their level of difficulty
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: dplyr-table
 | Level | Description |
-|--------------------|----------------------------------------------------|
+|---------------------|---------------------------------------------------|
 | {{< fa star >}} {{< fa regular star >}} {{< fa regular star >}} | Level 1 exercises are similar to the workshop examples. |
 | {{< fa star >}} {{< fa star >}} {{< fa regular star >}} | Level 2 exercises extend the workshop examples, for example by using a different function. |
 | {{< fa star >}} {{< fa star >}} {{< fa star >}} | Level 3 exercises go beyond the workshop examples, for example by combining multiple ideas or extending the syntax covered. |
@@ -152,7 +152,7 @@ For these materials we are using the gapminder data that is directly available i
 
 The `gapminder` data frame contains country-level data on life expectancy, population, and GDP per capita across multiple years. The data frame includes six variables:
 
-![](images/clipboard-726576217.png){width="281" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-726576217.png){width="281" style="display:block; margin: 2em auto;"}
 
 *Life expectancy at birth* is the average number of years a newborn infant is expected to live if current mortality rates and death patterns remain constant throughout their lifetime.
 
@@ -173,7 +173,7 @@ gapminder <- gapminder
 
 ...that will then be visible in the Environment pane:
 
-![](images/clipboard-1174445029.png){width="350" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-1174445029.png){width="350" style="display:block; margin: 2em auto;"}
 
 We could view the entire data frame in the console by typing its name and running it, but it’s often nicer to view it in the Source pane. You can do this either by clicking on the data frame in the Environment pane (which automatically runs `View()`), or by using the `View()` function directly:
 
@@ -186,7 +186,7 @@ View(gapminder)
 ```
 :::
 
-![](images/clipboard-186928276.png){width="529" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-186928276.png){width="529" style="display:block; margin: 2em auto;"}
 
 We can see that we have life expectancy, population and GDP data for multiple countries within multiple continents, for a selection of years.
 
@@ -288,7 +288,7 @@ View(gapminder)
 ```
 :::
 
-![](images/clipboard-186928276.png){width="529" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-186928276.png){width="529" style="display:block; margin: 2em auto;"}
 
 **Examine the structure of the data frame**
 
@@ -304,7 +304,7 @@ str(gapminder)
 
 The same information can also be viewed by clicking the blue arrow to the left of the data frame name in the Environment pane:
 
-![](images/clipboard-2545698866.png){width="600" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-2545698866.png){width="600" style="display:block; margin: 2em auto;"}
 
 The output from the `str()` function shows us:
 
@@ -544,7 +544,7 @@ We installed and loaded `dplyr` in the [basic setup & packages](#setup) stage.
 
 To confirm that `dplyr` has successfully installed and loaded in your session, check that `dplyr` is ticked in the Packages tab of the Output pane:
 
-![](images/clipboard-2729860430.png){width="700" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-2729860430.png){width="700" style="display:block; margin: 2em auto;"}
 
 ### 4.1.2 Overview of functions available in dplyr
 
@@ -721,7 +721,7 @@ Row operations allow you to keep, remove, reorder, or otherwise manipulate rows 
 
 ::: dplyr-table
 | dplyr function | Description |
-|-----------------|---------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | filter(...) slice(...) distinct(...) | Filters rows (choose rows based on column values). Chooses rows based on location. Removes duplicate rows. |
 :::
 
@@ -733,7 +733,7 @@ To do this, you write a **filter condition** that tests each row and returns eit
 
 ::: {#dplyr-filter}
 | Operator | Operator meaning | Example filter condition | Result: Keeps rows where... |
-|--------------|--------------|-------------------|--------------------------|
+|----------------|----------------|-----------------|-----------------------|
 | `==` | equal to | `country == "France"` | The `country` column is equal to `"France"` |
 | `!=` | not equal to | `year != 2007` | The `year` column is not equal to `2007` |
 | `>` | greater than | `pop > 500000` | `pop` (population) is greater than `500,000` |
@@ -872,7 +872,7 @@ help(filter)
 
 Towards the bottom of the help page there will be lots of examples of using that function:
 
-![](images/clipboard-3498626644.png){width="600" style="display:block; margin: 2em auto;"} \*\*\[Note these don't all use \|\>\]
+![](../images/clipboard-3498626644.png){width="600" style="display:block; margin: 2em auto;"} \*\*\[Note these don't all use \|\>\]
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -913,7 +913,7 @@ Row ordering allows you to arrange the rows in a dataset based on the values of 
 
 ::: dplyr-table
 | dplyr function | Description |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `arrange(...)` | Sorts the data (changes the order of the rows). |
 | `desc(...)` | Indicates descending order when arranging rows (typically used inside `arrange()`). |
 :::
@@ -1197,7 +1197,7 @@ In dplyr, this is typically done using `group_by()` and `summarise`, shown in th
 
 ::: geomxxx-table
 | dplyr function | Description |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `group_by(...)` | Groups the data by the values of one or more columns. |
 | `summarise(...)` | Aggregates data using summary functions (e.g. `mean()`), reducing it to one row overall or one row per group when used with `group_by()`. |
 :::
@@ -1214,7 +1214,7 @@ In R, summary statistic functions are applied to a vector of data (e.g. a column
 
 ::: dplyr-table
 | Summary function | Description |
-|----------------------|--------------------------------------------------|
+|-----------------------|-------------------------------------------------|
 | `n()` | Counts the number of rows. Takes no arguments. \| |
 | `mean(...)` | Calculates the arithmetic mean (average). |
 | `median(...)` | Calculates the median (middle value). |
@@ -1243,7 +1243,7 @@ Rather than calculating a single statistic, some functions return a predefined s
 
 ::: dplyr-table
 | Summary function | Description |
-|---------------|---------------------------------------------------------|
+|-----------------|-------------------------------------------------------|
 | `summary()` | Returns summary statistics for each variable. For numeric variables, this includes the minimum, first quartile, median, mean, third quartile, and maximum. For factors, it returns frequency counts for each level. |
 | `describe(...)` | From the `Hmisc` package. Provides a more detailed summary than `summary()`, including information on missing values and additional percentiles for numeric variables. |
 :::
@@ -1737,13 +1737,13 @@ We installed and loaded `ggplot2` in the [basic setup & packages](#setup) stage.
 
 To confirm that `ggplot2` has successfully installed and loaded in your session, check that `ggplot2` is ticked in the Packages tab of the Output pane:
 
-![](images/clipboard-694121927.png){width="700" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-694121927.png){width="700" style="display:block; margin: 2em auto;"}
 
 ### 5.1.2 Overview of general code structure for creating a plot
 
 A plot produced with the `ggplot2` package is built up using component functions which are "added" together using the `+` operator. This is illustrated in the code below.
 
-![](images/clipboard-1526284648.png){width="700" style="display:block; margin: 2em auto;"}
+![](../images/clipboard-1526284648.png){width="700" style="display:block; margin: 2em auto;"}
 
 The code above produces a box plot. However, the same structure applies to any ggplot2 plot - it is built up from several components, connected using `+`:
 
@@ -1845,7 +1845,7 @@ The second component is the `geom_xxx()` function, which specifies the type of p
 
 ::: {#geomxxx-table}
 | Function | Plot type |
-|--------------------|----------------------------------------------------|
+|---------------------|---------------------------------------------------|
 | `geom_point()` | scatter plot |
 | `geom_line()` | line chart |
 | `geom_bar()` | bar chart (default bar heights are counts) |
@@ -1950,7 +1950,7 @@ We have already used `x=` and `y=` within the `aes()` function to map variables 
 
 ::: {}
 | Aesthetic argument | Description |
-|------------------|------------------------------------------------------|
+|-------------------|-----------------------------------------------------|
 | `x=` | Specifies which variable (column) to map to the x-axis |
 | `y=` | Specifies which variable (column) to map to the y-axis |
 | `colour=` | Assign different colours based on the specified variable (for points, lines or borders, depending on plot type) |
@@ -2057,7 +2057,7 @@ Below are some commonly used fixed aesthetics. Some are available across many di
 
 ::: {}
 | Aesthetic argument | Description | Example | Valid values | Plot types |
-|------------|-------------|------------|-------------------------|------------|
+|-------------|-------------|-------------|-------------------|-------------|
 | `colour=` | Controls the colour of points, lines, or borders | `colour = "blue"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a> | point, line, bar, boxplot |
 | `fill=` | Controls the fill colour of areas | `fill = "red"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a> | bar, histogram, boxplot |
 | `size=` | Controls the size of points or lines | `size = 3` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/size" target="_blank" rel="noopener"> size guide </a> | scatter, line |
@@ -2166,7 +2166,7 @@ Below are some commonly used arguments within `labs()`:
 
 ::: {}
 | Label argument | Description | Example |
-|----------------|--------------------------------------|------------------|
+|------------------|-------------------------------------|------------------|
 | `title=` | Main title of the plot | `title = "GDP per capita by continent"` |
 | `subtitle=` | Subtitle displayed below the title | `subtitle = "Data from 2007"` |
 | `x=` | x-axis label | `x = "Population"` |
@@ -2280,7 +2280,7 @@ Below are some commonly used additional components:
 
 ::: {}
 | Component | Description | Example |
-|-----------------|--------------------------------------|-----------------|
+|------------------|-------------------------------------|------------------|
 | `theme_xxx()` | Changes the overall appearance of the plot (background, gridlines, fonts etc.) | `theme_minimal()`, `theme_classic()`, `theme_bw()` |
 | `xlim()` / `ylim()` | Sets the limits of the x or y axis | `xlim(0, 100)`, `ylim(0, 50)` |
 | `scale_x_continuous()` / `scale_y_continuous()` | Customises a continuous axis (breaks, labels, limits) | `scale_x_continuous(breaks = seq(0, 100, 10))` |
@@ -2405,7 +2405,7 @@ Once you are happy with your plot, you may want to save it to use elsewhere - fo
 
 The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
 
-![](images/clipboard-1982207542.png)
+![](../images/clipboard-1982207542.png)
 
 ### 5.4.2 Saving your plot
 
@@ -2413,7 +2413,7 @@ To save a plot as an image file, you can either:
 
 - Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
 
-![](images/clipboard-3693964577.png)
+![](../images/clipboard-3693964577.png)
 
 - Use `ggsave()` in your code, which saves the most recently generated plot to a file:
 
@@ -2552,7 +2552,7 @@ LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
 ## Glossary
 
 | Term | Definition | Details/example |
-|--------------|---------------------------------|-------------------------|
+|-----------------|-------------------------------|------------------------|
 | argument | A value you give to a function inside its brackets to tell it what data to use or how to run. | In `max(gapminder$pop)`, `gapminder$pop` is the argument which is being given to the `max()` function. |
 | assignment operator | A symbol (`<-`) that is used to assign a value or object to a name. | `x <- 5` assigns the value 5 to a variable called x |
 | base R | The default set of functions and datasets that come with R without installing extra packages. | `mean()`, `plot()`, `data.frame()` are all functions that are available in base R |
