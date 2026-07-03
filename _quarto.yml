@@ -1,10 +1,10 @@
 project:
   type: book
   output-dir: _site
-  render:
-    - index.qmd
-    - Introduction.qmd
-    - materials/*
+  # render:
+  #   - index.qmd
+  #   - Introduction.qmd
+  #   - materials/*
 
 format:
   html:
