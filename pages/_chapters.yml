@@ -12,3 +12,5 @@ book:
           href: pages/Intermediate_R_4_Data_manipulation_with_dplyr.qmd
         - text: "Plotting with ggplot2"
           href: pages/Intermediate_R_5_Plotting_with_ggplot2.qmd
+        - text: "Glossary"
+          href: pages/Glossary.qmd

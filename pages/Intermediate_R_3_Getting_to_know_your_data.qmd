@@ -1,6 +1,6 @@
-﻿{{< include _intermediate_r_setup.qmd >}}
+{{< include _intermediate_r_setup.qmd >}}
 
-# 3 Getting to know your data
+# Getting to know your data
 
 It's a good idea to explore and get to know the data you're working with before starting any analysis. This helps you spot issues, understand what information is available, and avoid making incorrect assumptions before you begin analysing.
 
@@ -24,7 +24,7 @@ The following sections demonstrate some useful functions for exploring both your
 If you want to run any of the functions in this section on a different data frame, replace `gapminder` with the name of the data frame.
 :::
 
-### 3.1 Data properties
+### Data properties
 
 Below are some reminders of useful functions for exploring the properties of your data, demonstrated using the `gapminder` dataset.
 
@@ -121,7 +121,7 @@ When reviewing output for your own data, consider:
 - Do the example values shown for each variable look sensible?
 - Are there any variables that seem particularly useful for answering your research question?
 
-### 3.2 Generating basic summaries
+### Generating basic summaries
 
 Viewing the first few rows of a data frame (or the entire data frame) and using `str()` are useful first steps for understanding a dataset. However, particularly for larger datasets, it can be difficult to quickly understand the overall structure or key properties of the data.
 
@@ -172,7 +172,7 @@ The `unique()` function returns all distinct values in a particular column:
 unique(gapminder$country)
 ```
 
-### 3.3 Adjusting data types
+### Adjusting data types
 
 Sometimes, variables need to have their data types adjusted.
 
@@ -218,7 +218,7 @@ It is important to ensure categorical variables are stored as factors because th
 
 Similarly, if a numeric or integer variables represent categories (for example, 0 and 1 indicating no and yes), they should also be converted to factors so that R treats them as categorical rather than continuous data.
 
-### 3.4 Handling missing values
+### Handling missing values
 
 Missing values are not an issue in the gapminder data (there aren't any!), but they are very common in real life datasets. Because of this, it is useful to know how to identify and handle them in your own data.
 
@@ -317,7 +317,7 @@ In terms of the `dplyr` and `ggplot` content covered in these materials, if you 
 
 It is therefore important to be aware of any missing values in your data so that you can decide how best to handle them and interpret your results appropriately.
 
-## 3.5 Summary
+## Summary
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Key points

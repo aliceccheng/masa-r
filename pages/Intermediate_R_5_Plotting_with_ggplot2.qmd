@@ -1,14 +1,14 @@
 {{< include _intermediate_r_setup.qmd >}}
 
-# 5 Plotting with ggplot2
+# Plotting with ggplot2
 
 Base R provides various functions for creating particular plot types, for example, `plot()` for scatter plots, `hist()` for histograms and `boxplot()` for boxplots. It is perfectly fine to use these functions, particularly for quick exploratory visualisations, but the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
 
 `ggplot2` is an R package that provides a unified, consistent system for building graphics. Rather than having a separate function for each plot type, plots are built up layer by layer using a common syntax.
 
-## 5.1 The ggplot2 package: getting started
+## The ggplot2 package: getting started
 
-### 5.1.1 Installing and loading the ggplot2 package
+### Installing and loading the ggplot2 package
 
 We installed and loaded `ggplot2` in the [basic setup & packages](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#setup) stage.
 
@@ -16,7 +16,7 @@ To confirm that `ggplot2` has successfully installed and loaded in your session,
 
 ![](../images/clipboard-694121927.png){width="700" style="display:block; margin: 2em auto;"}
 
-### 5.1.2 Overview of general code structure for creating a plot
+### Overview of general code structure for creating a plot
 
 A plot produced with the `ggplot2` package is built up using component functions which are "added" together using the `+` operator. This is illustrated in the code below.
 
@@ -110,11 +110,11 @@ It is also good practice to add a new line after each `+` rather than writing th
 RStudio will automatically indent the next line for you, so you don't need to worry about doing this manually.
 :::
 
-## 5.2 Building a plot: components and customisation
+## Building a plot: components and customisation
 
 Now let's explore the different components in more detail and how to use them to build the plot you want.
 
-### 5.2.1 Produce the base plot: data, axes and plot type
+### Produce the base plot: data, axes and plot type
 
 The first component - `ggplot()` together with the `aes()` function nested within it - initialises (sets up) the plot. The first argument within `ggplot()` is the name of the data you want to use. The second argument is the `aes()` function (aes is short for aesthetics), which is used to specify which variables to plot on the x- and y-axis. The `aes()` function can also be used to map other visual properties to variables - this is covered in the next section.
 
@@ -219,7 +219,7 @@ For example:
 ::: {style="margin-bottom: 1.5rem;"}
 :::
 
-### 5.2.2 Set variable aesthetics within aes()
+### Set variable aesthetics within aes()
 
 In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of the plot - things like position (x and y), colour, size, and shape - and how variables in your data are mapped to them.
 
@@ -324,7 +324,7 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 :::
 ::::
 
-### 5.2.3 Set fixed aesthetics within geom_xxx()
+### Set fixed aesthetics within geom_xxx()
 
 So far we have used `geom_xxx()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments within it.
 
@@ -435,7 +435,7 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 :::
 ::::
 
-### 5.2.4 Add labels using labs()
+### Add labels using labs()
 
 Adding the `labs()` function as a component in your plot allows you to add or customise labels such as the title, axis labels, and legend title.
 
@@ -549,7 +549,7 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 :::
 ::::
 
-### 5.2.5 Add additional components for further customisation
+### Add additional components for further customisation
 
 Beyond fixed aesthetics and labels, there are additional components that can be added to a `ggplot2` plot to further customise its appearance. These are added in the same way as `labs()` â€” using the `+` operator to add a new layer.
 
@@ -569,7 +569,7 @@ Below are some commonly used additional components:
 | `coord_flip()` | Flips the x and y axes | `coord_flip()` |
 :::
 
-## 5.3 Full examples
+## Full examples
 
 In this section are some additional examples to demonstrate how all the components and arguments we have looked at can come together to produce a fully customised plot.
 
@@ -674,17 +674,17 @@ ggplot(gapminder_2007, aes(x = lifeExp)) +
 ```
 :::
 
-## 5.4 Copying and saving your plots
+## Copying and saving your plots
 
 Once you are happy with your plot, you may want to save it to use elsewhere - for example in a report or presentation.
 
-### 5.4.1 Copying your plot
+### Copying your plot
 
 The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
 
 ![](../images/clipboard-1982207542.png)
 
-### 5.4.2 Saving your plot
+### Saving your plot
 
 To save a plot as an image file, you can either:
 
@@ -701,9 +701,9 @@ ggsave("my_plot.png", width = 8, height = 5)
 
 `ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
 
-## 5.5 Exercises
+## Exercises
 
-### 5.5.1 Population by continent in 2007
+### Population by continent in 2007
 
 :::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 2
@@ -732,7 +732,7 @@ ggplot(gapminder_2007, aes(x = continent, y = pop)) +
 :::
 ::::
 
-### 5.5.2 UK population over time
+### UK population over time
 
 ::::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 1
@@ -796,7 +796,7 @@ ggplot(gapminder_uk, aes(x = year, y = pop)) +
 :::
 :::::
 
-### 5.5.3 xxxxxx
+### xxxxxx
 
 :::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 3
@@ -812,7 +812,7 @@ LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
 :::
 ::::
 
-## 5.6 Summary
+## Summary
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}Â Â Key points
@@ -826,28 +826,5 @@ LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
   - Fixed aesthetics (those that do not change with the data) are specified inside the `geom_xxx()` function(s).
 :::
 
-## Glossary
 
-| Term | Definition | Details/example |
-|-----------------|-------------------------------|------------------------|
-| argument | A value you give to a function inside its brackets to tell it what data to use or how to run. | In `max(gapminder$pop)`, `gapminder$pop` is the argument which is being given to the `max()` function. |
-| assignment operator | A symbol (`<-`) that is used to assign a value or object to a name. | `x <- 5` assigns the value 5 to a variable called x |
-| base R | The default set of functions and datasets that come with R without installing extra packages. | `mean()`, `plot()`, `data.frame()` are all functions that are available in base R |
-| component (in ggplot2) | A component of a ggplot object that controls some aspect of how the plot is displayed or behaves. Components are combined using the `+` operator. | Essential components are `ggplot()` and `geom_xxx` |
-| data frame | A type of object in R that is a table-like structure made of rows and columns, where each column can hold different types of data. | `gapminder` is a data frame |
-| function | A reusable piece of code that performs a specific task. The function is called using its name, followed by brackets where arguments (inputs) are provided to control how the function behaves or what data it uses. | The `mean()` function calculates a mean; the `filter()` function from the `dplyr` package filters data |
-| object | A data structure in R e.g. a data frame, vector, or function output |  |
-| operator | A symbol that performs an operation (action) on values or objects. | `+` is the addition operator; `|>` is the pipe operator |
-| package | A collection of functions, data, and documentation that extends Râ€™s capabilities. | `dplyr` is a package containing data manipulation functions; `ggplot2` is a package for creating data visualisations. |
-| pipe operator | A symbol used to pass the output of one function into the next. | `|>` means â€œthenâ€ |
-| R session | The time you are currently using R. | If you close R and open it again later, you start a new session. |
-| scalar | A single value (a vector of length 1). | `x <- 5` creates a scalar named `x` |
-| session | see R session |  |
-| syntax | The rules for how you must write R code so it works properly. | It is similar to grammar in a language. For example, in R you must use the correct brackets and commas when writing functions, otherwise the code will not run. |
-| tibble | A modern version of a data frame. | A tibble is very similar to a data frame but has some extra useful features, such as printing more cleanly in the console. |
-| variable | A name used to store and refer to a value or column in a dataset. | `lifeExp` is a variable in `gapminder` |
-| vector | A type of object that contains an ordered sequence of values of the same type (numeric, character, or logical). | `c(1, 3, 2)` is a numeric vector |
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
