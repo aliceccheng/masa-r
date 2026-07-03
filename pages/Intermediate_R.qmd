@@ -60,15 +60,14 @@ Template code is shown in blue panels like this one
 
 Exercises in these materials are labelled according to their level of difficulty:
 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: dplyr-table
+| Level | Description |
+|--------------------|----------------------------------------------------|
+| {{< fa star >}} {{< fa regular star >}} {{< fa regular star >}} | Level 1 exercises are similar to the workshop examples. |
+| {{< fa star >}} {{< fa star >}} {{< fa regular star >}} | Level 2 exercises extend the workshop examples, for example by using a different function. |
+| {{< fa star >}} {{< fa star >}} {{< fa star >}} | Level 3 exercises go beyond the workshop examples, for example by combining multiple ideas or extending the syntax covered. |
 
-::: dplyr-table
-| Level  | Description                                 |
-|----------------|---------------------------------------------|
-| {{< fa star >}} {{< fa regular star >}} {{< fa regular star >}}  | Level 1 exercises are similar to the workshop examples.  |
-| {{< fa star >}} {{< fa star >}} {{< fa regular star >}}  | Level 2 exercises extend the workshop examples, for example by using a different function.               |
-| {{< fa star >}} {{< fa star >}} {{< fa star >}}  | Level 3 exercises go beyond the workshop examples, for example by combining multiple ideas or extending the syntax covered.                        |
-::: {#levels-table}
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: {#levels-table}
 # 2 Setup, data and workshop aims
 
 ## 2.1 R & RStudio
@@ -110,7 +109,7 @@ install.packages("ggplot2")
 install.packages("Hmisc")
 ```
 
-{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again. 
+{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
 :::
 
 4.  To *load* the required packages, copy and run the following code in your **script**:
@@ -376,7 +375,6 @@ The `unique()` function returns all distinct values in a particular column:
 unique(gapminder$country)
 ```
 
-
 ### 3.3 Adjusting data types
 
 Sometimes, variables need to have their data types adjusted.
@@ -422,7 +420,6 @@ Now `country` is a factor (`Factor`), meaning R recognises it as a categorical v
 It is important to ensure categorical variables are stored as factors because this allows R to correctly treat them as groups in analyses and visualisations, rather than as plain text values.
 
 Similarly, if a numeric or integer variables represent categories (for example, 0 and 1 indicating no and yes), they should also be converted to factors so that R treats them as categorical rather than continuous data.
-
 
 ### 3.4 Handling missing values
 
@@ -507,7 +504,7 @@ mean(penguins$body_mass_g)
 ```
 :::
 
-This happens because the calculation cannot be completed when missing values are present. In this case, we can use the argument `na.rm = TRUE` to remove missing values before calculating the summary: 
+This happens because the calculation cannot be completed when missing values are present. In this case, we can use the argument `na.rm = TRUE` to remove missing values before calculating the summary:
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -557,7 +554,7 @@ The table below gives an overview of a range of `dplyr` functions, grouped into 
 
 ::: {#dplyroa-table}
 | Category | dplyr function | Description |
-|---|---|---|
+|------------------------|------------------------|------------------------|
 | Row operations | `filter(...)` | Filters rows (choose rows based on column values). |
 |  | `slice(...)` | Chooses rows based on location. |
 |  | `distinct(...)` | Removes duplicate rows. |
@@ -577,8 +574,6 @@ The table below gives an overview of a range of `dplyr` functions, grouped into 
 |  | `if_else(...)` | Evaluates a logical test and returns one value where the test is true and another where it is false. |
 |  | `case_when(...)` | Evaluates multiple conditions in order and returns a value for the first condition that is true, allowing you to recode or create variables with many conditional rules. |
 :::
-
-
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Where can I find examples of how to use all of these functions?
@@ -646,7 +641,7 @@ gapminder2 <- gapminder |> select(country, pop)
 
 ```
 
-**The pipe operator: |>**
+**The pipe operator: \|\>**
 
 The pipe operator, `|>`, is used to pass the result of one step directly into the next step; the results of one step is "piped" into the next step.
 
@@ -725,14 +720,9 @@ This works because the dataset has already been specified at the start of the co
 Row operations allow you to keep, remove, reorder, or otherwise manipulate rows in a dataset based on their values or position. Some examples of commonly used row operations are shown below.
 
 ::: dplyr-table
-+--------------+----------------------------------------------------+
-| dplyr        | Description                                        |
-| function     |                                                    |
-+==============+====================================================+
-| filter(...)  | Filters rows (choose rows based on column values). |
-| slice(...)   | Chooses rows based on location.                    |
-| distinct(...)| Removes duplicate rows.                            |
-+--------------+----------------------------------------------------+
+| dplyr function | Description |
+|-----------------|---------------------------------------------------|
+| filter(...) slice(...) distinct(...) | Filters rows (choose rows based on column values). Chooses rows based on location. Removes duplicate rows. |
 :::
 
 ### 4.2.1 Filtering: filter()
@@ -742,30 +732,16 @@ The `filter(...)` function allows you to select a subset of rows in a data frame
 To do this, you write a **filter condition** that tests each row and returns either TRUE or FALSE. Only rows where the condition is TRUE are kept. The table below shows some common operators used to create filter conditions, along with their meanings and examples.
 
 ::: {#dplyr-filter}
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| Operator    | Operator         | Example filter condition                      | Result: Keeps rows where...                                 |
-|             | meaning          |                                               |                                                             |
-+=============+==================+===============================================+=============================================================+
-| `==`        | equal to         | `country == "France"`                         | The `country` column is equal to `"France"`                 |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `!=`        | not equal to     | `year != 2007`                                | The `year` column is not equal to `2007`                    |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `>`         | greater than     | `pop > 500000`                                | `pop` (population) is greater than `500,000`                |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `<`         | less than        | `pop < 500000`                                | `pop` (population) is less than `500,000`                   |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `>=`        | greater than     | `lifeExp >= 80`                               | `lifeExp` (life expectancy) is greater than or equal to `80`|
-|             | or equal to      |                                               |                                                             |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `<=`        | less than        | `lifeExp <= 80`                               | `lifeExp` (life expectancy) is less than or equal to `80`   |
-|             | or equal to      |                                               |                                                             |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `&`         | and              | `year == 2007 & continent == "Europe"`        | Both conditions are true (the year is `2007` *and* the      |
-|             |                  |                                               | continent is `"Europe"`)                                    |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
-| `|`         | or               | `country == "France" | country == "Germany"`  | At least one condition is true (the country is `"France"`   |
-|             |                  |                                               | *or* `"Germany"`)                                           |
-+-------------+------------------+-----------------------------------------------+-------------------------------------------------------------+
+| Operator | Operator meaning | Example filter condition | Result: Keeps rows where... |
+|--------------|--------------|-------------------|--------------------------|
+| `==` | equal to | `country == "France"` | The `country` column is equal to `"France"` |
+| `!=` | not equal to | `year != 2007` | The `year` column is not equal to `2007` |
+| `>` | greater than | `pop > 500000` | `pop` (population) is greater than `500,000` |
+| `<` | less than | `pop < 500000` | `pop` (population) is less than `500,000` |
+| `>=` | greater than or equal to | `lifeExp >= 80` | `lifeExp` (life expectancy) is greater than or equal to `80` |
+| `<=` | less than or equal to | `lifeExp <= 80` | `lifeExp` (life expectancy) is less than or equal to `80` |
+| `&` | and | `year == 2007 & continent == "Europe"` | Both conditions are true (the year is `2007` *and* the continent is `"Europe"`) |
+| `|` | or | `country == "France" | country == "Germany"` | At least one condition is true (the country is `"France"` *or* `"Germany"`) |
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -805,8 +781,7 @@ gapminder |> filter(country == "France" | country == "Germany")
 ```
 :::
 
-The filter condition is passed as an argument to `filter(...)`, creating a complete filter statement that selects the rows you want to keep.
-The template code below illustrates the general structure of a full `filter()` statement:
+The filter condition is passed as an argument to `filter(...)`, creating a complete filter statement that selects the rows you want to keep. The template code below illustrates the general structure of a full `filter()` statement:
 
 ::: {.panel-tabset .panel-blue group="language"}
 ## R
@@ -880,7 +855,6 @@ gapminder |> filter(pop < 100000)
 ### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}  Remember to use quotations for character values
 
 Remember to use quotes (`""` or `''`) when referring to character values (e.g. `country == "France"`) but no quotes when referring a numeric value.
-
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -904,7 +878,7 @@ Towards the bottom of the help page there will be lots of examples of using that
 ::: {style="margin-bottom: 1.5rem;"}
 :::
 
-::: {.callout-note icon="false" collapse="true"}
+::::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}  Checking that filtering has worked
 
 It's always good to check that your filtering has worked as expected before moving on to further analysis.
@@ -931,22 +905,17 @@ table(gapminder_2007$year)
 head(gapminder_2007) 
 ```
 :::
-
-:::
-
+:::::
 
 ## 4.3 Row ordering
 
 Row ordering allows you to arrange the rows in a dataset based on the values of one or more variables, either in ascending or descending order. Some examples of commonly used row ordering operations are shown below.
 
 ::: dplyr-table
-+-----------------------+-------------------------------------------------------------------------------------+
-| dplyr function        | Description                                                                         |
-+=======================+=====================================================================================+
-| `arrange(...)`        | Sorts the data (changes the order of the rows).                                     |
-+-----------------------+-------------------------------------------------------------------------------------+
-| `desc(...)`           | Indicates descending order when arranging rows (typically used inside `arrange()`). |
-+-----------------------+-------------------------------------------------------------------------------------+
+| dplyr function | Description |
+|------------------|------------------------------------------------------|
+| `arrange(...)` | Sorts the data (changes the order of the rows). |
+| `desc(...)` | Indicates descending order when arranging rows (typically used inside `arrange()`). |
 :::
 
 ### 4.3.1 arrange() and descend()
@@ -976,16 +945,12 @@ gm_pop_desc <- gapminder |> arrange(year, desc(pop))
 
 Column operations allow you to select, rename, create, or otherwise manipulate the columns in a dataset. Some examples of commonly used column operations are shown below.
 
-::: dplyr-table
-+----------------------+-------------------------------------------------------------------------------------+
-| dplyr function       | Description                                                                         |
-+======================+=====================================================================================+
-| `select(...)`        | Selects columns to be included in the data.                                         |
-+----------------------+-------------------------------------------------------------------------------------+
-| `rename(...)`        | Changes the names of columns.                                                       |
-+----------------------+-------------------------------------------------------------------------------------+
-| `mutate(...)`        |  Creates new columns.                                                               |
-+----------------------+-------------------------------------------------------------------------------------+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: dplyr-table
+| dplyr function | Description                                 |
+|----------------|---------------------------------------------|
+| `select(...)`  | Selects columns to be included in the data. |
+| `rename(...)`  | Changes the names of columns.               |
+| `mutate(...)`  | Creates new columns.                        |
 
 ### 4.4.1 Selecting columns: select()
 
@@ -1231,13 +1196,10 @@ In practice, you'll often want to calculate summary statistics to describe your 
 In dplyr, this is typically done using `group_by()` and `summarise`, shown in the table below:
 
 ::: geomxxx-table
-+--------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| dplyr function                       | Description                                                                                                                               |
-+======================================+===========================================================================================================================================+
-| `group_by(...)`                      | Groups the data by the values of one or more columns.                                                                                     |
-+--------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
-| `summarise(...)`                     | Aggregates data using summary functions (e.g. `mean()`), reducing it to one row overall or one row per group when used with `group_by()`. |
-+--------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| dplyr function | Description |
+|------------------|------------------------------------------------------|
+| `group_by(...)` | Groups the data by the values of one or more columns. |
+| `summarise(...)` | Aggregates data using summary functions (e.g. `mean()`), reducing it to one row overall or one row per group when used with `group_by()`. |
 :::
 
 However, we'll start by recapping the base R functions used to calculate individual summary statistics (such as mean, median, and standard deviation).
@@ -1251,31 +1213,19 @@ A summary statistic is a single value that describes something about a set of da
 In R, summary statistic functions are applied to a vector of data (e.g. a column within a data frame) by placing the vector inside the brackets of the function. Some common summary statistic functions are given in the table below.
 
 ::: dplyr-table
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| Summary function                               | Description                                                                                                       |
-+================================================+===================================================================================================================+
-| `n()`                                          | Counts the number of rows. Takes no arguments.                                                                |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `mean(...)`                                    | Calculates the arithmetic mean (average).                                                                         |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `median(...)`                                  | Calculates the median (middle value).                                                                             |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `sd(...)`                                      | Calculates the standard deviation.                                                                                |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `var(...)`                                     | Calculates the variance.                                                                                          |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `min(...)`                                     | Returns the smallest value.                                                                                       |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `max(...)`                                     | Returns the largest value.                                                                                        |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `range(...)`                                   | Returns the smallest and largest values.                                                                          |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `IQR(...)`                                     | Calculates the interquartile range.                                                                               |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `quantile(...)`                                | Returns the requested quantiles (including quartiles).                                                            |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
-| `summary(...)`                                 | Returns several summary statistics at once (e.g. minimum, quartiles, median, mean, and maximum for numeric data). |
-+------------------------------------------------+-------------------------------------------------------------------------------------------------------------------+
+| Summary function | Description |
+|----------------------|--------------------------------------------------|
+| `n()` | Counts the number of rows. Takes no arguments. \| |
+| `mean(...)` | Calculates the arithmetic mean (average). |
+| `median(...)` | Calculates the median (middle value). |
+| `sd(...)` | Calculates the standard deviation. |
+| `var(...)` | Calculates the variance. |
+| `min(...)` | Returns the smallest value. |
+| `max(...)` | Returns the largest value. |
+| `range(...)` | Returns the smallest and largest values. |
+| `IQR(...)` | Calculates the interquartile range. |
+| `quantile(...)` | Returns the requested quantiles (including quartiles). |
+| `summary(...)` | Returns several summary statistics at once (e.g. minimum, quartiles, median, mean, and maximum for numeric data). |
 :::
 
 We know that we can apply these functions to a column in a data frame by using the `$` operator to point to a particular column, e.g.
@@ -1292,14 +1242,10 @@ median(gapminder_2007$lifeExp)    # median life expectancy (in 2007)
 Rather than calculating a single statistic, some functions return a predefined set of summary statistics for a column or an entire data frame:
 
 ::: dplyr-table
-+--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Summary                        | Description                                                                                                                                                                                                         |
-| function                       |                                                                                                                                                                                                                     |
-+================================+=====================================================================================================================================================================================================================+
-| `summary()`                    | Returns summary statistics for each variable. For numeric variables, this includes the minimum, first quartile, median, mean, third quartile, and maximum. For factors, it returns frequency counts for each level. |
-+--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `describe(...)`                | From the `Hmisc` package. Provides a more detailed summary than `summary()`, including information on missing values and additional percentiles for numeric variables.                                              |
-+--------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Summary function | Description |
+|---------------|---------------------------------------------------------|
+| `summary()` | Returns summary statistics for each variable. For numeric variables, this includes the minimum, first quartile, median, mean, third quartile, and maximum. For factors, it returns frequency counts for each level. |
+| `describe(...)` | From the `Hmisc` package. Provides a more detailed summary than `summary()`, including information on missing values and additional percentiles for numeric variables. |
 :::
 
 However, if you want to generate multiple summary statistics while retaining control over which statistics are calculated, dplyr provides a flexible approach.
@@ -1498,6 +1444,7 @@ Remember that we can read `|>` as "then", so in the code below (taken from the p
 
 ::: {.panel-tabset .panel-green group="language"}
 ## R
+
 ```{r}
 #| results: "hide"
 continent_summary_2007 <-           # assign the resulting summary data frame to a name
@@ -1518,7 +1465,6 @@ This is why in these materials we have always used the `|>` syntax even for sing
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
 
 Since our [aims](#aims) involve exploring data from 2007, we previously we filtered the original `gapminder` data for 2007 data using `filter()`, then removed the `year` column using `select`. The example below shows how we could have done this using a single pipeline.
-
 :::
 
 ::: {.panel-tabset .panel-green group="language"}
@@ -1560,7 +1506,6 @@ gapminder_2007_clean3 <- gapminder |>
 ```
 
 So we giving R the new name for our resulting data frame (gapminder_2007_clean3), and telling R to: take the gapminder data, *then* filter it, *then* select (or drop) the appropriate columns.
-
 :::
 
 ::: {.panel-tabset group="language"}
@@ -1672,7 +1617,7 @@ europe_post1990 <- gapminder |>
 
 ### 4.7.4 2007 data with population in millions
 
-:::: {.callout-note icon="false"}
+::::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 4
 
 LEVEL: {{< fa star >}} {{< fa star >}} {{< fa regular star >}}
@@ -1687,7 +1632,6 @@ Create a data frame that contains only the 2007 data and includes a new column g
 Have a look at the `mutate()` section of these materials.
 :::
 
-
 ::: {.callout-tip icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
 
@@ -1701,7 +1645,7 @@ gm_2007_popmil <-
   mutate(pop_mil = pop/1000000)
 ```
 :::
-::::
+:::::
 
 ### 4.7.5 France and Germany
 
@@ -1900,25 +1844,16 @@ The first component - `ggplot()` together with the `aes()` function nested withi
 The second component is the `geom_xxx()` function, which specifies the type of plot to create. "Geom" is short for geometry and refers to the geometric objects (e.g. points, bars, or lines) used to represent the data. `xxx` is replaced with the name of the geometry you want to use. Some of the most commonly used geom functions are shown below:
 
 ::: {#geomxxx-table}
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| Function                          | Plot type                                                                                        |
-+===================================+==================================================================================================+
-| `geom_point()`                    | scatter plot                                                                                     |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_line()`                     | line chart                                                                                       |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_bar()`                      | bar chart (default bar heights are counts)                                                       |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_col()`                      | bar chart (bar heights are values in the data)                                                   |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_histogram()`                | histogram                                                                                        |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_boxplot()`                  | box plot                                                                                         |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_smooth()`                   | smooth trend line (often used with `geom_point()`)                                               |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
-| `geom_jitter()`                   | scatter plot with points slightly spread out to avoid overlap (often used with `geom_boxplot()`) |
-+-----------------------------------+--------------------------------------------------------------------------------------------------+
+| Function | Plot type |
+|--------------------|----------------------------------------------------|
+| `geom_point()` | scatter plot |
+| `geom_line()` | line chart |
+| `geom_bar()` | bar chart (default bar heights are counts) |
+| `geom_col()` | bar chart (bar heights are values in the data) |
+| `geom_histogram()` | histogram |
+| `geom_boxplot()` | box plot |
+| `geom_smooth()` | smooth trend line (often used with `geom_point()`) |
+| `geom_jitter()` | scatter plot with points slightly spread out to avoid overlap (often used with `geom_boxplot()`) |
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -2014,23 +1949,15 @@ In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of th
 We have already used `x=` and `y=` within the `aes()` function to map variables to the axes. The table below summarises this and some other commonly used aesthetics:
 
 ::: {}
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| Aesthetic argument                | Description                                                                                                     |
-+===================================+=================================================================================================================+
-| `x=`                              | Specifies which variable (column) to map to the x-axis                                                          |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `y=`                              | Specifies which variable (column) to map to the y-axis                                                          |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `colour=`                         | Assign different colours based on the specified variable (for points, lines or borders, depending on plot type) |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `fill=`                           | Assign different fill colours based on the specified variable                                                   |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `size=`                           | Assign different sizes (e.g. sizes of points in a scatter plot) based on the specified variable                 |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `shape=`                          | Assign different shapes to points in a scatter plot based on the specified variable e.g. points in scatter plot |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
-| `linetype=`                       | Assign different line types (solid, dashed, dotted, etc.) based on the specified variable                       |
-+-----------------------------------+-----------------------------------------------------------------------------------------------------------------+
+| Aesthetic argument | Description |
+|------------------|------------------------------------------------------|
+| `x=` | Specifies which variable (column) to map to the x-axis |
+| `y=` | Specifies which variable (column) to map to the y-axis |
+| `colour=` | Assign different colours based on the specified variable (for points, lines or borders, depending on plot type) |
+| `fill=` | Assign different fill colours based on the specified variable |
+| `size=` | Assign different sizes (e.g. sizes of points in a scatter plot) based on the specified variable |
+| `shape=` | Assign different shapes to points in a scatter plot based on the specified variable e.g. points in scatter plot |
+| `linetype=` | Assign different line types (solid, dashed, dotted, etc.) based on the specified variable |
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
@@ -2129,35 +2056,21 @@ We saw in the previous section that aesthetics specified within the `aes()`funct
 Below are some commonly used fixed aesthetics. Some are available across many different plot types whilst others are more specific:
 
 ::: {}
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| Aesthetic argument | Description                                                            | Example                  | Valid values                                                                                                            | Plot types                |
-+====================+========================================================================+==========================+=========================================================================================================================+===========================+
-| `colour=`          | Controls the colour of points, lines, or borders                       | `colour = "blue"`        | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a>      | point, line, bar, boxplot |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `fill=`            | Controls the fill colour of areas                                      | `fill = "red"`           | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a>      | bar, histogram, boxplot   |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `size=`            | Controls the size of points or lines                                   | `size = 3`               | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/size" target="_blank" rel="noopener"> size guide </a>          | scatter, line             |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `shape=`           | Changes the shape of points                                            | `shape = 2`              | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/shape" target="_blank" rel="noopener"> shape guide </a>        | scatter                   |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `linetype=`        | Alters the line style (solid, dashed etc.)                             | `linetype = "dashed"`    | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/linetype" target="_blank" rel="noopener"> line type guide </a> | line, boxplot             |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `alpha=`           | Alters the transparency (0 = invisible, 1 = opaque)                    | `alpha = 0.7`            | Numeric value from 0 to 1 (default = 1)                                                                                 | most plot types           |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `show.legend=`     | Show or hide the legend (`TRUE` or `FALSE`)                            | `show.legend = FALSE`    | TRUE or FALSE (default = TRUE)                                                                                          | most plot types           |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `bins=`            | Number of bins                                                         | `bins = 30`              |                                                                                                                         | histogram                 |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `binwidth=`        | Width of each bin                                                      | `binwidth = 5`           |                                                                                                                         | histogram                 |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `width=`           | Width of bars                                                          | `width = 0.5`            |                                                                                                                         | bar                       |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `outlier.colour=`  | Colour of outlier points                                               | `outlier.colour = "red"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a>      | boxplot                   |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `se=`              | Show/hide confidence interval ribbon (TRUE or FALSE - default is TRUE) | `se = FALSE`             |                                                                                                                         | smooth                    |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
-| `method=`          | Smoothing method                                                       | `method = "lm"`          |                                                                                                                         | smooth                    |
-+--------------------+------------------------------------------------------------------------+--------------------------+-------------------------------------------------------------------------------------------------------------------------+---------------------------+
+| Aesthetic argument | Description | Example | Valid values | Plot types |
+|------------|-------------|------------|-------------------------|------------|
+| `colour=` | Controls the colour of points, lines, or borders | `colour = "blue"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a> | point, line, bar, boxplot |
+| `fill=` | Controls the fill colour of areas | `fill = "red"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a> | bar, histogram, boxplot |
+| `size=` | Controls the size of points or lines | `size = 3` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/size" target="_blank" rel="noopener"> size guide </a> | scatter, line |
+| `shape=` | Changes the shape of points | `shape = 2` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/shape" target="_blank" rel="noopener"> shape guide </a> | scatter |
+| `linetype=` | Alters the line style (solid, dashed etc.) | `linetype = "dashed"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/linetype" target="_blank" rel="noopener"> line type guide </a> | line, boxplot |
+| `alpha=` | Alters the transparency (0 = invisible, 1 = opaque) | `alpha = 0.7` | Numeric value from 0 to 1 (default = 1) | most plot types |
+| `show.legend=` | Show or hide the legend (`TRUE` or `FALSE`) | `show.legend = FALSE` | TRUE or FALSE (default = TRUE) | most plot types |
+| `bins=` | Number of bins | `bins = 30` |  | histogram |
+| `binwidth=` | Width of each bin | `binwidth = 5` |  | histogram |
+| `width=` | Width of bars | `width = 0.5` |  | bar |
+| `outlier.colour=` | Colour of outlier points | `outlier.colour = "red"` | <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/colour" target="_blank" rel="noopener"> colour guide </a> | boxplot |
+| `se=` | Show/hide confidence interval ribbon (TRUE or FALSE - default is TRUE) | `se = FALSE` |  | smooth |
+| `method=` | Smoothing method | `method = "lm"` |  | smooth |
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -2252,23 +2165,15 @@ Adding the `labs()` function as a component in your plot allows you to add or cu
 Below are some commonly used arguments within `labs()`:
 
 ::: {}
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| Label argument        | Description                                                                         | Example                                 |
-+=======================+=====================================================================================+=========================================+
-| `title=`              | Main title of the plot                                                              | `title = "GDP per capita by continent"` |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `subtitle=`           | Subtitle displayed below the title                                                  | `subtitle = "Data from 2007"`           |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `x=`                  | x-axis label                                                                        | `x = "Population"`                      |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `y=`                  | y-axis label                                                                        | `y = "GDP per capita"`                  |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `caption=`            | Caption displayed below the plot                                                    | `caption = "Source: Gapminder"`         |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `colour=`             | Renames the legend title when a variable has been mapped to the `colour=` aesthetic | `colour = "Continent"`                  |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
-| `fill=`               | Renames the legend title when a variable has been mapped to the `fill=` aesthetic   | `fill = "Continent"`                    |
-+-----------------------+-------------------------------------------------------------------------------------+-----------------------------------------+
+| Label argument | Description | Example |
+|----------------|--------------------------------------|------------------|
+| `title=` | Main title of the plot | `title = "GDP per capita by continent"` |
+| `subtitle=` | Subtitle displayed below the title | `subtitle = "Data from 2007"` |
+| `x=` | x-axis label | `x = "Population"` |
+| `y=` | y-axis label | `y = "GDP per capita"` |
+| `caption=` | Caption displayed below the plot | `caption = "Source: Gapminder"` |
+| `colour=` | Renames the legend title when a variable has been mapped to the `colour=` aesthetic | `colour = "Continent"` |
+| `fill=` | Renames the legend title when a variable has been mapped to the `fill=` aesthetic | `fill = "Continent"` |
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -2374,27 +2279,17 @@ Beyond fixed aesthetics and labels, there are additional components that can be 
 Below are some commonly used additional components:
 
 ::: {}
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| Component                                       | Description                                                                                                                                 | Example                                                   |
-+=================================================+=============================================================================================================================================+===========================================================+
-| `theme_xxx()`                                   | Changes the overall appearance of the plot (background, gridlines, fonts etc.)                                                              | `theme_minimal()`, `theme_classic()`, `theme_bw()`        |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `xlim()` / `ylim()`                             | Sets the limits of the x or y axis                                                                                                          | `xlim(0, 100)`, `ylim(0, 50)`                             |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `scale_x_continuous()` / `scale_y_continuous()` | Customises a continuous axis (breaks, labels, limits)                                                                                       | `scale_x_continuous(breaks = seq(0, 100, 10))`            |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `scale_x_log10()` / `scale_y_log10()`           | Transforms an axis to a log10 scale                                                                                                         | `scale_x_log10()`                                         |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `scale_colour_manual()`                         | Manually specifies the colours used for a `colour=` aesthetic - only applicable when a variable has been mapped to `colour=` inside `aes()` | `scale_colour_manual(values = c("red", "blue", "green"))` |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `scale_fill_manual()`                           | Manually specifies the colours used for a `fill=` aesthetic - only applicable when a variable has been mapped to `fill=` inside `aes()`     | `scale_fill_manual(values = c("red", "blue", "green"))`   |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `facet_wrap()`                                  | Splits the plot into separate panels by a variable                                                                                          | `facet_wrap(~ continent)`                                 |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `facet_grid()`                                  | Splits the plot into a grid of panels by two variables                                                                                      | `facet_grid(year ~ continent)`                            |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
-| `coord_flip()`                                  | Flips the x and y axes                                                                                                                      | `coord_flip()`                                            |
-+-------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------+
+| Component | Description | Example |
+|-----------------|--------------------------------------|-----------------|
+| `theme_xxx()` | Changes the overall appearance of the plot (background, gridlines, fonts etc.) | `theme_minimal()`, `theme_classic()`, `theme_bw()` |
+| `xlim()` / `ylim()` | Sets the limits of the x or y axis | `xlim(0, 100)`, `ylim(0, 50)` |
+| `scale_x_continuous()` / `scale_y_continuous()` | Customises a continuous axis (breaks, labels, limits) | `scale_x_continuous(breaks = seq(0, 100, 10))` |
+| `scale_x_log10()` / `scale_y_log10()` | Transforms an axis to a log10 scale | `scale_x_log10()` |
+| `scale_colour_manual()` | Manually specifies the colours used for a `colour=` aesthetic - only applicable when a variable has been mapped to `colour=` inside `aes()` | `scale_colour_manual(values = c("red", "blue", "green"))` |
+| `scale_fill_manual()` | Manually specifies the colours used for a `fill=` aesthetic - only applicable when a variable has been mapped to `fill=` inside `aes()` | `scale_fill_manual(values = c("red", "blue", "green"))` |
+| `facet_wrap()` | Splits the plot into separate panels by a variable | `facet_wrap(~ continent)` |
+| `facet_grid()` | Splits the plot into a grid of panels by two variables | `facet_grid(year ~ continent)` |
+| `coord_flip()` | Flips the x and y axes | `coord_flip()` |
 :::
 
 ## 5.3 Full examples
@@ -2523,6 +2418,7 @@ To save a plot as an image file, you can either:
 - Use `ggsave()` in your code, which saves the most recently generated plot to a file:
 
 ```{r}
+#| eval: false 
 ggsave("my_plot.png", width = 8, height = 5)
 ```
 
@@ -2655,40 +2551,25 @@ LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
 
 ## Glossary
 
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Term                        | Definition                                                                                                                                                                                                          | Details/example                                                                                                                                                 |
-+=============================+=====================================================================================================================================================================================================================+=================================================================================================================================================================+
-| argument                    | A value you give to a function inside its brackets to tell it what data to use or how to run.                                                                                                                       | In `max(gapminder$pop)`, `gapminder$pop` is the argument which is being given to the `max()` function.                                                          |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| assignment operator         | A symbol (`<-`) that is used to assign a value or object to a name.                                                                                                                                                 | `x <- 5` assigns the value 5 to a variable called x                                                                                                             |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| base R                      | The default set of functions and datasets that come with R without installing extra packages.                                                                                                                       | `mean()`, `plot()`, `data.frame()` are all functions that are available in base R                                                                               |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| component (in ggplot2)      | A component of a ggplot object that controls some aspect of how the plot is displayed or behaves. Components are combined using the `+` operator.                                                                   | Essential components are `ggplot()` and `geom_xxx`                                                                                                              |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| data frame                  | A type of object in R that is a table-like structure made of rows and columns, where each column can hold different types of data.                                                                                  | `gapminder` is a data frame                                                                                                                                     |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| function                    | A reusable piece of code that performs a specific task. The function is called using its name, followed by brackets where arguments (inputs) are provided to control how the function behaves or what data it uses. | The `mean()` function calculates a mean; the `filter()` function from the `dplyr` package filters data                                                          |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| object                      | A data structure in R e.g. a data frame, vector, or function output                                                                                                                                                 |                                                                                                                                                                 |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| operator                    | A symbol that performs an operation (action) on values or objects.                                                                                                                                                  | `+` is the addition operator; `|>` is the pipe operator                                                                                                         |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| package                     | A collection of functions, data, and documentation that extends R’s capabilities.                                                                                                                                   | `dplyr` is a package containing data manipulation functions; `ggplot2` is a package for creating data visualisations.                                           |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pipe operator               | A symbol used to pass the output of one function into the next.                                                                                                                                                     | `|>` means “then”                                                                                                                                               |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| R session                   | The time you are currently using R.                                                                                                                                                                                 | If you close R and open it again later, you start a new session.                                                                                                |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| scalar                      | A single value (a vector of length 1).                                                                                                                                                                              | `x <- 5` creates a scalar named `x`                                                                                                                             |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| session                     | see R session                                                                                                                                                                                                       |                                                                                                                                                                 |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| syntax                      | The rules for how you must write R code so it works properly.                                                                                                                                                       | It is similar to grammar in a language. For example, in R you must use the correct brackets and commas when writing functions, otherwise the code will not run. |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| tibble                      | A modern version of a data frame.                                                                                                                                                                                   | A tibble is very similar to a data frame but has some extra useful features, such as printing more cleanly in the console.                                      |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| variable                    | A name used to store and refer to a value or column in a dataset.                                                                                                                                                   | `lifeExp` is a variable in `gapminder`                                                                                                                          |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| vector                      | A type of object that contains an ordered sequence of values of the same type (numeric, character, or logical).                                                                                                     | `c(1, 3, 2)` is a numeric vector                                                                                                                                |
-+-----------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Term | Definition | Details/example |
+|--------------|---------------------------------|-------------------------|
+| argument | A value you give to a function inside its brackets to tell it what data to use or how to run. | In `max(gapminder$pop)`, `gapminder$pop` is the argument which is being given to the `max()` function. |
+| assignment operator | A symbol (`<-`) that is used to assign a value or object to a name. | `x <- 5` assigns the value 5 to a variable called x |
+| base R | The default set of functions and datasets that come with R without installing extra packages. | `mean()`, `plot()`, `data.frame()` are all functions that are available in base R |
+| component (in ggplot2) | A component of a ggplot object that controls some aspect of how the plot is displayed or behaves. Components are combined using the `+` operator. | Essential components are `ggplot()` and `geom_xxx` |
+| data frame | A type of object in R that is a table-like structure made of rows and columns, where each column can hold different types of data. | `gapminder` is a data frame |
+| function | A reusable piece of code that performs a specific task. The function is called using its name, followed by brackets where arguments (inputs) are provided to control how the function behaves or what data it uses. | The `mean()` function calculates a mean; the `filter()` function from the `dplyr` package filters data |
+| object | A data structure in R e.g. a data frame, vector, or function output |  |
+| operator | A symbol that performs an operation (action) on values or objects. | `+` is the addition operator; `|>` is the pipe operator |
+| package | A collection of functions, data, and documentation that extends R’s capabilities. | `dplyr` is a package containing data manipulation functions; `ggplot2` is a package for creating data visualisations. |
+| pipe operator | A symbol used to pass the output of one function into the next. | `|>` means “then” |
+| R session | The time you are currently using R. | If you close R and open it again later, you start a new session. |
+| scalar | A single value (a vector of length 1). | `x <- 5` creates a scalar named `x` |
+| session | see R session |  |
+| syntax | The rules for how you must write R code so it works properly. | It is similar to grammar in a language. For example, in R you must use the correct brackets and commas when writing functions, otherwise the code will not run. |
+| tibble | A modern version of a data frame. | A tibble is very similar to a data frame but has some extra useful features, such as printing more cleanly in the console. |
+| variable | A name used to store and refer to a value or column in a dataset. | `lifeExp` is a variable in `gapminder` |
+| vector | A type of object that contains an ordered sequence of values of the same type (numeric, character, or logical). | `c(1, 3, 2)` is a numeric vector |
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
