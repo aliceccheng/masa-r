@@ -35,7 +35,7 @@ install.packages("ggplot2")
 #| warning: false
 #| results: "hide"
 # Load packages
-install.packages("palmerpenguins"
+library("palmerpenguins")
 library(dplyr)
 library(ggplot2)
 ```
