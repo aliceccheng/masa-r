@@ -9,4 +9,6 @@ library(ggplot2)
 library(Hmisc)
 
 gapminder <- gapminder
+gapminder_2007 <- gapminder |> filter(year==2007)
+gapminder_uk <- gapminder |> filter(country=="United Kingdom")
 ```
