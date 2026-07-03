@@ -23,8 +23,3 @@ book:
       href: pages/Intermediate_R.qmd
     - text: "Placeholder"
       href: pages/Placeholder.qmd
-
-format:
-  html:
-    theme: cosmo
-    toc: true
