@@ -1,0 +1,34 @@
+project:
+  type: book
+  output-dir: _site
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css
+    number-sections: false
+
+metadata-files:
+  - "pages/_chapters.yml"
+
+book:
+  title: "MASA R"
+  page-navigation: true
+  navbar:
+    pinned: true
+    title: "MASA R"
+    right:
+      - icon: github
+        href: https://github.com/aliceccheng/masa-r
+        aria-label: GitHub
+  page-footer:
+    left: "© 2026 University of Surrey"
+    right: "Built with Quarto"
+  search:
+    location: sidebar
+  chapters:
+    - part: "Welcome"
+      chapters:
+        - index.qmd
+        - Introduction.qmd

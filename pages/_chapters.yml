@@ -1,0 +1,20 @@
+book:
+  chapters:
+    - part: "Beginner"
+      chapters:
+        - text: "Intermediate R"
+          href: pages/Intermediate_R.qmd
+        - text: "Placeholder"
+          href: pages/Placeholder.qmd
+    - part: "Intermediate"
+      chapters:
+        - text: "Intermediate R"
+          href: pages/Intermediate_R.qmd
+        - text: "Placeholder"
+          href: pages/Placeholder.qmd
+    - part: "Advanced"
+      chapters:
+        - text: "Intermediate R"
+          href: pages/Intermediate_R.qmd
+        - text: "Placeholder"
+          href: pages/Placeholder.qmd

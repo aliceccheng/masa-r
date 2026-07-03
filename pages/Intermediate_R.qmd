@@ -1,13 +1,5 @@
 ---
 title: "Intermediate R"
-format:
-  html:
-    theme: default
-    include-in-header:
-      text: |
-        <style>
-        h2 {color: #872046;}
-        </style>
 editor: visual
 ---
 
@@ -117,9 +109,9 @@ Some key `dplyr` functions are listed in the table below, grouped into categorie
 
 For a complete list of all dplyr functions, you can check official `dplyr` documentation directly:
 
--   dplyr Package Reference: <https://dplyr.tidyverse.org/reference/index.html>
+- dplyr Package Reference: <https://dplyr.tidyverse.org/reference/index.html>
 
--   CRAN Package Page: <https://cran.r-project.org/web/packages/dplyr/>
+- CRAN Package Page: <https://cran.r-project.org/web/packages/dplyr/>
 
 ### General syntax and the pipe operator: %\>%
 
