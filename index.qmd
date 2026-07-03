@@ -6,4 +6,4 @@ editor: visual
 
 # Welcome {.unnumbered}
 
-- [Intermediate R](Intermediate_R.qmd)
+- [Intermediate R](pages/Intermediate_R.qmd)
