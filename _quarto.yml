@@ -1,6 +1,11 @@
 project:
   type: book
   output-dir: _site
+  render:
+    - index.qmd
+    - Introduction.qmd
+    - materials/*
+
 
 metadata-files:
   - "materials/_chapters.yml"
