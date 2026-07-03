@@ -13,5 +13,6 @@ editor: visual
 
 # Welcome {.unnumbered}
 
-- [Intermediate R](pages/Intermediate_R.qmd)
-- [Placeholder](pages/Placeholder.qmd)
+Welcome to the Masa-R project site. This page provides a quick introduction and links to the latest resources, guides, and examples.
+
+Feel free to explore the documentation and reach out if you need assistance.
