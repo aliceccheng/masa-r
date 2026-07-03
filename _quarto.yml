@@ -18,8 +18,8 @@ book:
   search:
     location: sidebar
   chapters:
-    - index.qmd
-    - text: "Intermediate R"
-      href: pages/Intermediate_R.qmd
-    - text: "Placeholder"
-      href: pages/Placeholder.qmd
+  - part: "Welcome"
+    chapters:
+      - index.qmd
+      - text: "Introduction"
+        href: Introduction.qmd
