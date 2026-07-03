@@ -1,0 +1,31 @@
+---
+title: "Placeholder"
+format:
+  html:
+    theme: default
+    include-in-header:
+      text: |
+        <style>
+        h2 {color: #872046;}
+        </style>
+editor: visual
+---
+
+# Placeholder Page
+
+This page contains example R code inside a Quarto document.
+
+```{r}
+library(dplyr)
+
+data <- tibble(
+  x = 1:5,
+  y = x^2
+)
+
+summary <- data %>%
+  mutate(z = y + x) %>%
+  filter(z >= 10)
+
+summary
+```

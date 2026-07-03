@@ -1,9 +1,17 @@
 ---
 title: "placeholder"
-format: html
+format:
+  html:
+    theme: default
+    include-in-header:
+      text: |
+        <style>
+        h2 {color: #872046;}
+        </style>
 editor: visual
 ---
 
 # Welcome {.unnumbered}
 
 - [Intermediate R](pages/Intermediate_R.qmd)
+- [Placeholder](pages/Placeholder.qmd)

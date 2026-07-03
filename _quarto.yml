@@ -8,7 +8,6 @@ book:
     pinned: true
     background: primary
     title: "MASA R"
-    logo: "https://www.surrey.ac.uk/themes/custom/surrey/assets/dist/img/uos-logo.svg"
     right:
       - icon: github
         href: https://github.com/aliceccheng/masa-r
@@ -21,7 +20,9 @@ book:
   chapters:
     - index.qmd
     - text: "Intermediate R"
-      href: Intermediate_R.qmd
+      href: pages/Intermediate_R.qmd
+    - text: "Placeholder"
+      href: pages/Placeholder.qmd
 
 format:
   html:
