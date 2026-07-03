@@ -6,6 +6,11 @@ project:
     - Introduction.qmd
     - materials/*
 
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css
 
 metadata-files:
   - "pages/_chapters.yml"
