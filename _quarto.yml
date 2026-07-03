@@ -26,8 +26,8 @@ book:
   search:
     location: sidebar
   chapters:
-  - part: "Welcome"
-    chapters:
-      - index.qmd
-      - text: "Introduction"
-        href: Introduction.qmd
+    - part: "Welcome"
+      chapters:
+        - index.qmd
+        - text: "Introduction"
+          href: Introduction.qmd
