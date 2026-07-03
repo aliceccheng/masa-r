@@ -16,11 +16,12 @@ metadata:
   show-setup: false
 
 book:
-  title: "MASA R"
+  title: "R & RStudio"
   page-navigation: true
   navbar:
     pinned: true
-    title: "MASA R"
+    logo: images/LLS_SUBBRAND_LOGOS_PNG_Maths_Left_White@600x.png
+    title: "R & RStudio"
     right:
       - icon: github
         href: https://github.com/aliceccheng/masa-r
