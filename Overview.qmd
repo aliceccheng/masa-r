@@ -1,0 +1,10 @@
+---
+title: "Overview"
+editor: visual
+---
+
+# Overview {.unnumbered}
+
+This is a quick overview of the MASA-R project. This page provides a summary of the key features and resources available.
+
+Feel free to explore the documentation and reach out if you need assistance.

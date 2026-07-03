@@ -34,6 +34,5 @@ book:
   chapters:
     - part: "Welcome"
       chapters:
-        - index.qmd
-        - text: "Introduction"
-          href: Introduction.qmd
+        - Overview.qmd
+        - Introduction.qmd
