@@ -3,7 +3,7 @@ book:
     - part: "Intermediate R"
       chapters:
         - text: "1 Overview"
-          href: pages/Intermediate_R.qmd
+          href: pages/Intermediate_R_1_Overview.qmd
         - text: "2 Setup, data and workshop aims"
           href: pages/Intermediate_R_2_Setup_data_and_workshop_aims.qmd
         - text: "3 Getting to know your data"

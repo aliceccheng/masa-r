@@ -1,4 +1,6 @@
-﻿# 3 Getting to know your data
+﻿{{< include _intermediate_r_setup.qmd >}}
+
+# 3 Getting to know your data
 
 It's a good idea to explore and get to know the data you're working with before starting any analysis. This helps you spot issues, understand what information is available, and avoid making incorrect assumptions before you begin analysing.
 

@@ -1,4 +1,6 @@
-﻿# 5 Plotting with ggplot2
+﻿{{< include _intermediate_r_setup.qmd >}}
+
+# 5 Plotting with ggplot2
 
 Base R provides various functions for creating particular plot types, for example, `plot()` for scatter plots, `hist()` for histograms and `boxplot()` for boxplots. It is perfectly fine to use these functions, particularly for quick exploratory visualisations, but the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
 

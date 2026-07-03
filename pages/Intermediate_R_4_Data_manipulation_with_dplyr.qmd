@@ -1,4 +1,6 @@
-﻿# 4 Data manipulation with dplyr
+﻿{{< include _intermediate_r_setup.qmd >}}
+
+# 4 Data manipulation with dplyr
 
 ## 4.1 The dplyr package: getting started
 
