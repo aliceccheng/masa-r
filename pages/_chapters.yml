@@ -1,0 +1,14 @@
+book:
+  chapters:
+    - part: "Introduction"
+      chapters:
+        - pages/Intermediate_R.qmd 
+        - pages/Placeholder.qmd
+    - part: "Intermediate"
+      chapters:
+        - pages/Intermediate_R.qmd
+        - pages/Placeholder.qmd
+    - part: "Advanced"
+      chapters:
+        - pages/Intermediate_R.qmd
+        - pages/Placeholder.qmd

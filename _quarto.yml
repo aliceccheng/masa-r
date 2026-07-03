@@ -2,6 +2,9 @@ project:
   type: book
   output-dir: _site
 
+metadata-files:
+  - "materials/_chapters.yml"
+
 book:
   title: "MASA R"
   navbar:
