@@ -16,7 +16,6 @@ book:
   page-navigation: true
   navbar:
     pinned: true
-    background: primary
     title: "MASA R"
     right:
       - icon: github
