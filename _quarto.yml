@@ -8,7 +8,7 @@ project:
 
 
 metadata-files:
-  - "materials/_chapters.yml"
+  - "pages/_chapters.yml"
 
 book:
   title: "MASA R"
