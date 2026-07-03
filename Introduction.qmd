@@ -1,6 +1,7 @@
 ---
 title: "Introduction"
 editor: visual
+number-sections: false
 ---
 
 # Introduction {.unnumbered}

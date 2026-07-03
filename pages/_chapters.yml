@@ -2,13 +2,13 @@ book:
   chapters:
     - part: "Intermediate R"
       chapters:
-        - text: "1 Overview"
+        - text: "Overview"
           href: pages/Intermediate_R_1_Overview.qmd
-        - text: "2 Setup, data and workshop aims"
+        - text: "Setup, data and workshop aims"
           href: pages/Intermediate_R_2_Setup_data_and_workshop_aims.qmd
-        - text: "3 Getting to know your data"
+        - text: "Getting to know your data"
           href: pages/Intermediate_R_3_Getting_to_know_your_data.qmd
-        - text: "4 Data manipulation with dplyr"
+        - text: "Data manipulation with dplyr"
           href: pages/Intermediate_R_4_Data_manipulation_with_dplyr.qmd
-        - text: "5 Plotting with ggplot2"
+        - text: "Plotting with ggplot2"
           href: pages/Intermediate_R_5_Plotting_with_ggplot2.qmd

@@ -1,4 +1,4 @@
-﻿{{< include _intermediate_r_setup.qmd >}}
+{{< include _intermediate_r_setup.qmd >}}
 
 # 5 Plotting with ggplot2
 
@@ -796,7 +796,7 @@ ggplot(gapminder_uk, aes(x = year, y = pop)) +
 :::
 :::::
 
-### 5.5.3 xxxxx
+### 5.5.3 xxxxxx
 
 :::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 3
