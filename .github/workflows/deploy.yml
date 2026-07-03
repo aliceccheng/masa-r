@@ -33,6 +33,9 @@ jobs:
             any::rmarkdown
             any::palmerpenguins
             any::dplyr
+            any::gapminder
+            any::ggplot2
+            any::Hmisc
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
