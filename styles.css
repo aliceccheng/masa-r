@@ -11,3 +11,12 @@ h2 {
 .navbar {
     background-color: #872046;
 }
+
+.navbar .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #ffffff;
+}
