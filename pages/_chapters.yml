@@ -1,6 +1,6 @@
 book:
   chapters:
-    - part: "Introduction"
+    - part: "Beginner"
       chapters:
         - text: "Intermediate R"
           href: pages/Intermediate_R.qmd
