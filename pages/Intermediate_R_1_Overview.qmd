@@ -38,7 +38,7 @@ The material in this course lines up with the *Intermediate R & RStudio* worksho
 
 Code and examples taken directly from the workshop are shown in green panels like the one below, so you can easily match what you see here to the live workshop materials.
 
-The materials also include additional syntax, examples, and explanations to complement the workshop, and can be used as an extension or selfâ€‘study resource.
+The materials also include additional syntax, examples, and explanations to complement the workshop, and can be used as an extension or self-study resource.
 
 ::: {.panel-tabset .panel-green group="language"}
 ## R

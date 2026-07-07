@@ -1,8 +1,19 @@
 # Workshop 2
 
-## Setup
+## Learning outcomes
 
-## Basic setup & packages {#setup}
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
+
+By the end of this workshop, you should be able to:
+
+- xxxxxxxxxxxxxx
+- xxxxxxxxxxxxxx
+:::
+
+## Workshop structure
+
+## Setup {#setup}
 
 Follow the steps below to get set up for this workshop:
 
@@ -17,6 +28,7 @@ Follow the steps below to get set up for this workshop:
 
 ```{r}
 #| eval: false
+# Install packages
 install.packages("palmerpenguins")
 install.packages("dplyr")
 install.packages("ggplot2")

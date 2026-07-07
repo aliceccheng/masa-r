@@ -4,7 +4,7 @@
 
 Base R provides various functions for creating particular plot types, for example, `plot()` for scatter plots, `hist()` for histograms and `boxplot()` for boxplots. It is perfectly fine to use these functions, particularly for quick exploratory visualisations, but the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
 
-`ggplot2` is an R package that provides a unified, consistent system for building graphics. Rather than having a separate function for each plot type, plots are built up layer by layer using a common syntax.
+`ggplot2` is an R package that provides a consistent system for building plots. Rather than having a separate function for each plot type, plots are built up layer by layer using a common syntax.
 
 ## The ggplot2 package: getting started
 
@@ -15,6 +15,23 @@ We installed and loaded `ggplot2` in the [basic setup & packages](Intermediate_R
 To confirm that `ggplot2` has successfully installed and loaded in your session, check that `ggplot2` is ticked in the Packages tab of the Output pane:
 
 ![](../images/clipboard-694121927.png){width="700" style="display:block; margin: 2em auto;"}
+
+::: {style="margin-top: 2em;"}
+:::
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Link to workshop aims
+
+Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to explore how life expectancy differed across continents in 2007. In the `dplyr` [summarisation](Intermediate_R_4_Data_manipulation_with_dplyr.qmd#summarisation) section, we used descriptive statistics to being answering this question (using `group_by()` and `summarise()`).
+
+[AND SECOND AIM]
+
+In the section, the examples will be based around:
+
+- A boxplot to visually compare life expectancy across continents
+- A scatter plot to....
+:::
+
 
 ### Overview of general code structure for creating a plot
 
@@ -72,15 +89,6 @@ In the following sections we'll look at these components in more detail, returni
 ::: {style="margin-top: 2em;"}
 :::
 
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Link to workshop aims
-
-Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to explore how life expectancy differed across continents in 2007. In the `dplyr` [summarisation](Intermediate_R_4_Data_manipulation_with_dplyr.qmd#summarisation) section, we used descriptive statistics to being answering this question (using `group_by()` and `summarise()`). This boxplot now allows us to visualise this information, making it easier to compare distributions across continents.
-:::
-
-::: {style="margin-top: 2em;"}
-:::
-
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Interpreting this boxplot
 
@@ -116,7 +124,7 @@ Now let's explore the different components in more detail and how to use them to
 
 ### Produce the base plot: data, axes and plot type
 
-The first component - `ggplot()` together with the `aes()` function nested within it - initialises (sets up) the plot. The first argument within `ggplot()` is the name of the data you want to use. The second argument is the `aes()` function (aes is short for aesthetics), which is used to specify which variables to plot on the x- and y-axis. The `aes()` function can also be used to map other visual properties to variables - this is covered in the next section.
+The first component - `ggplot()` together with the `aes()` function nested inside it - initialises (sets up) the plot. The first argument within `ggplot()` is the name of the data you want to use. The second argument is the `aes()` function (aes is short for aesthetics), which is used to specify which variables to plot on the x- and y-axis. The `aes()` function can also be used to map other visual properties to variables - this is covered in the next section.
 
 The second component is the `geom_xxx()` function, which specifies the type of plot to create. "Geom" is short for geometry and refers to the geometric objects (e.g. points, bars, or lines) used to represent the data. `xxx` is replaced with the name of the geometry you want to use. Some of the most commonly used geom functions are shown below:
 
@@ -219,11 +227,11 @@ For example:
 ::: {style="margin-bottom: 1.5rem;"}
 :::
 
-### Set variable aesthetics within aes()
+### Map variable aesthetics inside aes()
 
 In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of the plot - things like position (x and y), colour, size, and shape - and how variables in your data are mapped to them.
 
-We have already used `x=` and `y=` within the `aes()` function to map variables to the axes. The table below summarises this and some other commonly used aesthetics:
+We have already used `x=` and `y=` inside the `aes()` function to map variables to the axes. The table below summarises this and some other commonly used aesthetics:
 
 ::: {}
 | Aesthetic argument | Description |
@@ -254,8 +262,8 @@ Adding a variable aesthetic to our boxplot code:
 
 ```{r}
 #| eval: false
-ggplot(gapminder_2007, aes(x = continent, y = lifeExp, ___________ = _____________)) +
-                                                        aesthetic     column name
+ggplot(gapminder_2007, aes(x = continent, y = lifeExp, __________ = ___________)) +
+                                                       aesthetic    column name
   geom_boxplot()
 ```
 
@@ -324,11 +332,11 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 :::
 ::::
 
-### Set fixed aesthetics within geom_xxx()
+### Set fixed aesthetics inside geom_xxx()
 
-So far we have used `geom_xxx()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments within it.
+So far we have used `geom_xxx()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments inside it.
 
-We saw in the previous section that aesthetics specified within the `aes()`function map a *variable* to a visual property. Within the `geom_xxx()`, we can instead set *fixed* aesthetics, where a visual property is set to a constant value for that layer - for example, making all of the boxes filled in blue.
+We saw in the previous section that aesthetics specified inside the `aes()`function map a *variable* to a visual property. Inside `geom_xxx()`, we can instead set *fixed* aesthetics, where a visual property is set to a constant value for that layer - for example, making all of the boxes filled in blue.
 
 Below are some commonly used fixed aesthetics. Some are available across many different plot types whilst others are more specific:
 
@@ -488,7 +496,7 @@ ggplot(________, aes(x = _______, y = ________)) +
 ```
 
 - Add the `labs()` function component using `+` as above.
-- Fill in the blanks within the `labs()` function with the corresponding x and y labels that you want to add to your plot. These should be in quotation marks.
+- Fill in the blanks inside the `labs()` function with the corresponding x and y labels that you want to add to your plot. These should be in quotation marks.
 - If required, you can add more labels too, such as a title, subtitle, or legend title (refer to the table above for more label argument options).
 
 {{< fa triangle-exclamation >}} At a minimum, it is good practice to always label your x and y axes. Beyond that, include any other arguments from the table above that are relevant for your plot.
@@ -583,7 +591,7 @@ First, let's return to our boxplot of life expectancy across continents in 2007.
 - The `ggplot()` function asks R to create a new plot
   - The first argument is the name of the dataset we want to use for the plot - here, we have used the `gapminder_2007` data
   - The next argument is the `aes()` function
-    - Within the `aes()` function, `x = continent` maps continent to the x-axis and `y = lifeExp` maps life expectancy to the y-axis.
+    - Inside the `aes()` function, `x = continent` maps continent to the x-axis and `y = lifeExp` maps life expectancy to the y-axis.
 - Adding the component "`geom_boxplot()`" tells R to produce a boxplot.
 - Adding the "`labs()`" component adds labels to the plot.
 
@@ -642,7 +650,7 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap)) +
 - Two `geom_` components are layered on top of one another using `+`:
   - `geom_point()` plots the individual country observations
   - `geom_smooth(method = "lm", se = FALSE)` adds a linear trend line through the points, with the confidence interval ribbon hidden
-- `colour =` is applied within each geom\_ component separately - "steelblue" for the points and "coral" for the trend line
+- `colour =` is applied inside each geom\_ component separately - "steelblue" for the points and "coral" for the trend line
 - `theme_minimal()` applies a clean theme with a minimal background
 - `scale_x_log10()` transforms the x-axis to a log10 scale (the underlying data is unchanged) - this is helpful here because GDP per capita is right-skewed, with a small number of very high values stretching the axis, making the log scale easier to read
 
