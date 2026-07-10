@@ -129,7 +129,7 @@ The main workshop examples are structured around some loose hypothetical researc
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
 
 - Compare life expectancy across continents in 2007
-- Examine the relationship between population and GDP in 2007
+- Examine the relationship between GDP and life expectancy in 2007
 :::
 
 These aims provide a common thread for the main examples, while other examples and exercises demonstrate how the functions and code introduced in this workshop can be applied to different aspects of the gapminder dataset.

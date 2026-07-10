@@ -714,7 +714,8 @@ The argument to the function (`(...)`) should be the thing that you want to summ
 
 ```{r}
 #| results: "hide"
-median(gapminder_2007$lifeExp)    # median life expectancy (in 2007)
+median(gapminder_2007$lifeExp)      # median life expectancy (in 2007)
+median(gapminder_2007$gdpPercap)    # median GDP (in 2007)
 ```
 :::
 

@@ -12,6 +12,8 @@ book:
           href: pages/Intermediate_R_4_Data_wrangling_with_dplyr.qmd
         - text: "Plotting with ggplot2"
           href: pages/Intermediate_R_5_Plotting_with_ggplot2.qmd
+        - text: "Introduction to linear regression"
+          href: pages/Intermediate_R_6_Introduction_to_linear_regression.qmd
         - text: "Glossary"
           href: pages/Glossary.qmd
     - part: "BMS1066/7"

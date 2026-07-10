@@ -2,7 +2,7 @@
 
 # Plotting with ggplot2
 
-Base R provides various functions for creating particular plot types, for example, `plot()` for scatter plots, `hist()` for histograms and `boxplot()` for boxplots. It is perfectly fine to use these functions, particularly for quick exploratory visualisations, but the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
+Base R provides various functions for creating particular plot types, for example, `plot()` for scatter plots, `hist()` for histograms and `boxplot()` for boxplots. These functions are great for exploratory visualisations, but the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
 
 `ggplot2` is an R package that provides a consistent system for building plots. Rather than having a separate function for each plot type, plots are built up layer by layer using a common syntax.
 
@@ -20,16 +20,16 @@ To confirm that `ggplot2` has successfully installed and loaded in your session,
 :::
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Link to workshop aims
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
 
-Recall that one of our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) was to explore how life expectancy differed across continents in 2007. In the `dplyr` [summarisation](Intermediate_R_4_Data_manipulation_with_dplyr.qmd#summarisation) section, we used descriptive statistics to being answering this question (using `group_by()` and `summarise()`).
+Recall that our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) were to:
 
-[AND SECOND AIM]
+- Compare life expectancy across continents in 2007
+- Examine the relationship between GDP and life expectancy in 2007
 
-In the section, the examples will be based around:
+In the previous chapter, we produced some descriptive statistics to start to compare life expectancy across continents. The main example in this chapter will focus around a boxplot which help us to *visualise* these differences.
 
-- A boxplot to visually compare life expectancy across continents
-- A scatter plot to....
+We will also look at a scatter of plot of GDP and life expectancy.
 :::
 
 
@@ -39,13 +39,13 @@ A plot produced with the `ggplot2` package is built up using component functions
 
 ![](../images/clipboard-1526284648.png){width="700" style="display:block; margin: 2em auto;"}
 
-The code above produces a box plot. However, the same structure applies to any ggplot2 plot - it is built up from several components, connected using `+`:
+The code above produces a box plot of life expectancy by continent, and we'll come back to this example throughout this section. It is built from several components, which form the general structure for creating any ggplot2 plot:
 
-- Initialise the plot with [**ggplot()**]{style="color: #C00000;"}, specifying the [**data**]{style="color: #349353;"} and the [**aesthetic mappings**]{style="color: #FDB151;"} (how variables map to visual properties such as x and y axes)\
+- Initialise the plot with [**ggplot()**]{style="color: #C00000;"}, specifying the [**data**]{style="color: #349353;"} and the [**aesthetic mappings**]{style="color: #FDB151;"} (how variables are mapped to visual properties such as x and y axes)\
 - Choose a [**geom_xxx()**]{style="color: #901A9D;"} function based on the type of plot you want (here `geom_boxplot()` produces a boxplot)\
 - Customise the plot using additional components - here we add [**labels**]{style="color: #0070C0;"} using the [**labs()**]{style="color: #0070C0;"} function
 
-Click through the tabs below to see how each component builds up the boxplot step by step:
+Click through the tabs below to see how each component contributes to building the box plot step by step:
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -61,7 +61,7 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp))
 
 ## Add the plot
 
-The second component tells R the plot type that should be used to visually represent the data - in this case, as a boxplot ("`geom_boxplot()`"). Without it, `ggplot()` would only know the data and axes, but have no instructions on what to draw.
+The second component tells R the plot type that should be used to visually represent the data - in this case, as a boxplot ("`geom_boxplot()`").
 
 ```{r}
 ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
@@ -84,7 +84,7 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 ::: {style="margin-top: 2em;"}
 :::
 
-In the following sections we'll look at these components in more detail, returning to this boxplot example to see...
+In the following sections, we'll examine these components and further customisation options in more detail, using this box plot example to illustrate each one in context.
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -92,30 +92,9 @@ In the following sections we'll look at these components in more detail, returni
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Interpreting this boxplot
 
-Note that the medians shown in each boxplot above are not the median life expectancies of the overall populations of each continent. Since the data contains one observation per country, the median represents the median across countries within each continent - countries with larger populations are not weighted any differently to smaller ones.
+Note that the medians shown in the boxplot above are not the median life expectancies of the overall populations of each continent. Since the data contains one observation per country, the median represents the median across countries within each continent - countries with larger populations are not weighted any differently to smaller ones.
 
 If presenting this plot formally, it would be worth including a footnote to make this clear.
-:::
-
-::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Where to put the "+"
-
-When building up a ggplot2 plot, the `+` must be placed at the end of a line, not the beginning. For example:
-
-```{r}
-#| eval: false
-# This works
-ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
-  geom_boxplot()
-
-# This does not work
-ggplot(gapminder_2007, aes(x = continent, y = lifeExp))
-  + geom_boxplot()
-```
-
-It is also good practice to add a new line after each `+` rather than writing the entire plot on one line - this makes the code much easier to read and follow.
-
-RStudio will automatically indent the next line for you, so you don't need to worry about doing this manually.
 :::
 
 ## Building a plot: components and customisation
@@ -126,7 +105,14 @@ Now let's explore the different components in more detail and how to use them to
 
 The first component - `ggplot()` together with the `aes()` function nested inside it - initialises (sets up) the plot. The first argument within `ggplot()` is the name of the data you want to use. The second argument is the `aes()` function (aes is short for aesthetics), which is used to specify which variables to plot on the x- and y-axis. The `aes()` function can also be used to map other visual properties to variables - this is covered in the next section.
 
-The second component is the `geom_xxx()` function, which specifies the type of plot to create. "Geom" is short for geometry and refers to the geometric objects (e.g. points, bars, or lines) used to represent the data. `xxx` is replaced with the name of the geometry you want to use. Some of the most commonly used geom functions are shown below:
+![](../images/component1.png){width="600" style="display:block; margin: 2em auto;"}
+
+The second component is the `geom_xxx()` function, which specifies the type of plot to create. "Geom" is short for geometry and refers to the geometric objects (e.g. points, bars, or lines) used to represent the data. `xxx` is replaced with the name of the geometry you want to use.
+
+![](../images/component2.png){width="600" style="display:block; margin: 2em auto;"}
+
+
+Some of the most commonly used geom functions are shown below:
 
 ::: {#geomxxx-table}
 | Function | Plot type |
@@ -163,6 +149,27 @@ ggplot(________, aes(x = _______, y = ________)) +
 - Replace `xxx` with the name of the plot type you want to use - see options in table below
 :::
 
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Where to put the "+"
+
+When building up a ggplot2 plot, the `+` must be placed at the end of a line, not the beginning. For example:
+
+```{r}
+#| eval: false
+# This works
+ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
+  geom_boxplot()
+
+# This does not work
+ggplot(gapminder_2007, aes(x = continent, y = lifeExp))
+  + geom_boxplot()
+```
+
+It is also good practice to add a new line after each `+` rather than writing the entire plot on one line - this makes the code much easier to read and follow.
+
+RStudio will automatically indent the next line for you, so you don't need to worry about doing this manually.
+:::
+
 ::: {.panel-tabset .panel-green group="language"}
 ## R
 
@@ -182,9 +189,9 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Some plots do not require the `y=` argument
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Some plots do not require the "y=" argument
 
-Some plot types only require the `x=` argument. For example, histograms and bar charts of counts map a single variable to the xâ€‘axis, and ggplot2 automatically computes the frequencies for the y-axis).
+Some plot types only require the `x=` argument. For example, histograms and bar charts of counts map a single variable to the x-axis, and ggplot2 automatically computes the frequencies for the y-axis).
 
 **Example**
 
@@ -199,7 +206,7 @@ ggplot(gapminder_2007, aes(x = continent)) +
 ::: {style="margin-bottom: 1.5rem;"}
 :::
 
-::: {.callout-important collapse="true"}
+::: {.callout-note icon="false" collapse="true"}
 ### Multiple geom_xxx() components are possible
 
 While the examples above use a single `geom_xxx()` function, it is possible to add multiple geom layers to a single plot by adding them with `+`.
@@ -207,6 +214,8 @@ While the examples above use a single `geom_xxx()` function, it is possible to a
 Each additional `geom_xxx()` will be drawn on top of the previous one, allowing you to combine different plot types.
 
 For example, you could add `geom_point()` on top of `geom_boxplot()` to show the individual data points alongside the boxplot summary.
+
+Examples of this can be seen in the "Full examples" section and the Exercises.
 :::
 
 ::: {style="margin-bottom: 1.5rem;"}
@@ -238,10 +247,11 @@ We have already used `x=` and `y=` inside the `aes()` function to map variables 
 |-------------------|-----------------------------------------------------|
 | `x=` | Specifies which variable (column) to map to the x-axis |
 | `y=` | Specifies which variable (column) to map to the y-axis |
+| `group=` | Specifies which observations belong to the same group, allowing ggplot to draw separate lines, polygons, or other grouped elements for each category |
 | `colour=` | Assign different colours based on the specified variable (for points, lines or borders, depending on plot type) |
 | `fill=` | Assign different fill colours based on the specified variable |
 | `size=` | Assign different sizes (e.g. sizes of points in a scatter plot) based on the specified variable |
-| `shape=` | Assign different shapes to points in a scatter plot based on the specified variable e.g. points in scatter plot |
+| `shape=` | Assign different shapes to points in a scatter plot based on the specified variable |
 | `linetype=` | Assign different line types (solid, dashed, dotted, etc.) based on the specified variable |
 :::
 
@@ -280,9 +290,10 @@ ggplot(________, aes(x = _______, y = ________, ___________ = _____________)) +
 - Fill in the `column name` blank with the name of the column (variable) in your dataset that you want to map to this aesthetic
 :::
 
-**Adding a variable aesthetic - examples**
+::: {style="margin-bottom: 1.5rem;"}
+:::
 
-\[In tabs Below are base plot(s) we've see previously, scroll to see how code and plot changes to add a variable aesthetic\]
+**Adding a variable aesthetic - examples**
 
 :::: {style="overflow-y: auto; max-height: 800px;"}
 ::: panel-tabset
@@ -301,21 +312,21 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 
 Adding `fill = continent` inside the `aes()` function maps the continent variable to the fill aesthetic, meaning the fill colour of the boxes changes according to the continent. (This works since `continent` is also the variable defining the different boxes.)
 
-R also adds a legend for us - we may not want this since the continents are already defined on the x-axis. We'll see later how this can be removed.
-
 ```{r}
 ggplot(gapminder_2007, aes(x = continent, y = lifeExp, fill = continent)) +
   geom_boxplot()
 ```
 
+Notice that R also adds a legend for us, to show which colour corresponds to which continent. We may not want to include this since the continents are already defined on the x-axis, and will see later how this can be removed.
+
 ## Scatter plot: colour
 
 **Base plot**
 
-The code below creates a scatter plot (`geom_point`) using the 2007 data (`gapminder_2007`), with population (`pop`) on the x axis and GDP per capita (`gdpPercap`) on the y axis:
+The code below creates a scatter plot (`geom_point`) using the 2007 data (`gapminder_2007`), with population GDP per capita (`gdpPercap`) on the x axis and life expectancy (`lifeExp`) on the y axis:
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap)) +
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp)) +
   geom_point()
 ```
 
@@ -323,13 +334,15 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap)) +
 
 Adding `colour = continent` inside the `aes()` function maps the continent variable to the colour aesthetic, meaning the points in the scatter plot are coloured according to their continent.
 
-R also adds a legend for us, to show which colour corresponds to which continent.
-
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
   geom_point()
 ```
+
+Notice that R also adds a legend for us, to show which colour corresponds to which continent.
+
 :::
+
 ::::
 
 ### Set fixed aesthetics inside geom_xxx()
@@ -392,8 +405,6 @@ ggplot(________, aes(x = _______, y = ________) +
 
 **Adding a fixed aesthetic - examples**
 
-\[In tabs Below are base plot(s) we've see previously, scroll to see how code and plot changes to add a fixed aesthetic\]
-
 :::: {style="overflow-y: auto; max-height: 800px;"}
 ::: panel-tabset
 ## Box plot: fill
@@ -420,25 +431,23 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 
 **Base plot plus colours by continent**
 
-The code below creates a scatter plot (`geom_point`) using the 2007 data (`gapminder_2007`), with population (`pop`) on the x axis and GDP per capita (`gdpPercap`) on the y axis.
-
-Adding `colour = continent` inside the `aes()` function maps the continent variable to the colour aesthetic, meaning the points in the scatter plot are coloured according to their continent.
+As seen previously, the code below creates a scatter plot (`geom_point`) using the 2007 data (`gapminder_2007`), withGDP per capita (`gdpPercap`) on the x axis and life expectancy (`lifeExp`) on the y axis. We saw that adding `colour = continent` inside the `aes()` function maps the continent variable to the colour aesthetic, meaning the points in the scatter plot are coloured according to their continent.
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
   geom_point()
 ```
 
-**Adding variable aesthetics**
+**Adding fixed aesthetics**
 
-We have added two fixed aesthetics inside the `geom_point` function:
+In the code below, we have added two fixed aesthetics inside the `geom_point` function:
 
-- `size = 3` makes all of the points in the scatter plot size 3 (the default size is 1.5)
-- `alpha = 0.6` makes all of the points a bit transparent (the default is 1, i.e. no transparency) - this makes it easier to see the points when they overlap
+- `size = 3` makes *all* of the points in the scatter plot size 3 (the default size is 1.5)
+- `alpha = 0.6` makes *all* of the points a bit transparent - this makes it easier to see the points when they overlap
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
-  geom_point(size = 3, alpha = 0.7)
+ggplot(gapminder_2007, aes(x = gdp, y = lifeExp, colour = continent)) +
+  geom_point(size = 3, alpha = 0.6)
 ```
 :::
 ::::
@@ -446,6 +455,8 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 ### Add labels using labs()
 
 Adding the `labs()` function as a component in your plot allows you to add or customise labels such as the title, axis labels, and legend title.
+
+![](../images/component3.png){width="600" style="display:block; margin: 2em auto;"}
 
 Below are some commonly used arguments within `labs()`:
 
@@ -507,8 +518,6 @@ ggplot(________, aes(x = _______, y = ________)) +
 
 **Adding labels - examples**
 
-\[In tabs Below are base plot(s) we've see previously, scroll to see how code and plot changes to add labels\]
-
 :::: {style="overflow-y: auto; max-height: 800px;"}
 ::: panel-tabset
 ## Box plot: axis labels & title
@@ -537,8 +546,8 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
 **Base plot plus variable and fixed aesthetics**
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
-  geom_point(size = 3, alpha = 0.7)
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
+  geom_point(size = 3, alpha = 0.6)
 ```
 
 **Adding labels**
@@ -546,20 +555,21 @@ ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
 Here we add axis labels, a title, a subtitle, and rename the legend title using `colour=`:
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap, colour = continent)) +
-  geom_point(size = 3, alpha = 0.7) +
-  labs(title = "GDP per capita vs population",
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
+  geom_point(size = 3, alpha = 0.6) +
+  labs(title = "Life expectancy vs GDP",
        subtitle = "Data from 2007",
-       x = "Population",
-       y = "GDP per capita",
-       colour = "Continent")
+       x = "GDP per capita (international dollars)",
+       y = "Life expectancy (years)",
+       colour = "Continent") # The default legend title is the variable name (continent)
+                             # Here we rename it so it has a capital C
 ```
 :::
 ::::
 
-### Add additional components for further customisation
+### Additional components for further customisation
 
-Beyond fixed aesthetics and labels, there are additional components that can be added to a `ggplot2` plot to further customise its appearance. These are added in the same way as `labs()` â€” using the `+` operator to add a new layer.
+Beyond fixed aesthetics and labels, there are additional components that can be added to a `ggplot2` plot to further customise its appearance. These are added in the same way as `labs()` - using the `+` operator to add a new layer.
 
 Below are some commonly used additional components:
 
@@ -577,6 +587,12 @@ Below are some commonly used additional components:
 | `coord_flip()` | Flips the x and y axes | `coord_flip()` |
 :::
 
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}   Where can I see examples of using these components?
+
+Type `help()` with the name of the function in the brackets into the console (e.g. `help(scale_x_continuous)`) to open the corresponding R help page. The examples at the bottom of the help page are often particularly useful for understanding how the function works.
+:::
+
 ## Full examples
 
 In this section are some additional examples to demonstrate how all the components and arguments we have looked at can come together to produce a fully customised plot.
@@ -586,13 +602,13 @@ In this section are some additional examples to demonstrate how all the componen
 First, let's return to our boxplot of life expectancy across continents in 2007. The first tab below has the code we were introduced to at the start of the ggplot2 section and have seen throughout the examples. Select the second tab to see some additional customisation.
 
 ::: {.panel-tabset .panel-green}
-## Boxplot with labels
+## boxplot with labels
 
 - The `ggplot()` function asks R to create a new plot
   - The first argument is the name of the dataset we want to use for the plot - here, we have used the `gapminder_2007` data
   - The next argument is the `aes()` function
     - Inside the `aes()` function, `x = continent` maps continent to the x-axis and `y = lifeExp` maps life expectancy to the y-axis.
-- Adding the component "`geom_boxplot()`" tells R to produce a boxplot.
+- Adding the component "`geom_boxplot()`" tells R to produce a box plot.
 - Adding the "`labs()`" component adds labels to the plot.
 
 ```{r}
@@ -633,15 +649,15 @@ ggplot(gapminder_2007, aes(x = continent, y = lifeExp, fill = continent)) +
 
 - `colour = "steelblue"` colours all points steel blue
 - `size = 2` makes the points slightly larger (default is 1.5)
-- `alpha = 0.7` makes the points slightly transparent, helping to reveal overlapping points
+- `alpha = 0.6` makes the points slightly transparent, helping to reveal overlapping points
 - `theme_minimal()` applies a clean theme with a minimal background
 
 ```{r}
-ggplot(gapminder_2007, aes(x = pop, y = gdpPercap)) +
-  geom_point(colour = "steelblue", size = 2, alpha = 0.7) +
-  labs(title = "Relationship between population and GDP per capita in 2007",
-       x = "Population (log scale)",
-       y = "GDP per capita") +
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(colour = "steelblue", size = 2, alpha = 0.6) +
+  labs(title = "Life expectancy vs GDP in 2007",
+       x = "GDP per capita (international dollars)",
+       y = "Life expectancy (years)") +
   theme_minimal()
 ```
 
@@ -659,8 +675,8 @@ ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp)) +
   geom_point(colour = "steelblue", alpha = 0.6) +
   geom_smooth(method = "lm", se = FALSE, colour = "coral") +
   scale_x_log10() +
-  labs(title = "Relationship between GDP per capita and life expectancy in 2007",
-       x = "GDP per capita (log scale)",
+  labs(title = "Life expectancy vs GDP in 2007",
+       x = "GDP per capita (international dollars)",
        y = "Life expectancy (years)") +
   theme_minimal()
 ```
@@ -682,17 +698,17 @@ ggplot(gapminder_2007, aes(x = lifeExp)) +
 ```
 :::
 
-## Copying and saving your plots
+## Copying and saving plots
 
 Once you are happy with your plot, you may want to save it to use elsewhere - for example in a report or presentation.
 
-### Copying your plot
+### Copying a plot
 
 The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
 
 ![](../images/clipboard-1982207542.png)
 
-### Saving your plot
+### Saving a plot
 
 To save a plot as an image file, you can either:
 
@@ -747,17 +763,14 @@ ggplot(gapminder_2007, aes(x = continent, y = pop)) +
 
 LEVEL: {{< fa star >}} {{< fa star >}} {{< fa regular star >}}
 
-\[make a column with population in millions? / other extensions???? e.g. colour, scale\]
-
 Suppose you want to plot the UK population over time.
 
-In a previous exercise, we created a data frame containing only UK data. Run the following command if you have not already created it:
+Using `dplyr` functions, create a data frame which:
 
-```{r}
-gapminder_uk <- gapminder |> filter(country == "United Kingdom")
-```
+- Contains only UK data (from all years)
+- Has a new column giving population in millions 
 
-Now produce a plot of UK population over time:
+Using the data frame you created above, produce a plot of UK population (in millions) over time:
 
 - Use the `gapminder_uk` data
 - Put the `year` variable on the x axis and the `pop` (population) variable on the y axis
@@ -769,12 +782,18 @@ Now produce a plot of UK population over time:
 ### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
 
 ```{r}
-ggplot(gapminder_uk, aes(x = year, y = pop)) +
+
+gapminder_uk_mil <-
+  gapminder |>
+  filter(country == "United Kingdom") |>
+  mutate(pop_mil = pop/1000000)
+
+ggplot(gapminder_uk_mil, aes(x = year, y = pop_mil)) +
   geom_line() +
   geom_point() +
   labs(title = "UK population over time",
        x = "Year",
-       y = "Population")
+       y = "Population (millions)")
 ```
 :::
 
@@ -791,31 +810,48 @@ Once you have the basic plot above working, have a go at adding the following cu
 ### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
 
 ```{r}
-ggplot(gapminder_uk, aes(x = year, y = pop)) +
+ggplot(gapminder_uk_mil, aes(x = year, y = pop_mil)) +
   geom_line(colour = "red") +
   geom_point(colour = "blue", shape = 15) +
   labs(title = "UK population over time",
        x = "Year",
-       y = "Population") +
+       y = "Population (millions)") +
   theme_minimal() + 
   scale_x_continuous(limits = c(1952, 2007), breaks = seq(1952, 2007, by = 5)) +
-  scale_y_continuous(limits = c(50000000, 70000000))
+  scale_y_continuous(limits = c(5, 7))
 ```
 :::
 :::::
 
-### xxxxxx
+### Life expectancy by continent in 1997 vs 2007
 
 :::: {.callout-note icon="false"}
 ### [{{< fa pencil >}}]{style="color: #9e9e9e;"} Exercise 3
 
 LEVEL: {{< fa star >}} {{< fa star >}} {{< fa star >}}
 
+Suppose we want to compare life expectancy in 1997 vs 2007, separately for each continent.
+
+- Create a data frame containing only 1997 and 2007 data, and convert `year` to a factor variable
+- Create box plot with year on the x-axis and life expectancy on the y-axis
+- Add a `facet_wrap()` component so that each continent is shown in a separate panel
+- Add suitable labels
+
 ::: {.callout-tip icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
 
 ```{r}
-#| results: "hide"
+gapminder_97_07 <-
+  gapminder |>
+  filter(year %in% c(1997, 2007)) |>
+  mutate(year = as.factor(year))
+
+ggplot(gapminder_97_07, aes(x = year, y = lifeExp)) +
+  geom_boxplot() +
+  facet_wrap(~continent) +
+  labs(title = "Life expectancy by continent in 1997 and 2007",
+       x = "Year",
+       y = "Life expectancy")
 ```
 :::
 ::::
