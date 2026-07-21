@@ -446,7 +446,7 @@ In the code below, we have added two fixed aesthetics inside the `geom_point` fu
 - `alpha = 0.6` makes *all* of the points a bit transparent - this makes it easier to see the points when they overlap
 
 ```{r}
-ggplot(gapminder_2007, aes(x = gdp, y = lifeExp, colour = continent)) +
+ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
   geom_point(size = 3, alpha = 0.6)
 ```
 :::
