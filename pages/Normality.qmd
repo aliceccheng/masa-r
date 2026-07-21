@@ -504,43 +504,44 @@ As a rule of thumb:
 
 :::
 
+[Commented out as there is an issue with moments library when run in github]
 
 ```{r}
 #| echo: false
-library(moments)
+#library(moments)
 
-shape_stats <- function(x) {
+#shape_stats <- function(x) {
   
-  n <- length(x)
+  #n <- length(x)
   
-  skew <- skewness(x)
-  kurt <- kurtosis(x)   # raw kurtosis
+  #skew <- skewness(x)
+  #kurt <- kurtosis(x)   # raw kurtosis
   
-  se_skew <- sqrt(6 / n)
-  se_kurt <- sqrt(24 / n)
+  #se_skew <- sqrt(6 / n)
+  #se_kurt <- sqrt(24 / n)
   
-  z_skew <- skew / se_skew
+  #z_skew <- skew / se_skew
   
-  # z-statistic relative to normal kurtosis = 3
-  z_kurt <- (kurt - 3) / se_kurt
+  ## z-statistic relative to normal kurtosis = 3
+  #z_kurt <- (kurt - 3) / se_kurt
   
-  data.frame(
-    n = n,
-    skewness = skew,
-    z_skewness = z_skew,
-    kurtosis = kurt,
-    z_kurtosis = z_kurt
-  )
-}
+  #data.frame(
+    #n = n,
+    #skewness = skew,
+    #z_skewness = z_skew,
+    #kurtosis = kurt,
+    #z_kurtosis = z_kurt
+  #)
+#}
 
-results <- rbind(
-  "n = 250, normal"       = shape_stats(normal_large),
-  "n = 20, normal"       = shape_stats(normal_small),
-  "n = 250, left-skewed"  = shape_stats(lskewed_large),
-  "n = 250, right-skewed" = shape_stats(rskewed_large)
-)
+#results <- rbind(
+  #"n = 250, normal"       = shape_stats(normal_large),
+  #"n = 20, normal"       = shape_stats(normal_small),
+  #"n = 250, left-skewed"  = shape_stats(lskewed_large),
+  #"n = 250, right-skewed" = shape_stats(rskewed_large)
+#)
 
-round(results, 3)
+#round(results, 3)
 ```
 
 
