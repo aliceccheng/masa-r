@@ -1,0 +1,655 @@
+# A guide to normality and assessing the normality assumption
+
+```{r}
+#| echo: false
+#| results: "hide"
+# Create x values
+x <- seq(130, 210, length.out = 1000)
+
+# Normal density values
+y <- dnorm(x, mean = 170, sd = 10)
+```
+
+## The normal distribution
+
+The normal (or Gaussian) distribution is a continuous probability distribution with a symmetric, bell-shaped curve (Figure 1). It is an important distribution in statistics because many real-world variables are approximately normally distributed. 
+
+```{r}
+#| echo: false
+#| fig-cap: "Theoretical normal distribution."
+#| fig-width: 4
+#| fig-height: 2.5
+
+par(mar = c(1, 1, 1, 1))
+
+curve(dnorm(x, mean = 170, sd = 10),
+      from = 130,
+      to = 210,
+      lwd = 4,
+      col = "blue",
+      axes = FALSE,
+      xlab = "",
+      ylab = "")
+```
+
+The smooth curve shown in Figure 1 is a theoretical model; real datasets contain a finite number of observations and therefore only approximate this shape.
+
+A common example of data that are approximately normally distributed is adult height. Suppose we could measure the height of every adult living in the UK and display the data using a histogram, a graph that groups values into intervals and shows the frequency of observations within each interval. Although the histogram would not be perfectly smooth, its overall shape would closely resemble the bell-shaped curve of the normal distribution (Figure 2). Most people would have heights close to the average, while progressively fewer people would be found as we move towards very short or very tall heights.
+
+```{r}
+#| echo: false
+#| fig-cap: "Histogram of adult heights in the UK population."
+#| fig-width: 8
+#| fig-height: 4
+
+set.seed(123)
+
+# Simulated UK adult heights (cm)
+uk_heights <- rnorm(68000000, mean = 170, sd = 10)
+
+hist(uk_heights,
+     breaks = 40,
+     col = "skyblue",
+     border = "white",
+     main = "",
+     xlab = "Height (cm)",
+     ylab = "Frequency")
+```
+
+In research, we usually work with a sample – a smaller subset drawn from a wider population. For example, rather than measuring the height of every adult in the UK, we might collect data from a random sample of 100 adults. The resulting histogram (Figure 3) would be less smooth than the population histogram shown in Figure 2 because it is based on fewer observations. Nevertheless, since the sample comes from a population whose heights are approximately normally distributed, we would still expect the histogram to display an approximately bell-shaped, normal distribution.
+
+```{r}
+#| echo: false
+#| results: "hide"
+# Take a random sample of 100 from full UK pop
+height_sample <- sample(uk_heights, size = 100)
+```
+
+```{r}
+#| echo: false
+#| fig-cap: "Histogram of a sample of 100 UK adult heights."
+#| fig-width: 8
+#| fig-height: 5
+# Histogram of the sample
+hist(height_sample,
+     breaks = 10,
+     col = "salmon",
+     border = "white",
+     main = "",
+     xlab = "Height (cm)",
+     ylab = "Frequency")
+```
+
+## Properties of the normal distribution
+
+The tails of a distribution are the thin ends of the histogram or curve, where relatively few observations are found. In a perfectly normal distribution, the tails are equal in length on both sides of the centre, giving the distribution its characteristic symmetric bell shape. However, some distributions have one tail that extends further than the other. This asymmetry is known as skewness (or simply skew). A distribution is right-skewed (positively skewed) if it has a longer tail towards larger values, and left-skewed (negatively skewed) if it has a longer tail towards smaller values. 
+
+The direction of the skew is always named after the direction of the longer tail. Figure 4 compares a normal distribution with left-skewed and right-skewed distributions, illustrating how skewness affects the overall shape of the data. 
+
+```{r}
+#| echo: false
+#| fig-height: 2.5
+
+# Create 1 x 3 layout
+par(mfrow = c(1, 3), mar = c(2, 2, 4, 1), cex.main = 1.4)
+
+# Common x values
+x <- seq(130, 210, length.out = 1000)
+
+# Normal distribution
+plot(x, dnorm(x, mean = 170, sd = 10),
+     type = "l",
+     lwd = 4,
+     col = "palegreen3",
+     main = "Normal",
+     xlab = "",
+     ylab = "",
+     axes = FALSE)
+box()
+
+# Left-skewed distribution
+plot(x, dgamma(210 - x, shape = 5, scale = 5),
+     type = "l",
+     lwd = 4,
+     col = "orange",
+     main = "Left-skewed",
+     xlab = "",
+     ylab = "",
+     axes = FALSE)
+box()
+
+# Right-skewed distribution
+plot(x, dgamma(x - 130, shape = 5, scale = 5),
+     type = "l",
+     lwd = 4,
+     col = "purple",
+     main = "Right-skewed",
+     xlab = "",
+     ylab = "",
+     axes = FALSE)
+box()
+
+# Reset layout
+par(mfrow = c(1, 1))
+```
+
+A normal distribution is fully defined by two parameters: the mean (μ) and the standard deviation (σ). The mean determines the location of the distribution, with the peak of the curve occurring at the mean value. Changing the mean shifts the curve left or right. The standard deviation determines the spread of the distribution: larger values produce a wider, flatter curve, while smaller values produce a narrower, taller curve. For example, if adult heights were normally distributed with a mean of 170 cm and a standard deviation of 10 cm, the peak of the curve would occur at 170 cm. If the mean increased to 180 cm, the entire curve would shift to the right. If the standard deviation increased to 20 cm, the curve would become wider and less peaked, reflecting greater variation in heights.
+
+```{r}
+#| echo: false
+#| fig-height: 2.5
+
+# 1 x 3 layout
+par(mfrow = c(1, 3), mar = c(4, 4, 4, 1), cex.main = 1.4)
+
+# x-range
+x <- seq(100, 250, length.out = 1000)
+
+# Original distribution
+plot(x, dnorm(x, mean = 170, sd = 10),
+     type = "l",
+     lwd = 4,
+     col = "palegreen3",
+     main = "Mean = 170, SD = 10",
+     xlab = "Height (cm)",
+     ylab = "Density")
+abline(v = 170, lty = 2, lwd = 2)
+
+# Increased mean
+plot(x, dnorm(x, mean = 180, sd = 10),
+     type = "l",
+     lwd = 4,
+     col = "orange",
+     main = "Mean = 180, SD = 10",
+     xlab = "Height (cm)",
+     ylab = "Density")
+abline(v = 180, lty = 2, lwd = 2)
+
+# Increased SD
+plot(x, dnorm(x, mean = 170, sd = 20),
+     type = "l",
+     lwd = 4,
+     col = "purple",
+     main = "Mean = 170, SD = 20",
+     xlab = "Height (cm)",
+     ylab = "Density")
+abline(v = 170, lty = 2, lwd = 2)
+
+# Reset layout
+
+par(mfrow = c(1, 1))
+```
+
+## Why normality matters for statistical testing
+
+Many commonly used statistical tests assume that the data (or residuals) come from a normal distribution – an assumption often referred to as the “normality assumption”. Checking whether this assumption is reasonable is therefore an important step in the analysis, as violations can affect the validity of the conclusions.
+
+Unlike the height example, in practice we usually do not know the true population distribution. We use our sample data to assess whether the assumption of normality is reasonable. In other words, we examine whether the data appear to be approximately normally distributed using tools such as histograms and other graphical or statistical methods.
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key point
+
+The key practical question is whether our sample data appear sufficiently normal to justify using statistical methods that assume the underlying population is normally distributed.
+:::
+
+## Methods for assessing normality
+
+[ADD COLOURS]
+
+There are several ways to assess whether data are approximately normally distributed. The methods below are illustrated using a **<span style="color:palegreen3;">large normal sample</span>** (n = 250), a small normal sample (n = 20), and skewed samples (n = 250). For each method, examples are provided to show what normal and non-normal results might look like, together with the main strengths and limitations of the approach.
+
+```{r}
+#| echo: false
+#| results: "hide"
+# Generate data to use throughout examples
+# Set seed for reproducibility
+set.seed(130)
+
+# Generate data
+normal_large <- rnorm(250, mean = 0, sd = 1)
+lskewed_large <- 5 - rgamma(250, shape = 5, scale = 1)
+rskewed_large <- rgamma(250, shape = 5, scale = 1)
+normal_small <- rnorm(20, mean = 0, sd = 1)
+```
+
+### Histograms
+
+Perhaps the most intuitive way to assess normality is with a histogram. A histogram groups the data into equal intervals (called bins), with the height of each bar representing the number of observations within that interval.
+
+::: {.callout-caution icon="false"}
+### [{{< fa circle-check >}}]{style="color: #2E6B4E;"}   If data are approximately normally distributed...
+
+The histogram should have a roughly symmetrical, bell-shaped appearance.
+
+:::
+
+```{r}
+#| echo: false
+#| fig-height: 8
+# Create 2 x 2 plotting layout
+par(mfrow = c(2, 2), mar = c(10, 4, 4, 1))
+
+# Histogram 1: Large sample, normal
+hist(normal_large,
+     breaks = 20,
+     col = "palegreen3",
+     border = "white",
+     main = "n = 250, normal",
+     xlab = "Value")
+
+mtext("Fairly closely resembles\na normal distribution",
+      side = 1, line = 6, cex = 0.7)
+
+# Histogram 2: Small sample, normal
+hist(normal_small,
+     breaks = 6,
+     col = "darkgreen",
+     border = "white",
+     main = "n = 20, normal",
+     xlab = "Value")
+
+mtext("Underlying normal\nshape less clear",
+      side = 1, line = 6, cex = 0.7)
+
+# Histogram 3: Large sample, left-skewed
+hist(lskewed_large,
+     breaks = 20,
+     col = "orange",
+     border = "white",
+     main = "n = 250, left-skewed",
+     xlab = "Value")
+
+mtext("Long tail on the left\n(not normal)",
+      side = 1, line = 6, cex = 0.7)
+
+# Histogram 4: Large sample, right-skewed
+hist(rskewed_large,
+     breaks = 20,
+     col = "purple",
+     border = "white",
+     main = "n = 250, right-skewed",
+     xlab = "Value")
+
+mtext("Long tail on the right\n(not normal)",
+      side = 1, line = 6, cex = 0.7)
+
+# Reset layout
+par(mfrow = c(1, 1))
+```
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using histograms
+
+Pros
+
+- Simple and easy to interpret.
+- Provides a visual overview of the distribution.
+- Can reveal skewness, outliers, gaps, and multiple peaks.
+- Widely available in statistical software.
+
+Cons
+
+- With small samples, the shape of the histogram may appear irregular, making it difficult to judge whether the assumption of an underlying normal distribution is reasonable. 
+- The appearance depends on the choice of bin width and number of bins – different bin settings can make the same dataset look quite different  (i.e. appear more/less normal).
+- Provides only a subjective visual assessment rather than a formal statistical test.
+
+:::
+
+### Q-Q plots
+
+A Q-Q (quantile-quantile) plot is a graphical method for assessing normality. It compares the observed values in the sample with the values that would be expected if the data followed a normal distribution.
+
+::: {.callout-caution icon="false"}
+### [{{< fa circle-check >}}]{style="color: #2E6B4E;"}   If data are approximately normally distributed...
+
+The points on the Q-Q plot should lie close to the straight diagonal reference line.
+
+Small deviations at the tails are usually acceptable, but systematic departures from the line (such as a pronounced curve) suggest that the data may not be normally distributed.
+
+:::
+
+```{r}
+#| echo: false
+#| fig-height: 8
+# Create 2 x 2 plotting layout
+par(mfrow = c(2, 2), mar = c(10, 4, 4, 1))
+
+# Normal (large n)
+qqnorm(normal_large,
+       main = "n = 250, normal",
+       pch = 19,
+       col = "palegreen3")
+qqline(normal_large, col = "red", lwd = 2)
+
+mtext("Most points lie close to the\nreference line; a little deviation\nat the tails (ends) is okay",
+      side = 1, line = 6, cex = 0.7)
+
+# Normal (small n)
+qqnorm(normal_small,
+       main = "n = 20, normal",
+       pch = 19,
+       col = "darkgreen")
+qqline(normal_small, col = "red", lwd = 2)
+
+mtext("Points lie reasonably close\nto the reference line",
+      side = 1, line = 6, cex = 0.7)
+
+# Left-skewed (large n)
+qqnorm(lskewed_large,
+       main = "n = 250, left-skewed",
+       pch = 19,
+       col = "orange")
+qqline(lskewed_large, col = "red", lwd = 2)
+
+mtext("Systematic deviation\nfrom the line - curved pattern",
+      side = 1, line = 6, cex = 0.7)
+
+# Right-skewed (large n)
+qqnorm(rskewed_large,
+       main = "n = 250, right-skewed",
+       pch = 19,
+       col = "purple")
+qqline(rskewed_large, col = "red", lwd = 2)
+
+mtext("Systematic deviation\nfrom the line - curved pattern",
+      side = 1, line = 6, cex = 0.7)
+
+# Reset layout
+par(mfrow = c(1, 1))
+```
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using Q-Q plots
+
+Pros
+
+- Generally more sensitive to departures from normality than a histogram.
+- Easy to detect skewness and unusual tail behaviour.
+- Widely used by researchers.
+
+Cons
+
+- Less intuitive than a histogram for those unfamiliar with the method.
+- Interpretation can be subjective, particularly when deviations from the line are small.
+- Small samples may show noticeable random variation, making patterns harder to interpret.
+
+:::
+
+### Normality tests (Shapiro-Wilk and Kolmogorov Smirnov)
+
+Normality tests provide a formal statistical method for assessing whether a sample differs significantly from a normal distribution. Unlike histograms and Q-Q plots, which rely on visual interpretation, normality tests produce a test statistic and a p-value. A non-significant result (p > .05) suggests there is insufficient evidence to conclude that the data are non-normal, whereas a significant result (p ≤ .05) suggests that the data may not be normally distributed.
+
+Common examples include the Shapiro–Wilk test and the Kolmogorov–Smirnov test. The Shapiro–Wilk test is typically recommended for samples of fewer than 50 observations, whereas the Kolmogorov–Smirnov test is often used for samples of 50 or more observations.
+
+::: {.callout-caution icon="false"}
+### [{{< fa circle-check >}}]{style="color: #2E6B4E;"}   If data are approximately normally distributed...
+
+
+
+:::
+
+```{r}
+#| echo: false
+shapiro_results <- data.frame(
+  Dataset = c("n = 250, normal",
+              "n = 20, normal",
+              "n = 250, left-skewed",
+              "n = 250, right-skewed"),
+  W = c(
+    shapiro.test(normal_large)$statistic,
+    shapiro.test(normal_small)$statistic,
+    shapiro.test(lskewed_large)$statistic,
+    shapiro.test(rskewed_large)$statistic
+  ),
+  p = c(
+    shapiro.test(normal_large)$p.value,
+    shapiro.test(normal_small)$p.value,
+    shapiro.test(lskewed_large)$p.value,
+    shapiro.test(rskewed_large)$p.value
+  )
+)
+
+shapiro_results$W <- round(shapiro_results$W, 3)
+shapiro_results$p <- round(shapiro_results$p, 3)
+
+shapiro_results$Conclusion <- ifelse(
+  shapiro_results$p < .05,
+  "Non-normal",
+  "Normal"
+)
+
+knitr::kable(
+  shapiro_results,
+  caption = "Shapiro-Wilk normality test results"
+)
+
+
+ks_normal <- function(x) {
+  ks.test(x,
+          "pnorm",
+          mean = mean(x),
+          sd = sd(x))
+}
+
+ks_results <- data.frame(
+  Dataset = c("n = 250, normal",
+              "n = 20, normal",
+              "n = 250, left-skewed",
+              "n = 250, right-skewed"),
+  D = c(
+    ks_normal(normal_large)$statistic,
+    ks_normal(normal_small)$statistic,
+    ks_normal(lskewed_large)$statistic,
+    ks_normal(rskewed_large)$statistic
+  ),
+  p = c(
+    ks_normal(normal_large)$p.value,
+    ks_normal(normal_small)$p.value,
+    ks_normal(lskewed_large)$p.value,
+    ks_normal(rskewed_large)$p.value
+  )
+)
+
+ks_results$D <- round(ks_results$D, 3)
+ks_results$p <- round(ks_results$p, 3)
+
+ks_results$Conclusion <- ifelse(
+  ks_results$p < .05,
+  "Non-normal",
+  "Normal"
+)
+
+knitr::kable(
+  ks_results,
+  caption = "Kolmogorov-Smirnov normality test results"
+)
+```
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using normality tests
+
+Pros
+- Provides an objective test.
+- Produces a p-value that can be used to support conclusions.
+
+Cons
+
+- Results are highly influenced by sample size.
+- With large samples, even very small and practically unimportant departures from normality may produce a significant result.
+- With small samples, the test may have insufficient power to detect genuine non-normality.
+- Does not indicate the nature of the departure from normality (e.g., skewness, outliers, or multiple peaks).
+- Best used alongside graphical methods such as histograms and Q-Q plots rather than in isolation.
+
+:::
+
+### Skewness and kurtosis
+
+Skewness and kurtosis are numerical measures of distribution shape that can be used to assess whether sample data follow the shape of a normal distribution. They focus on two key characteristics: symmetry and the shape of the peak and tails. Skewness measures the degree of asymmetry in the data, while kurtosis measures the heaviness of the tails and the peakedness of the distribution. For a normal distribution, both skewness and kurtosis values are expected to be close to zero.
+
+To help determine whether skewness and kurtosis values differ significantly from those expected under normality, z-skewness and z-kurtosis can be calculated:
+
+$$z_{skewness} = \frac{skewness}{SE_{skewness}}$$
+
+$$z_{kurtosis} = \frac{kurtosis}{SE_{kurtosis}}$$
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa circle-check >}}]{style="color: #2E6B4E;"}   If data are approximately normally distributed...
+
+As a rule of thumb:
+
+- Small samples (n < 50): values between −1.96 and +1.96 suggest no significant departure from normality.
+- Medium samples (50 ≤ n < 300): values between −3.29 and +3.29 are often considered acceptable.
+- Large samples (n ≥ 300): z-values become very sensitive, so graphical methods (e.g., histograms and Q-Q plots) are generally more informative than relying on significance tests alone.
+
+:::
+
+
+```{r}
+#| echo: false
+library(moments)
+
+shape_stats <- function(x) {
+  
+  n <- length(x)
+  
+  skew <- skewness(x)
+  kurt <- kurtosis(x)   # raw kurtosis
+  
+  se_skew <- sqrt(6 / n)
+  se_kurt <- sqrt(24 / n)
+  
+  z_skew <- skew / se_skew
+  
+  # z-statistic relative to normal kurtosis = 3
+  z_kurt <- (kurt - 3) / se_kurt
+  
+  data.frame(
+    n = n,
+    skewness = skew,
+    z_skewness = z_skew,
+    kurtosis = kurt,
+    z_kurtosis = z_kurt
+  )
+}
+
+results <- rbind(
+  "n = 250, normal"       = shape_stats(normal_large),
+  "n = 20, normal"       = shape_stats(normal_small),
+  "n = 250, left-skewed"  = shape_stats(lskewed_large),
+  "n = 250, right-skewed" = shape_stats(rskewed_large)
+)
+
+round(results, 3)
+```
+
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using skewness and kurtosis
+
+Pros
+
+- Provides numerical measures of distribution shape.
+- Can identify asymmetry (skewness) and unusual tail behaviour (kurtosis).
+- z-skewness and z-kurtosis allow formal assessment of whether values differ significantly from those expected under normality.
+- Easy to calculate using statistical software.
+- Useful for supplementing histograms, Q-Q plots, and normality tests.
+
+Cons
+
+- Sensitive to outliers.
+- Large samples can produce significant z-values for trivial departures from normality.
+- Interpretation may be difficult for beginners.
+- No single set of cut-off values is universally accepted.
+- Does not show the nature of the distribution as clearly as graphical methods.
+
+:::
+
+
+:::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key point
+
+The key practical question is whether our sample data appear sufficiently normal to justify using statistical methods that assume the underlying population is normally distributed.
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Recommendations
+
+- Histograms are highly influenced by bin width and sample size, so they should usually not be used in isolation (except perhaps with very large samples). They are best used as an initial visual check.
+- Normality tests (e.g., Shapiro–Wilk and Kolmogorov–Smirnov) can be overly sensitive in large samples and may lack power in small samples. If used, they should generally be interpreted alongside graphical methods rather than on their own.
+- Q-Q plots are widely recognised as one of the most useful graphical methods for assessing normality. They are less affected by arbitrary choices (such as bin width) and make departures from normality easier to identify.
+- Skewness and kurtosis provide useful numerical measures of distribution shape and can complement graphical methods, but they should not be relied upon as the sole basis for assessing normality.
+- For most analyses, a combination of a histogram and a Q-Q plot provides a strong basis for assessing normality, with normality tests and/or skewness and kurtosis used as supporting evidence where appropriate. 
+
+:::
+
+::::
+
+## Normality assumption for specific statistical tests
+
+
+When checking the normality assumption, it is important to understand exactly what needs to be normally distributed. Depending on the statistical test being used, the assumption may apply to the outcome variable, difference scores, or model residuals rather than the raw data themselves.
+
+The normality assumption is a type of distributional assumption, meaning that we assume the data (or relevant statistics, such as residuals or difference scores) follow a normal distribution. Statistical tests that rely on such assumptions are known as parametric tests. When these assumptions are not met, a non-parametric test, which makes fewer assumptions about the underlying distribution of the data, may be more appropriate.
+
+The table below summarises the normality assumption for several commonly used parametric statistical tests and identifies a non-parametric alternative that may be considered when the assumption is violated.
+
+| Parametirc test | Normality assumption | Non-parametric alternative |
+|------|------|------|
+| Independent-samples t-test | The outcome variable should be approximately normally distributed within each group. | Mann–Whitney U test |
+| Paired-samples t-test | The difference scores between paired observations should be approximately normally distributed. | Wilcoxon signed-rank test |
+| One-way ANOVA | The outcome variable should be approximately normally distributed within each group. | Kruskal–Wallis test |
+| Repeated-measures ANOVA | The scores (or residuals) within each condition should be approximately normally distributed. | Friedman test |
+| Pearson correlation | Both variables should be approximately normally distributed. | Spearman's rank correlation |
+| Simple linear regression | The residuals (errors) should be approximately normally distributed. | No direct non-parametric alternative |
+| Multiple linear regression | The residuals (errors) should be approximately normally distributed. | No direct non-parametric alternative |
+
+
+::: {.callout-important collapse="true"}
+### For some tests, normality is not the only assumption that needs to be checked
+
+For example, Pearson's correlation assumes that the relationship between the two variables is approximately linear, while an independent-samples t-test assumes that the variances of the two groups are approximately equal.
+
+Always check all assumptions relevant to the statistical test being used, not just normality.
+
+:::
+
+## What to do if the normality assumption is not met
+
+
+Finding that the normality assumption has been violated does not automatically mean that a statistical analysis cannot be performed. Many parametric tests are reasonably robust to moderate departures from normality, particularly when sample sizes are large.
+
+The most appropriate response depends on the severity of the violation, the sample size, and the statistical test being used. Possible options include:
+
+- Proceed with the planned parametric test if departures from normality are minor and the test is known to be robust.
+- Transform the data (e.g. using a logarithmic or square-root transformation) to reduce skewness and improve normality
+- Use a non-parametric alternative, which makes fewer assumptions about the underlying distribution of the data. In some cases, a non-parametric test can also be used as a sensitivity analysis to determine whether the conclusions are consistent with the parametric approach.
+- Report and justify your decision, explaining how normality was assessed and why a particular approach was chosen.
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Other considerations
+
+- According to the Central Limit Theorem (CLT), as sample size increases, the sampling distribution of the mean becomes increasingly normal, even if the underlying data are not normally distributed. As a result, many parametric tests are relatively robust to moderate violations of normality when sample sizes are large.
+- For tests that compare groups (e.g., independent-samples t-tests and ANOVA), having similar group sizes can also improve robustness to non-normality. Unequal group sizes combined with strong departures from normality are more likely to affect the validity of the results.
+- It is also important to consider the practical significance of any departure from normality. Real-world data rarely follow a perfect normal distribution, so the goal is usually to determine whether the assumption is reasonable enough for the planned analysis rather than whether the data are perfectly normal.
+
+:::
+
+
+## Using software
+
+Because the normality assumption applies differently to different statistical tests (as seen in the previous section), the way it is assessed can also differ. In some cases, normality is assessed using the raw data, whereas in others it is assessed using derived values. For example, in linear regression, the normality assumption applies to the residuals rather than the original variables, meaning that the regression model must be fitted before normality can be assessed.
+
+The guides below focus on assessing the normality of *raw* data, either for an entire variable or separately within groups (e.g. heights for males and females). These approaches are appropriate for many commonly used statistical tests, including t-tests, ANOVA, and correlation.
+
+- Excel (Real Statistics) - <a href="https://real-statistics.com/tests-normality-and-symmetry/" target="_blank" rel="noopener noreferrer">Real Statistics: Tests for Normality and Symmetry</a>
+- Jamovi (Dana Wanzer) - <a href="https://danawanzer.github.io/stats-with-jamovi/checking-assumptions.html" target="_blank" rel="noopener noreferrer">Checking Assumptions in Jamovi</a>
+- SPSS (Laerd Statistics) - <a href="https://statistics.laerd.com/spss-tutorials/testing-for-normality-using-spss-statistics.php" target="_blank" rel="noopener noreferrer">Testing for Normality Using SPSS Statistics</a>
+- R (Statology) - <a href="https://www.statology.org/test-for-normality-in-r/" target="_blank" rel="noopener noreferrer">How to Test for Normality in R</a>
+
+
+## Further reading
+
+- <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3693611/" target="_blank" rel="noopener noreferrer">Normality Tests for Statistical Analysis: A Guide for Non-Statisticians</a>
+
+
+

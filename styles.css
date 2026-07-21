@@ -77,7 +77,7 @@ margin-right: 0.5rem;
 }*/
 
 
-/* Make callout-tip boxes grey by default */
+/* Make callout-tip boxes plum by default */
 
 div.callout.callout-tip {
   border-left-color: #872046 !important;   /* border left */
@@ -87,6 +87,18 @@ div.callout.callout-tip .callout-header {
   font-size: 1em;
   background-color: #f3e3e8 !important;    /* header background */
 }
+
+/* Make callout-caution boxes green by default */
+
+div.callout.callout-caution {
+  border-left-color: #2E6B4E !important;   /* border left */
+}
+
+div.callout.callout-caution .callout-header {
+  font-size: 1em;
+  background-color: #EAF5EE !important;    /* header background */
+}
+
 
 
 /* Make callout-note boxes grey by default */
