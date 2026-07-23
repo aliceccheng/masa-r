@@ -1,4 +1,20 @@
+---
+crossref:
+  chapters: false
+number-sections: false
+---
+
 # A guide to normality and assessing the normality assumption
+
+## Learning outcomes
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Learning outcomes
+
+This guide should help you to:
+
+- 
+:::
 
 ```{r}
 #| echo: false
@@ -12,10 +28,11 @@ y <- dnorm(x, mean = 170, sd = 10)
 
 ## The normal distribution
 
-The normal (or Gaussian) distribution is a continuous probability distribution with a symmetric, bell-shaped curve (Figure 1). It is an important distribution in statistics because many real-world variables are approximately normally distributed. 
+The normal (or Gaussian) distribution is a continuous probability distribution with a symmetric, bell-shaped curve (@fig-norm-dist). It is an important distribution in statistics because many real-world variables are approximately normally distributed. 
 
 ```{r}
 #| echo: false
+#| label: fig-norm-dist
 #| fig-cap: "Theoretical normal distribution."
 #| fig-width: 4
 #| fig-height: 2.5
@@ -26,18 +43,19 @@ curve(dnorm(x, mean = 170, sd = 10),
       from = 130,
       to = 210,
       lwd = 4,
-      col = "blue",
+      col = "skyblue",
       axes = FALSE,
       xlab = "",
       ylab = "")
 ```
 
-The smooth curve shown in Figure 1 is a theoretical model; real datasets contain a finite number of observations and therefore only approximate this shape.
+The smooth curve shown in @fig-norm-dist is a theoretical model; real datasets contain a finite number of observations and therefore only approximate this shape.
 
-A common example of data that are approximately normally distributed is adult height. Suppose we could measure the height of every adult living in the UK and display the data using a histogram, a graph that groups values into intervals and shows the frequency of observations within each interval. Although the histogram would not be perfectly smooth, its overall shape would closely resemble the bell-shaped curve of the normal distribution (Figure 2). Most people would have heights close to the average, while progressively fewer people would be found as we move towards very short or very tall heights.
+A common example of data that are approximately normally distributed is adult height. Suppose we could measure the height of every adult living in the UK and display the data using a histogram, a graph that groups values into intervals and shows the frequency of observations within each interval. Although the histogram would not be perfectly smooth, its overall shape would closely resemble the bell-shaped curve of the normal distribution (@fig-height-hist). Most people would have heights close to the average, while progressively fewer people would be found as we move towards very short or very tall heights.
 
 ```{r}
 #| echo: false
+#| label: fig-height-hist
 #| fig-cap: "Histogram of adult heights in the UK population."
 #| fig-width: 8
 #| fig-height: 4
@@ -45,7 +63,7 @@ A common example of data that are approximately normally distributed is adult he
 set.seed(123)
 
 # Simulated UK adult heights (cm)
-uk_heights <- rnorm(68000000, mean = 170, sd = 10)
+uk_heights <- rnorm(1000, mean = 170, sd = 10)
 
 hist(uk_heights,
      breaks = 40,
@@ -53,10 +71,11 @@ hist(uk_heights,
      border = "white",
      main = "",
      xlab = "Height (cm)",
-     ylab = "Frequency")
+     ylab = "Frequency",
+     xlim = c(130, 210))
 ```
 
-In research, we usually work with a sample – a smaller subset drawn from a wider population. For example, rather than measuring the height of every adult in the UK, we might collect data from a random sample of 100 adults. The resulting histogram (Figure 3) would be less smooth than the population histogram shown in Figure 2 because it is based on fewer observations. Nevertheless, since the sample comes from a population whose heights are approximately normally distributed, we would still expect the histogram to display an approximately bell-shaped, normal distribution.
+In research, we usually work with a sample – a smaller subset drawn from a wider population. For example, rather than measuring the height of every adult in the UK, we might collect data from a random sample of 100 adults. The resulting histogram (@fig-height-hist-small) would be less smooth than the population histogram shown in @fig-height-hist because it is based on fewer observations. Nevertheless, since the sample comes from a population whose heights are approximately normally distributed, we would still expect the histogram to display an approximately bell-shaped, normal distribution.
 
 ```{r}
 #| echo: false
@@ -67,27 +86,91 @@ height_sample <- sample(uk_heights, size = 100)
 
 ```{r}
 #| echo: false
+#| label: fig-height-hist-small
 #| fig-cap: "Histogram of a sample of 100 UK adult heights."
-#| fig-width: 8
 #| fig-height: 5
 # Histogram of the sample
 hist(height_sample,
      breaks = 10,
-     col = "salmon",
+     col = "skyblue",
      border = "white",
      main = "",
      xlab = "Height (cm)",
-     ylab = "Frequency")
+     ylab = "Frequency",
+     xlim = c(130, 210))
 ```
+
+### Interactive Histogram
+
+```{ojs}
+viewof n = Inputs.range(
+  [10, 5000],
+  {
+    value: 100,
+    step: 10,
+    label: "Sample Size"
+  }
+)
+```
+
+```{ojs}
+function rnorm() {
+  const u1 = Math.random();
+  const u2 = Math.random();
+
+  return Math.sqrt(-2 * Math.log(u1)) *
+         Math.cos(2 * Math.PI * u2);
+}
+```
+
+```{ojs}
+sample = Array.from(
+  {length: n},
+  () => rnorm()
+)
+```
+
+```{ojs}
+Plot.plot({
+  width: 700,
+  height: 400,
+  x: {
+    label: "Value"
+  },
+  y: {
+    label: "Frequency"
+  },
+  marks: [
+    Plot.rectY(
+      sample,
+      Plot.binX(
+        { y: "count" },
+        { x: d => d }
+      )
+    )
+  ]
+})
+```
+
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+
+- The normal distribution is a continuous probability distribution which.....
+- In statistics we are often interested in whether continuous data we have collected comes from a normal distribution...
+- This can be more difficult to assess for smaller samples...
+:::
 
 ## Properties of the normal distribution
 
 The tails of a distribution are the thin ends of the histogram or curve, where relatively few observations are found. In a perfectly normal distribution, the tails are equal in length on both sides of the centre, giving the distribution its characteristic symmetric bell shape. However, some distributions have one tail that extends further than the other. This asymmetry is known as skewness (or simply skew). A distribution is right-skewed (positively skewed) if it has a longer tail towards larger values, and left-skewed (negatively skewed) if it has a longer tail towards smaller values. 
 
-The direction of the skew is always named after the direction of the longer tail. Figure 4 compares a normal distribution with left-skewed and right-skewed distributions, illustrating how skewness affects the overall shape of the data. 
+The direction of the skew is always named after the direction of the longer tail. @fig-skew compares a normal distribution with left-skewed and right-skewed distributions, illustrating how skewness affects the overall shape of the data. 
 
 ```{r}
 #| echo: false
+#| label: fig-skew
+#| fig-cap: "Graphical examples of normal, left-skewed and right-skewed distributions."
 #| fig-height: 2.5
 
 # Create 1 x 3 layout
@@ -122,7 +205,7 @@ box()
 plot(x, dgamma(x - 130, shape = 5, scale = 5),
      type = "l",
      lwd = 4,
-     col = "purple",
+     col = "#CC5500",
      main = "Right-skewed",
      xlab = "",
      ylab = "",
@@ -133,10 +216,16 @@ box()
 par(mfrow = c(1, 1))
 ```
 
-A normal distribution is fully defined by two parameters: the mean (μ) and the standard deviation (σ). The mean determines the location of the distribution, with the peak of the curve occurring at the mean value. Changing the mean shifts the curve left or right. The standard deviation determines the spread of the distribution: larger values produce a wider, flatter curve, while smaller values produce a narrower, taller curve. For example, if adult heights were normally distributed with a mean of 170 cm and a standard deviation of 10 cm, the peak of the curve would occur at 170 cm. If the mean increased to 180 cm, the entire curve would shift to the right. If the standard deviation increased to 20 cm, the curve would become wider and less peaked, reflecting greater variation in heights.
+A normal distribution is fully defined by two parameters: the mean (μ) and the standard deviation (σ). The mean determines the location of the distribution, with the peak of the curve occurring at the mean value. Changing the mean shifts the curve left or right. The standard deviation determines the spread of the distribution: larger values produce a wider, flatter curve, while smaller values produce a narrower, taller curve.
+
+@fig-mean-sd
+
+For example, if adult heights were normally distributed with a mean of 170 cm and a standard deviation of 10 cm, the peak of the curve would occur at 170 cm (@fig-mean-sd-a). If the mean increased to 180 cm, the entire curve would shift to the right (@fig-mean-sd-b). If the standard deviation increased to 20 cm, the curve would become wider and less peaked, reflecting greater variation in heights (@fig-mean-sd-c).
 
 ```{r}
 #| echo: false
+#| label: fig-mean-sd
+#| fig-cap: "Normal distributions with different values of the mean and standard deviation."
 #| fig-height: 2.5
 
 # 1 x 3 layout
@@ -149,7 +238,7 @@ x <- seq(100, 250, length.out = 1000)
 plot(x, dnorm(x, mean = 170, sd = 10),
      type = "l",
      lwd = 4,
-     col = "palegreen3",
+     col = "skyblue",
      main = "Mean = 170, SD = 10",
      xlab = "Height (cm)",
      ylab = "Density")
@@ -159,7 +248,7 @@ abline(v = 170, lty = 2, lwd = 2)
 plot(x, dnorm(x, mean = 180, sd = 10),
      type = "l",
      lwd = 4,
-     col = "orange",
+     col = "#4682B4",
      main = "Mean = 180, SD = 10",
      xlab = "Height (cm)",
      ylab = "Density")
@@ -169,7 +258,7 @@ abline(v = 180, lty = 2, lwd = 2)
 plot(x, dnorm(x, mean = 170, sd = 20),
      type = "l",
      lwd = 4,
-     col = "purple",
+     col = "#4169E1",
      main = "Mean = 170, SD = 20",
      xlab = "Height (cm)",
      ylab = "Density")
@@ -180,23 +269,113 @@ abline(v = 170, lty = 2, lwd = 2)
 par(mfrow = c(1, 1))
 ```
 
+::: {#fig-normal-panels layout-ncol=3}
+
+```{r}
+#| echo: false
+#| label: fig-mean-sd-a
+#| fig-cap: "(a)"
+#| fig-height: 7
+
+par(
+  cex = 1.5,
+  cex.main = 1.7,
+  cex.lab = 1.6,
+  cex.axis = 1.5
+)
+
+x <- seq(100, 250, length.out = 1000)
+
+plot(x, dnorm(x, mean = 170, sd = 10),
+     type = "l", 
+     lwd = 6,
+     col = "skyblue",
+     main = "Mean = 170, SD = 10",
+     xlab = "Height (cm)",
+     ylab = "Density")
+
+abline(v = 170, lty = 2, lwd = 2)
+```
+
+```{r}
+#| echo: false
+#| label: fig-mean-sd-a
+#| fig-cap: "(b)"
+#| fig-height: 7
+
+par(
+  cex = 1.5,
+  cex.main = 1.7,
+  cex.lab = 1.6,
+  cex.axis = 1.5
+)
+
+plot(x, dnorm(x, mean = 180, sd = 10),
+     type = "l",
+     lwd = 6,
+     col = "#4682B4",
+     main = "Mean = 180, SD = 10",
+     xlab = "Height (cm)",
+     ylab = "Density")
+
+abline(v = 180, lty = 2, lwd = 2)
+```
+
+```{r}
+#| echo: false
+#| label: fig-mean-sd-a
+#| fig-cap: "(c)"
+#| fig-height: 7
+
+par(
+  cex = 1.5,
+  cex.main = 1.7,
+  cex.lab = 1.6,
+  cex.axis = 1.5
+)
+
+plot(x, dnorm(x, mean = 170, sd = 20),
+     type = "l",
+     lwd = 6,
+     col = "#4169E1",
+     main = "Mean = 170, SD = 20",
+     xlab = "Height (cm)",
+     ylab = "Density")
+
+abline(v = 170, lty = 2, lwd = 2)
+```
+
+:::
+
+Comparison 
+
+Comparison of normal distributions with different means and standard deviations. Panel (a) shows a distribution with mean 170 cm and standard deviation 10 cm; panel (b) shows the effect of increasing the mean to 180 cm; panel (c) shows the effect of increasing the standard deviation to 20 cm.
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+
+- The centre (and peak) of a normal distribution is determined by the mean.
+- The spread of a normal distribution is determined by the standard deviation.
+:::
+
+
 ## Why normality matters for statistical testing
 
 Many commonly used statistical tests assume that the data (or residuals) come from a normal distribution – an assumption often referred to as the “normality assumption”. Checking whether this assumption is reasonable is therefore an important step in the analysis, as violations can affect the validity of the conclusions.
 
-Unlike the height example, in practice we usually do not know the true population distribution. We use our sample data to assess whether the assumption of normality is reasonable. In other words, we examine whether the data appear to be approximately normally distributed using tools such as histograms and other graphical or statistical methods.
+Unlike the height example, in practice we usually do not know the true population distribution. We use our sample data to assess whether the assumption of normality is *reasonable*. In other words, we examine whether the data appear to be approximately normally distributed using tools such as histograms and other graphical or statistical methods.
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key point
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
 
-The key practical question is whether our sample data appear sufficiently normal to justify using statistical methods that assume the underlying population is normally distributed.
+- The key practical question is whether our sample data appear sufficiently normal to justify using statistical methods that assume the underlying population is normally distributed.
 :::
 
 ## Methods for assessing normality
 
 [ADD COLOURS]
 
-There are several ways to assess whether data are approximately normally distributed. The methods below are illustrated using a **<span style="color:palegreen3;">large normal sample</span>** (n = 250), a small normal sample (n = 20), and skewed samples (n = 250). For each method, examples are provided to show what normal and non-normal results might look like, together with the main strengths and limitations of the approach.
+There are several ways to assess whether data are approximately normally distributed. The methods below are illustrated using a **<span style="color:#7CCD7C;">large normal sample</span>** (n = 250), a **<span style="color:#006400;">small normal sample</span>** (n = 20), a **<span style="color:#FFA500;">left skewed sample</span>** (n = 250) and a **<span style="color:#CC5500;">right skewed sample</span>** (n - 250). For each method, examples are provided to show what normal and non-normal results might look like, together with the main strengths and limitations of the approach.
 
 ```{r}
 #| echo: false
@@ -225,9 +404,9 @@ The histogram should have a roughly symmetrical, bell-shaped appearance.
 
 ```{r}
 #| echo: false
-#| fig-height: 8
+#| fig-height: 5
 # Create 2 x 2 plotting layout
-par(mfrow = c(2, 2), mar = c(10, 4, 4, 1))
+par(mfrow = c(1, 2), mar = c(10, 4, 4, 1))
 
 # Histogram 1: Large sample, normal
 hist(normal_large,
@@ -238,7 +417,7 @@ hist(normal_large,
      xlab = "Value")
 
 mtext("Fairly closely resembles\na normal distribution",
-      side = 1, line = 6, cex = 0.7)
+      side = 1, line = 6, cex = 0.9)
 
 # Histogram 2: Small sample, normal
 hist(normal_small,
@@ -248,8 +427,21 @@ hist(normal_small,
      main = "n = 20, normal",
      xlab = "Value")
 
-mtext("Underlying normal\nshape less clear",
-      side = 1, line = 6, cex = 0.7)
+mtext("Although the sample data comes from a\nnormal distribution, the underlying normal\nshape is less clear",
+      side = 1, line = 6, cex = 0.9)
+```
+
+::: {.callout-failure icon="false"}
+### [{{< fa circle-xmark >}}]{style="color: #C66A1A;"}   If data are NOT approximately normally distributed...
+
+The histogram will likely show skew, multiple peaks, or outliers, rather than a symmetric bell-shaped distribution.
+:::
+
+```{r}
+#| echo: false
+#| fig-height: 5
+# Create 2 x 2 plotting layout
+par(mfrow = c(1, 2), mar = c(10, 4, 4, 1))
 
 # Histogram 3: Large sample, left-skewed
 hist(lskewed_large,
@@ -260,21 +452,19 @@ hist(lskewed_large,
      xlab = "Value")
 
 mtext("Long tail on the left\n(not normal)",
-      side = 1, line = 6, cex = 0.7)
+      side = 1, line = 6, cex = 0.9)
 
 # Histogram 4: Large sample, right-skewed
 hist(rskewed_large,
      breaks = 20,
-     col = "purple",
+     col = "#CC5500",
      border = "white",
      main = "n = 250, right-skewed",
      xlab = "Value")
 
 mtext("Long tail on the right\n(not normal)",
-      side = 1, line = 6, cex = 0.7)
+      side = 1, line = 6, cex = 0.9)
 
-# Reset layout
-par(mfrow = c(1, 1))
 ```
 
 ::: {.callout-note icon="false" collapse="true"}
@@ -302,17 +492,15 @@ A Q-Q (quantile-quantile) plot is a graphical method for assessing normality. It
 ::: {.callout-caution icon="false"}
 ### [{{< fa circle-check >}}]{style="color: #2E6B4E;"}   If data are approximately normally distributed...
 
-The points on the Q-Q plot should lie close to the straight diagonal reference line.
-
-Small deviations at the tails are usually acceptable, but systematic departures from the line (such as a pronounced curve) suggest that the data may not be normally distributed.
+The points on the Q-Q plot should lie close to the straight diagonal reference line. Small deviations at the tails are usually acceptable.
 
 :::
 
 ```{r}
 #| echo: false
-#| fig-height: 8
-# Create 2 x 2 plotting layout
-par(mfrow = c(2, 2), mar = c(10, 4, 4, 1))
+#| fig-height: 5
+
+par(mfrow = c(1, 2), mar = c(10, 4, 4, 1))
 
 # Normal (large n)
 qqnorm(normal_large,
@@ -334,6 +522,18 @@ qqline(normal_small, col = "red", lwd = 2)
 mtext("Points lie reasonably close\nto the reference line",
       side = 1, line = 6, cex = 0.7)
 
+```
+
+::: {.callout-failure icon="false"}
+### [{{< fa circle-xmark >}}]{style="color: #C66A1A;"}   If data are NOT approximately normally distributed...
+
+The Q-Q plot is likely to display systematic departures from the line, such as a pronounced curve).
+:::
+
+```{r}
+#| echo: false
+#| fig-height: 5
+
 # Left-skewed (large n)
 qqnorm(lskewed_large,
        main = "n = 250, left-skewed",
@@ -348,7 +548,7 @@ mtext("Systematic deviation\nfrom the line - curved pattern",
 qqnorm(rskewed_large,
        main = "n = 250, right-skewed",
        pch = 19,
-       col = "purple")
+       col = "#CC5500")
 qqline(rskewed_large, col = "red", lwd = 2)
 
 mtext("Systematic deviation\nfrom the line - curved pattern",
@@ -357,6 +557,7 @@ mtext("Systematic deviation\nfrom the line - curved pattern",
 # Reset layout
 par(mfrow = c(1, 1))
 ```
+
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using Q-Q plots
@@ -583,6 +784,8 @@ The key practical question is whether our sample data appear sufficiently normal
 
 :::
 
+- It can be subjective...
+
 ::::
 
 ## Normality assumption for specific statistical tests
@@ -594,7 +797,7 @@ The normality assumption is a type of distributional assumption, meaning that we
 
 The table below summarises the normality assumption for several commonly used parametric statistical tests and identifies a non-parametric alternative that may be considered when the assumption is violated.
 
-| Parametirc test | Normality assumption | Non-parametric alternative |
+| Parametric test | Normality assumption | Non-parametric alternative |
 |------|------|------|
 | Independent-samples t-test | The outcome variable should be approximately normally distributed within each group. | Mann–Whitney U test |
 | Paired-samples t-test | The difference scores between paired observations should be approximately normally distributed. | Wilcoxon signed-rank test |

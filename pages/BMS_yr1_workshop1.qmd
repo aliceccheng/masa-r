@@ -153,6 +153,7 @@ You can also save your script using the keyboard shortcut <strong>Ctrl + S</stro
 ### [{{< fa keyboard >}}]{style="color: #2E6B4E;"}  Task
 Create a new script and save it in a dedicated folder for the R work on this module.
 (This folder will be used to store all of your R scripts and data files for these workshops.)
+:::
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task

@@ -100,6 +100,17 @@ div.callout.callout-caution .callout-header {
 }
 
 
+/* Make callout-question boxes orange by default */
+
+div.callout.callout-question {
+  border-left-color: #C66A1A !important;   /* border left */
+}
+
+div.callout.callout-question .callout-header {
+  font-size: 1em;
+  background-color: #FDF1E6 !important;    /* header background */
+}
+
 
 /* Make callout-note boxes grey by default */
 
@@ -273,5 +284,24 @@ div.callout.callout-note {
   overflow-wrap: anywhere;
 }
 
+
+
+/**********************/
+/* Figure captions */
+/**********************/
+
+
+figcaption {
+  display: block;
+}
+
+figcaption .figure-number {
+  display: inline;
+  margin-right: 0.3em;
+}
+
+figcaption p {
+  display: inline;
+}
 
 
