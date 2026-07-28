@@ -8,10 +8,67 @@ number-sections: false
 
 Over three workshops this semester, you'll be learning the basics of R...
 
-### Why R?
+### MASA/Getting help
+
+Ask friends, ask staff
+
+Outside of the workshops, the 
+
+
+The Maths and Statistics Advice (MASA) service can support with...
 
 ### What are R and RStudio?
 
+Technically speaking, R and RStudio are different things.
+
+R is the name of the programming language, while RStudio is an environment for working with R - essentially it provides a user-friendly interface that makes writing, running, and managing R code much easier.
+
+In practice, we will often refer to "R" and "RStudio" interchangeably.
+
+### Why R?
+
+- Built specifically for data analysis and statistics
+- Free and open-source
+- Powerful tools for handling and analysing data
+- Produces publication-quality graphs
+- Widely used across scientific research disciplines
+- A valuable skill for both further study and future careers
+
+Today we'll be covering the basics. Most of the examples could be carried out in software such as Excel, but the skills you learn in these workshops provide the foundation for the much more powerful analyses that R can perform.
+
+### Using these course materials
+
+These course materials follow the same content that is in the workshops (and workshop slides). They are intended as a supplementary to access the content all in one place.
+
+You can also copy code from the examples.
+
+**Template code**
+
+Sometimes code is shown in blue panels like the one below. This code cannot be directly copied and run in R, but shows the structure of using a particular function. There are blanks spaces with information on what to fill in there.
+
+[we might not need this until workshop 2]
+
+::: {.panel-tabset .panel-blue group="language"}
+## R
+
+Template code is shown in blue panels like this one
+:::
+
+
+**Exercises**
+
+Exercises in these materials are labelled according to their level of difficulty:
+
+:::: dplyr-table
+| Level | Description |
+|----------------------|--------------------------------------------------|
+| {{< fa star >}} {{< fa regular star >}} {{< fa regular star >}} | Level 1 exercises are similar to the workshop examples. |
+| {{< fa star >}} {{< fa star >}} {{< fa regular star >}} | Level 2 exercises extend the workshop examples, for example by using a different function. |
+| {{< fa star >}} {{< fa star >}} {{< fa star >}} | Level 3 exercises go beyond the workshop examples, for example by combining multiple ideas or extending the syntax covered. |
+
+::: {#levels-table}
+:::
+::::
 
 ## Workshop 1 overview
 
@@ -25,7 +82,7 @@ By the end of this session, you should be able to:
 - Navigate the RStudio interface
 - Use R as a calculator 
 - [[Make the next one more specific]]
-- Install and load R packages!!!!!!!! < may move to workshop 2
+- Install and load R packages
 - Troubleshoot some common coding errors
 [update to match the individual LOs as we go]
 
@@ -65,41 +122,8 @@ Users need to create an account, but it's then possible to use RStudio essential
 [For work outside class/coursework.... library laptop or library computers - FIND OUT]
 
 
-## MASA
 
-The Maths and Statistics Advice (MASA) service can support with...
-
-
-## How the workshops work
-
-**Template code**
-
-Sometimes code is shown in blue panels like the one below. This code cannot be directly copied and run in R, but shows the structure of using a particular function. There are blanks spaces with information on what to fill in there.
-
-[we might not need this until workshop 2]
-
-::: {.panel-tabset .panel-blue group="language"}
-## R
-
-Template code is shown in blue panels like this one
-:::
-
-
-**Exercises**
-
-Exercises in these materials are labelled according to their level of difficulty:
-
-:::: dplyr-table
-| Level | Description |
-|----------------------|--------------------------------------------------|
-| {{< fa star >}} {{< fa regular star >}} {{< fa regular star >}} | Level 1 exercises are similar to the workshop examples. |
-| {{< fa star >}} {{< fa star >}} {{< fa regular star >}} | Level 2 exercises extend the workshop examples, for example by using a different function. |
-| {{< fa star >}} {{< fa star >}} {{< fa star >}} | Level 3 exercises go beyond the workshop examples, for example by combining multiple ideas or extending the syntax covered. |
-
-::: {#levels-table}
-:::
-::::
-
+1.  Open RStudio (you do not need to open R separately)
 
 ### Structure of the session
 
@@ -185,6 +209,12 @@ Saving a script is similar to saving a Microsoft Word document. To save your scr
 
 You can also save your script using the keyboard shortcut <strong>Ctrl + S</strong> (or <strong>Cmd + S</strong> on a Mac).
 
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Create a new script and save it in a **dedicated folder** for the R work on this module.
+(This folder will be used to store all of your R scripts and data files for these workshops.)
+:::
+
 ***Video***
 
 The video below demonstrates how to create and save an R script, and how to open an existing script.
@@ -208,12 +238,6 @@ The video below demonstrates how to create and save an R script, and how to open
 - 1:45 – TASK: Creating and saving a script?
 :::
 
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Create a new script and save it in a **dedicated folder** for the R work on this module.
-(This folder will be used to store all of your R scripts and data files for these workshops.)
-:::
-
 ## Writing and running code
 
 ::: {.callout-tip icon="false"}
@@ -226,6 +250,10 @@ There are two places where you can write code in R: in a script or in the consol
 **Writing and running code from a script**
 
 It is generally recommended to write your code in scripts because it can be edited and saved, allowing you to reopen it and run the code again later.
+
+Code can be written directly in the script:
+
+[example]
 
 To **run a line of code from your script** (i.e. ask R to execute it):
 
@@ -295,6 +323,40 @@ The video below below summarises and demonstrates writing and running code in R.
 - 1:55 – Is it better to write code in a script or in the console?
 :::
 
+## Workshop 1 data: Three penguins
+
+[intro the penguins]
+
+Suppose we have three penguins, and we have measured each of their body masses in grams. We also have their species.
+
+:::: {.columns}
+
+::: {.column width="33%"}
+![](../images/adelie.jfif){height=300px}
+
+**Penguin 1**  
+Species: Adelie  
+Body mass (g): 3750
+:::
+
+::: {.column width="33%"}
+![](../images/gentoo.jpg){height=300px}
+
+**Penguin 2**   
+Species: Gentoo  
+Body mass (g): 4500
+:::
+
+::: {.column width="33%"}
+![](../images/chinstrap.jfif){height=300px}
+
+**Penguin 3**   
+Species: Chinstrap  
+Body mass (g): 3500
+:::
+
+::::
+
 ## Using R as a calculator
 
 ::: {.callout-tip icon="false"}
@@ -302,32 +364,45 @@ The video below below summarises and demonstrates writing and running code in R.
 - Write R commands to perform simple arithmetic calculations
 :::
 
+Although R is a powerful tool for data analysis and statistics, at its most basic it can be used like a normal calculator. Performing simple calculations is a useful way to start practising writing and running code.
+
 In the previous section, we ran the simple command `2 + 3`.
 
-Although R is a powerful tool for data analysis and statistics, at its most basic it can be used as a calculator. Performing simple calculations is a useful way to start practising writing and running code.
+To perform calculations, we use symbols such as `+`, `-`, `*`, and `/`. In R, these symbols are called operators.
 
 To carry out calculations and other tasks, R uses operators.
 
-An operator is a symbol that tells R to perform a particular action. 
+An operator is a symbol that tells R to perform a particular action.
 
 One type of operator is an arithmetic operator. These are the operators we are most familiar with from everyday mathematics, such as addition, subtraction, multiplication, and division:
 
 ::: {#geomxxx-table}
-| Action | Operator (symbol in R) |
-|---------------------|---------------------------------------------------|
+| Action | Operator |
+|---------|---------|
 | Addition | `+` |
 | Subtraction | `-` |
 | Multiplication | `*` |
 | Division | `/` |
 :::
 
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-Practise running some more simple calculations, both from your script and directly in the console. For example:
+An operator is a symbol that tells R to perform a particular action. We'll come across some other operators through the workshops.
 
-- 4 + 5
-- 8 ÷ 2
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+Practise running some more simple calculations based on our three penguins:
+
+- Add together the body masses of penguin 1 (3750) and penguin 2 (4500)
+- Use a division to find penguin 1's body mass (3750g) in kg
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
+
+```{r}
+#
+
+```
 :::
+::::
 
 ***Video***
 
@@ -415,19 +490,17 @@ The video below demonstrates adding comments to an R script:
 
 **Expressions**
 
+[change to penguins?]
+
 An expression is code that R evaluates to produce a result. For example, earlier we ran the following code:
 
 ```{r}
 2 + 3    # this is an expression, which returns the value 5
 ```
 
-`2 + 3` is an expression because, when R evaluates it, it produces a result (`5`), which is displayed in the console, but not saved for later use. 
-
-[remove?] An expression could also be much more complicated than a simple sum, for example a complex function or model.
+The expression produces a result (`5`), which is displayed in the console, but not saved for later use. 
 
 [could be a single value, but will usally involve an operator, function or both]
-
-[remove?] The key idea is that R runs the code, produces a result, and displays it. If the result is not stored in an [object] for later use, the code is an expression.
 
 **Assignments**
 
@@ -499,70 +572,97 @@ The video below explains expressions and assignments:
 - 2:23 – Rules for variable names
 :::
 
-## Assigning and using variables
+
+
+
+## Assigning numeric and character values
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- 
+- xx
 :::
 
-Before we assigned numeric
-
-Different for character (OG data) - use quotes
-
-once saved can just refer to them by name
-
-e.g. calcs
-
-=== existing stuff from before:
-
-
-
-
-[Let's now suppose we have 3 penguins]
-[Scroll up in "complete this github table" copilot chat - gave scaffolding for working up from values to data frames ]
-
-
-
-** ... **
-
-An object in R is a piece of information stored in memory.
-
-A variable name is a name that refers to an object.
-
-For example, when we run:
+In the previous section, the expressions that we assigned involved calculations:
 
 ```{r}
 x <- 2 + 3
 ```
 
-R first evaluates the expression `2 + 3`, producing the value `5`. It then stores this value as an object and associates it with the variable name `x`.
+However, expressions do not have to be calculations. Sometimes we simply want to store a value so that we can refer to it later.
 
-After this assignment has been run, we can use `x` elsewhere in our code:
+Let's explore this using our penguin data. 
+
+**Assigning numeric values**
+
+When assigning numeric values, we simply type the numbers we want to store.
+
+For example, let's create 3 variables called `mass_1`, `mass_2` and `mass_3` to store our pengiuns' respective body masses.
 
 ```{r}
-x
+mass_1 <- 3750
+mass_2 <- 4500
+mass_3 <- 3500
 ```
+
+**Assigning character values**
+
+When assigning character values (i.e. text), we need to use quotes around the values.
+
+For example, let's create 3 variables called `species_1`, `species_2` and `species_3` to store our penguins' respective body masses.
 
 ```{r}
-x * 10
+species_1 <- "Adelie"
+species_2 <- "Gentoo"
+species_3 <- "Chinstrap"
 ```
 
-Whenever R sees the variable name `x`, it retrieves the object associated with that name.
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- xx
+:::
+
+## Using stored variables/objects
+
+We keep saying that assigning a variable means you can "use it later". Now let's see what that means. Once something is stored in a [named object], it can be referred to/used by name.
+
+For example, let's say we want to add the three body masses.
+
+Instead of using the raw data:
+
+```{r}
+3750 + 4500 + 3500
+```
+
+We can add the variables to produce the same result:
+
+```{r}
+mass_1 + mass_2 + mass_3
+```
+
+This probably isn't much easier here, using variable names becomes much more useful when we are working with larger datasets and more complicated calculations.
+
+Whenever R sees a variable name, it retrieves the object associated with that name. [or put first]
+
+If we wanted to, we could even assign the result of this expression to a new variable to *store* the total mass:
+
+```{r}
+total_mass <- mass_1 + mass_2 + mass_3
+total_mass
+```
 
 
-
-
-
-
-
+```{r}
+mass_1/1000
+```
 
 ## Functions
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- 
+- Write simple functions such as...
 :::
+
+If you've worked with Excel, you'll be familiar with the idea of functions. For example, to add cells values in Excel , you can use the SUM() function.
 
 A function is a block of code that carries out a specific task. This could be something simple, like finding the average of a set of numbers, or something more complex, like creating a graph.
 
@@ -636,9 +736,8 @@ sum(mass_1, mass_2, mass_3)   # adds the mass values together and returns the to
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- 
--
--
+- xx
+
 :::
 
 
@@ -661,13 +760,42 @@ So far, we have stored the body mass of each penguin in a separate variable. Thi
 
 A vector provides a more convenient approach by allowing us to store all of the body masses together in a single object.
 
+```{r}
+#| eval: false
+_______________ <- c(_____________, _______________, ______________)
+ variable name        first value     second value    third value
+```
+
+Could add more
+
+::: {.callout-note icon="false"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  xxxx
+- All values must be of the same type (e.g. numeric or character)
+- Character values must have quotations
+:::
+
 For example:
 
-[example]
+```{r}
+body_mass_g <- c(mass_1, mass_2, mass_3)
+```
 
-Now we have a numeric vector called `body_mass` which....
+Now we have a numeric vector called `body_mass_g` which....
 
 We use assignment again!
+
+Let's also create a vector of the species. As will single values, when we are entering character (text) values, we need to use quotation marks. We use quotations around each argument.
+
+```{r}
+species <- c("Adelie","Gentoo","Chinstrap")
+```
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- xx
+
+:::
 
 
 Summary 
@@ -687,19 +815,181 @@ Summary
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- 
+- xx
 :::
 
+A data frame is a type of object in R which it has a tabular structure with rows and columns
+
+Each row corresponds to a single observation / record / subject
+
+Each column represents a variable - i.e. piece of information.
+
+**Creating data frames from vectors**
+
+Data frames can be created by combining vectors – the vectors form the columns of the data frame.
+
+Lets use our penguin data as an example. At the moment we have a vector called `species` containing the three species and a vector called `body_mass_g` containing the body masses.
+
+It might be helpful to have all of that information in one place so that...
+
+```{r}
+penguins <- data.frame(species, body_mass_g)
+```
+
+So it's a bit like combining values into a vector, except this time we are combining vectors as columns into a data frame - so the arguments are the names of the vectors.
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- xx
+
+:::
 
 ## Data frames - accessing columns
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- 
+- xx
+:::
+
+It is common to want to work with, or analyse, a specific variable i.e. column (vector) in a data frame.
+
+To [select] a column from a data frame, use the $ operator e.g. 
+
+```{r}
+penguins$species
+penguins$body_mass_g
+```
+
+These are vectors which you can apply functions to as before. For example:
+
+```{r}
+print(penguins$species)
+```
+
+[maybe introduce the sum function]
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+
+Using your `penguins` data frame and appropriate functions:
+
+- print the body_mass_g
+- find the class (i.e. data type) of the body_mass_g column
+
+:::
+
+[!! I think move installing and loading packages to next workshop, as this is where we actually use it?]
+
+## Types of data
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+- xx
+:::
+
+R represents different kinds of data using specific data types.
+
+The three main data types in R are:
+
+- numeric – numbers!
+- character – text (or numbers stored as text)
+- factor – categorical data with fixed levels
+
+`class()`– We have seen that this function can be used to check object type i.e. class (for a scalar or vector this shows its data type).
+
+`str()` – Use this function to view the structure of an object, e.g. for a data frame it will give you info, such as data type, about each column.
+
+!!! Get them to change theirs to factor
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+
+Use the `str()` function to view the structure of:
+
+- the whole `penguins` data frame
+- the `species` column only
+
+:::
+
+[functions can also be applied to data frames]
+
+
+## Installing and loading packages
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+- Install and load R packages
+:::
+
+An R packageis a collection of pre-written code and functions that extend the capabilities of the R programming language.
+
+[remove?] Libraries are the directories where R packages are stored.
+
+An R package needs to be installed onto your machine, and also then loaded, before it can be used. Think of this as like....
+
+Some standard packages come pre-installed *and* loaded.
+Some packages come pre-installed but need to be loaded.
+Additional packages need to be installed and then loaded.
+
+**Installing and loading a package**
+
+Functions, argument is the package name
+
+```{r}
+#| eval: false
+#| results: hide
+install.packages("______________")
+                   package name
+
+library(________________)
+         package name
+
+```
+
+For example:
+
+```{r}
+#| eval: false
+install.packages(Hmisc)
+```
+
+```{r}
+#| results: hide
+library(Hmisc)
+```
+
+
+The Hmisc package includes many useful functions for data analysis such as the `describe()` function.
+
+
+
+
+You may get some warnings... if package is installed, should get something like this:
+
+![](../images/package_ready.png){width="600" style="display:block; margin: 2em auto;"}
+You may also get a warning message from loading the package. This is usally just to tell you that the package was built under a previous version as R.
+
+
+**Checking a package is ready to use**
+
+[screenshot of box with tick]
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+
+- Install and load the Hmisc package
+
 :::
 
 
-[Why do data frames from scratch? - wrote this down somewhere]
+## Summary
+
+
+[Why do data frames from scratch? - wrote this down somewhere - paper on desdk]
 E.g.
 
 - Show how data frames work: columns containing same types of data
@@ -707,11 +997,6 @@ E.g.
 - c() function is useful!
 
 
-
-[!! I think move installing and loading packages to next workshop, as this is where we actually use it?]
-
-
-## Summary
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key point
@@ -731,7 +1016,15 @@ E.g.
 Exploring a data frame should come in somewhere - like Will Kay
 
 
+## Complete code
+
+
+
+
 ===============================================================
+
+
+=======
 
 [[coursework data]]
 
@@ -761,5 +1054,31 @@ ggplot(cw, aes(x = group, y = weight_change)) +
   geom_point()
 ```
 
+*=======================
 
+[Scroll up in "complete this github table" copilot chat - gave scaffolding for working up from values to data frames ]
+
+An object in R is a piece of information stored in memory.
+
+A variable name is a name that refers to an object.
+
+For example, when we run:
+
+```{r}
+x <- 2 + 3
+```
+
+R first evaluates the expression `2 + 3`, producing the value `5`. It then stores this value as an object and associates it with the variable name `x`.
+
+After this assignment has been run, we can use `x` elsewhere in our code:
+
+```{r}
+x
+```
+
+```{r}
+x * 10
+```
+
+*=======================
 
