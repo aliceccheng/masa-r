@@ -26,6 +26,8 @@ x <- seq(130, 210, length.out = 1000)
 y <- dnorm(x, mean = 170, sd = 10)
 ```
 
+!!!!!!!!! change back to 1 million not 1000 once finished editing
+
 ## The normal distribution
 
 The normal (or Gaussian) distribution is a continuous probability distribution with a symmetric, bell-shaped curve (@fig-norm-dist). It is an important distribution in statistics because many real-world variables are approximately normally distributed. 
@@ -103,6 +105,7 @@ hist(height_sample,
 ### Interactive Histogram
 
 ```{ojs}
+//| echo: false
 viewof n = Inputs.range(
   [10, 5000],
   {
@@ -114,6 +117,7 @@ viewof n = Inputs.range(
 ```
 
 ```{ojs}
+//| echo: false
 function rnorm() {
   const u1 = Math.random();
   const u2 = Math.random();
@@ -124,6 +128,7 @@ function rnorm() {
 ```
 
 ```{ojs}
+//| echo: false
 sample = Array.from(
   {length: n},
   () => rnorm()
@@ -131,6 +136,7 @@ sample = Array.from(
 ```
 
 ```{ojs}
+//| echo: false
 Plot.plot({
   width: 700,
   height: 400,
@@ -299,7 +305,7 @@ abline(v = 170, lty = 2, lwd = 2)
 
 ```{r}
 #| echo: false
-#| label: fig-mean-sd-a
+#| label: fig-mean-sd-b
 #| fig-cap: "(b)"
 #| fig-height: 7
 
@@ -323,7 +329,7 @@ abline(v = 180, lty = 2, lwd = 2)
 
 ```{r}
 #| echo: false
-#| label: fig-mean-sd-a
+#| label: fig-mean-sd-c
 #| fig-cap: "(c)"
 #| fig-height: 7
 
@@ -405,7 +411,7 @@ The histogram should have a roughly symmetrical, bell-shaped appearance.
 ```{r}
 #| echo: false
 #| fig-height: 5
-# Create 2 x 2 plotting layout
+# Create 1 x 2 plotting layout
 par(mfrow = c(1, 2), mar = c(10, 4, 4, 1))
 
 # Histogram 1: Large sample, normal
@@ -437,12 +443,11 @@ mtext("Although the sample data comes from a\nnormal distribution, the underlyin
 The histogram will likely show skew, multiple peaks, or outliers, rather than a symmetric bell-shaped distribution.
 :::
 
+[I feel like these are the wrong way round - should work from what histogram looks like and what this suggests]
+
 ```{r}
 #| echo: false
 #| fig-height: 5
-# Create 2 x 2 plotting layout
-par(mfrow = c(1, 2), mar = c(10, 4, 4, 1))
-
 # Histogram 3: Large sample, left-skewed
 hist(lskewed_large,
      breaks = 20,
@@ -465,7 +470,87 @@ hist(rskewed_large,
 mtext("Long tail on the right\n(not normal)",
       side = 1, line = 6, cex = 0.9)
 
+# Reset layout
+par(mfrow = c(1, 1))
 ```
+
+
+### Interactive Histogram with Skew
+
+```{ojs}
+//| echo: false
+viewof n_skew = Inputs.range(
+  [10, 500],
+  {
+    value: 100,
+    step: 10,
+    label: "Sample Size"
+  }
+)
+```
+
+```{ojs}
+//| echo: false
+viewof skew = Inputs.range(
+  [-2, 2],
+  {
+    value: 0,
+    step: 0.1,
+    label: "Skew"
+  }
+)
+```
+
+```{ojs}
+//| echo: false
+function rnorm_skew() {
+  const u1 = Math.random();
+  const u2 = Math.random();
+
+  return Math.sqrt(-2 * Math.log(u1)) *
+         Math.cos(2 * Math.PI * u2);
+}
+```
+
+```{ojs}
+//| echo: false
+sample_skew = Array.from(
+  {length: n_skew},
+  () => {
+    const z = rnorm_skew();
+
+    if (Math.abs(skew) < 0.01) return z;
+
+    return skew > 0
+      ? (Math.exp(skew * z) - 1) / skew
+      : -((Math.exp(-skew * z) - 1) / -skew);
+  }
+)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  width: 700,
+  height: 400,
+  x: {
+    label: "Value"
+  },
+  y: {
+    label: "Frequency"
+  },
+  marks: [
+    Plot.rectY(
+      sample_skew,
+      Plot.binX(
+        {y: "count"},
+        {x: d => d}
+      )
+    )
+  ]
+})
+```
+
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa circle-info >}}]{style="color: #9e9e9e;"}   Pros and cons of assessing normality using histograms
