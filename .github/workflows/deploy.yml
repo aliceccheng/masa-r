@@ -36,6 +36,8 @@ jobs:
             any::gapminder
             any::ggplot2
             any::Hmisc
+            any::moments
+            any::readxl
 
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
