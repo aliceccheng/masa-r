@@ -100,13 +100,13 @@ div.callout.callout-caution .callout-header {
 }
 
 
-/* Make callout-question boxes orange by default */
+/* Make callout-warning boxes orange by default */
 
-div.callout.callout-question {
+div.callout.callout-warning {
   border-left-color: #C66A1A !important;   /* border left */
 }
 
-div.callout.callout-question .callout-header {
+div.callout.callout-warning .callout-header {
   font-size: 1em;
   background-color: #FDF1E6 !important;    /* header background */
 }

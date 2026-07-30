@@ -24,6 +24,10 @@ book:
           href: pages/BMS_yr1_workshop2.qmd
         - text: "Workshop 3"
           href: pages/BMS_yr1_workshop3.qmd
+    - part: "VMS3012"
+      chapters:
+        - text: "VMS3012"
+          href: pages/VMS3012.qmd
     - part: "Normality"
       chapters:
         - text: "Normality"

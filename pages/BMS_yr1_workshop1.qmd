@@ -325,14 +325,12 @@ The video below below summarises and demonstrates writing and running code in R.
 
 ## Workshop 1 data: Three penguins
 
-[intro the penguins]
-
 Suppose we have three penguins, and we have measured each of their body masses in grams. We also have their species.
 
 :::: {.columns}
 
 ::: {.column width="33%"}
-![](../images/adelie.jfif){height=300px}
+![](../images/adelie.jfif){width="85%"}
 
 **Penguin 1**  
 Species: Adelie  
@@ -340,7 +338,7 @@ Body mass (g): 3750
 :::
 
 ::: {.column width="33%"}
-![](../images/gentoo.jpg){height=300px}
+![](../images/gentoo.jpg){width="100%"}
 
 **Penguin 2**   
 Species: Gentoo  
@@ -348,7 +346,7 @@ Body mass (g): 4500
 :::
 
 ::: {.column width="33%"}
-![](../images/chinstrap.jfif){height=300px}
+![](../images/chinstrap.jfif){width="100%"}
 
 **Penguin 3**   
 Species: Chinstrap  
@@ -745,7 +743,7 @@ sum(mass_1, mass_2, mass_3)   # adds the mass values together and returns the to
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- 
+- xx
 :::
 
 [So far we've been working with/storing single values...]
@@ -985,6 +983,34 @@ You may also get a warning message from loading the package. This is usally just
 
 :::
 
+***Video***
+
+The video below demonstrates how to install and load an R package.
+
+*Note*: The examples used in the video are the dplyr and readxl packages. We do not require these packages for this workshop - we only need to install and load the Hmisc package.
+
+- The video imports a file called "iris" - ours is called "penguins", so whenever the video refers to "iris", replace this with "penguins" in your code
+- The video uses: Session > Set Working Directory > *Choose Directory* to import the data. Session > Set Working Directory > *To Source File Location* is quicker if your Excel file is saved in the same location asyour script, but either method is fine.
+- The "previous video" referred to in the video is the video about installing packages, which...
+
+<div style="text-align: center;">
+  <iframe
+    width="80%"
+    style="aspect-ratio: 16 / 9;"
+    src="https://www.youtube.com/embed/qchMoYYDsOA"
+    title="YouTube video player"
+    allowfullscreen>
+  </iframe>
+</div>
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Video timestamps
+- 0:00 – What is are R packages and libraries?
+- 0:30 – How to view the packages in your libraries
+- 1:10 – Installing a package
+- 3:09 – Loading a package
+- 4:22 – Installing the readxl package (and summary slide)
+:::
 
 ## Summary
 

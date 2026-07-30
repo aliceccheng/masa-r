@@ -1,26 +1,222 @@
 ---
-title: "Untitled"
-format: html
-editor: visual
+number-sections: false
 ---
 
-## Quarto
+# R workshop 3: Statistical analysis in R
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+## Learning outcomes
 
-## Running Code
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+By the end of this workshop, you should be able to:
+
+- xxxxxxxxxxxxxx
+- xxxxxxxxxxxxxx
+:::
+
+## Workshop structure
+
+## Setup {#setup}
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Follow the steps below to get set up for this workshop
+:::
+
+1.  Open RStudio (you do not need to open R separately)
+
+2.  Create a new script and save it in your **dedicated folder** for the R work on this module
+
+3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it. **If you installed these packages in workshop2 you do not need to install them again.**
+
+!! explain why we need each of these
+
+::: {.panel-tabset group="language"}
+## R
+
+{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
 
 ```{r}
-1 + 1
+#| eval: false
+# Install packages
+install.packages ("readxl")
+install.packages("ggplot2")
 ```
+:::
 
-You can add options to executable code like this 
+4.  Below is the code for *loading* the packages that are needed for this workshop. Copy the code and paste it into the top of your new **script**, then run this code.
+
+::: {.panel-tabset group="language"}
+## R
 
 ```{r}
-#| echo: false
-2 * 2
+#| message: false
+#| warning: false
+#| results: "hide"
+# Load packages
+library(readxl)
+library(ggplot2)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+{{< fa lightbulb >}} You'll need to load any packages required for your work each time you start a new R session.
+:::
+
+::: {style="margin-top: 2em;"}
+:::
+
+::: callout-important
+### Write code in your script, not the console
+
+From now on, unless you're testing a small piece of code, write all of your code in the script rather than the console. This makes it easier to save, review, and rerun your work later.
+:::
+
+## Importing workshop 3 data
+
+In workshop 2, we learnt how to import data from an Excel file into R.
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Import the "Workshop 3 data" Excel file into R by following the steps below
+:::
+
+1. Save the Workshop 3 Excel file [link] in your **dedicated folder** for the R work on this module (this should be the same folder that your R script is saved in.)
+
+2. Set your working directory by clicking: Session > Set Working Directory > To Source File Location
+
+![](../images/setwd.png){width="600" style="display:block; margin: 2em auto;"}
+
+3. Import the data using the `read_excel()` function and assign it the name "ws3data" using the following code:
+
+```{r}
+#| results: hide
+ws3data <- read_excel("Workshop 3 data.xlsx")
+```
+
+4. Check that a data frame called "ws3data" now appears in the Environment tab of the environment pane:
+
+![](../images/ws3data.png){width="400" style="display:block; margin: 2em auto;"}
+
+[see workshop 2 for video - link]
+[put common errors again]
+
+
+![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"
+
+
+## Recap: Exploring a data frame
+
+It’s a good idea to explore and get to know the data you’re working with before starting any analysis. 
+
+We saw some useful functions for doing this in workshop 2. [link]
+
+**View the whole data frame**
+
+We could view the entire data frame in the console by typing its name and running it, but it's often nicer to view it in the Source pane. You can do this either by clicking on the data frame in the Environment pane (which automatically runs `View()`), or by using the `View()` function directly:
+
+::: {.panel-tabset group="language"}
+## R
+
+```{r}
+#| eval: false
+View(ws3data)   
+```
+:::
+
+This is quite a small dataframe, so we can get to know it visually rather than using functions.
+
+**About the data**
+
+A group of scientists are investigating whether adding a supplement to hamster pup diet will affect tail growth.
+
+A control group was given the standard diet, whilst a treatment group was given the supplement in addition to the standard diet.
+
+The tail length was recorded in mm after five months of development.
+
+
+## Workshop aims for analysing the data {#aims}
+
+The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
+
+- Investigate whether adding a supplement to hamster pup diet will affect tail growth
+
+[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
+
+:::
+
+
+## Recap: Grouped descriptive statistics
+
+Often, we want to obtain descriptive statistics broken down by certain subsets of data i.e. *grouped* descriptive statistics.
+
+We can see that this might be helpful for us here, because we want to compare tail growth between the treatment and the control group.
+
+Recall from Workshop 2 that the `by()` function can be used to find grouped descriptive statistics:
+
+::: {.panel-tabset .panel-blue group="language"}
+## R
+
+**Using the by() function - general template**
+
+```{r}
+#| eval = FALSE
+by(______________________, ____________________, ___________________)
+    column to summarise     column to group by    function to use
+```
+
+[any extra info from before?]
+
+:::
+
+In our`ws3data`:
+
+- Our `column to summarise` will be `tail_length_mm`, because this is the thing we have measured and want to summarise.
+- Our `column to group by` will be `treat_group`, because this column contains the groups that we want to create separate summaries for
+
+Remember that to select a column from a data frame, we need to use the `$` operator, so to select the `tail_length_mm` column we use `ws3data$tail_length_mm`, and to select the `treat_group` column, we use `ws3data$treat_group`.
+
+- The `function to use` is the function corresponding to whatever descriptive statistics or summary you would like to produce. For example, if you want to find the median, use `mean`.
+
+So altogether, to find the mean tail length for each treatment group, we would use the command:
+
+```{r}
+by(ws3data$tail_length_mm, ws3data$treat_group, mean)
+```
+
+[Q. What does this tell us about the [average] tail length for the two groups? Which is higher? What does this initially suggest about our aim?]
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Find the median tail length of each group
+- Find the standard deviation of the tail length of each group
+- Find the minimum tail length in each group
+- Find the maximum tail length in each group
+
+[You make need to look back at the functions table]
+
+[Answers]
+:::
+
+
+[Use slides]
+
+
+
+.===== work this in (slide 15) - "comparing groups" - Will / Sam's lectures
+
+Comparing groups:Workshop 3 data
+
+A group of scientists are investigating whether adding a supplement to hamster pup diet will **affect tail growth**.
+
+A **control group* was given the standard diet, whilst a **treatment group** was given the supplement in addition to the standard diet.
+
+The tail length was recorded in mm after five months of development.
+
+
+We can compare the tail lengths in the control group versus the treatment group, to see if the supplement has lead to longer tails…
+
+
+

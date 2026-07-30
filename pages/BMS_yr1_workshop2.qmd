@@ -19,25 +19,23 @@ By the end of this workshop, you should be able to:
 
 ## Setup {#setup}
 
-Follow the steps below to get set up for this workshop:
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Follow the steps below to get set up for this workshop
+:::
 
 1.  Open RStudio (you do not need to open R separately)
 
-2.  Create a new script and save it in a location you can easily find later
+2.  Create a new script and save it in your **dedicated folder** for the R work on this module
 
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Create a new script and save it in a **dedicated folder** for the R work on this module.
-(This folder will be used to store all of your R scripts and data files for these workshops.)
-:::
-
-
-3.  To install all of the packages used in this workshop, run the following code in your **console**:
+3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it. (e.g. you will not need to installed `Hmisc` again if you already installed it in workshop 1)
 
 !! explain why we need each of these
 
-::: {.panel-tabset .panel-green group="language"}
+::: {.panel-tabset group="language"}
 ## R
+
+{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
 
 ```{r}
 #| eval: false
@@ -46,13 +44,11 @@ install.packages("Hmisc")
 install.packages ("readxl")
 install.packages("ggplot2")
 ```
-
-{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
 :::
 
-4.  To *load* the required packages, copy and run the following code in your **script**:
+4.  Below is the code for *loading* the packages that are needed for this workshop. Copy the code and paste it into the top of your new **script**, then run this code.
 
-::: {.panel-tabset .panel-green group="language"}
+::: {.panel-tabset group="language"}
 ## R
 
 ```{r}
@@ -178,9 +174,39 @@ You should now see `penguins` in the Environment tab of the environment pane:
 Things to check (if it's not working):
 
 - Make sure the Excel file is closed
+- Check naming of Excel file
 
+***Video***
 
-## Exploring the data
+The video below demonstrates how to import a file from Excel, including some things to check if it is not working.
+
+A couple of things to note about the video:
+
+- The video imports a file called "iris" - ours is called "penguins", so whenever the video refers to "iris", replace this with "penguins" in your code
+- The video uses: Session > Set Working Directory > *Choose Directory* to import the data. Session > Set Working Directory > *To Source File Location* is quicker if your Excel file is saved in the same location asyour script, but either method is fine.
+- The "previous video" referred to in the video is the video about installing packages, which...
+
+<div style="text-align: center;">
+  <iframe
+    width="80%"
+    style="aspect-ratio: 16 / 9;"
+    src="https://www.youtube.com/embed/rJljmh2CEZU"
+    title="YouTube video player"
+    allowfullscreen>
+  </iframe>
+</div>
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Video timestamps
+- 0:00 – Introduction (and recap of installing the readxl package)
+- 0:40 – Setting the working directory - how and why
+- 2:09 – Checking your current working directory using getwd()
+- 2:28 – Importing data (.xls and .xlsx files) using the read_excel function
+- 2:59 – Common errors when importing Excel files
+- 4:13 – Viewing the imported data
+:::
+
+## Exploring a data frame
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
@@ -190,6 +216,8 @@ Things to check (if it's not working):
 - [Generate descriptive statistics for data frames or columns using the summary() and describe() functions]
 
 :::
+
+It’s a good idea to explore and get to know the data you’re working with before starting any analysis. This helps you spot issues, understand what information is available, and avoid making incorrect assumptions before you begin analysing.
 
 We'll use some simple functions [that we saw last time] to explore the dataset.
 
@@ -459,13 +487,13 @@ In the following sections, we'll examine these components and further customisat
 ::: {style="margin-top: 2em;"}
 :::
 
-## Producing a boxplot
+### Producing a boxplot
 
 
-## Extra customisation section for people who go quickly?
+### Extra customisation section for people who go quickly?
 
 
-#============================
+.============================
 
 [[ the exercise for this workshop can be exactly the same just different variables - gender and another measure]]
 
