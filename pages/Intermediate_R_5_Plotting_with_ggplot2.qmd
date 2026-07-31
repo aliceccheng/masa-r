@@ -491,7 +491,7 @@ Adding labels to our boxplot code:
 ```{r}
 #| eval: false
 ggplot(gapminder_2007, aes(x = continent, y = lifeExp)) +
-  geom_boxplot(___________ = _____________) +
+  geom_boxplot() +
   labs(x = "_______",
        y = "_______")
 ```

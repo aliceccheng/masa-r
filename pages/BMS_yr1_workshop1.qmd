@@ -882,6 +882,8 @@ Using your `penguins` data frame and appropriate functions:
 
 ## Types of data
 
+[use Eva]
+
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
 - xx

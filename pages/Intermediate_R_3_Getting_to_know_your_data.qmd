@@ -94,7 +94,7 @@ This will open a new tab next to your script. Click on the "x" to close it.
 
 **Examine the structure of the data frame**
 
-The str() ("structure") function is useful for quickly examining the structure of a dataset:
+The `str()` ("structure") function is useful for quickly examining the structure of a dataset:
 
 ::: {.panel-tabset .panel-green group="language"}
 ## R

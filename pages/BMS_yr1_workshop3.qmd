@@ -26,16 +26,16 @@ By the end of this workshop, you should be able to:
 
 1.  Open RStudio (you do not need to open R separately)
 
-2.  Create a new script and save it in your **dedicated folder** for the R work on this module
+2.  Create a new script and save it in your dedicated folder for the R work on this module
 
-3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it. **If you installed these packages in workshop2 you do not need to install them again.**
+3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it.
 
 !! explain why we need each of these
 
 ::: {.panel-tabset group="language"}
 ## R
 
-{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device, you do not need to install them again.
+{{< fa triangle-exclamation >}} If you have previously installed any of these packages on your device (e.g. we installed HMisc is workshop 1), you do not need to install them again.
 
 ```{r}
 #| eval: false
@@ -80,20 +80,20 @@ In workshop 2, we learnt how to import data from an Excel file into R.
 - Import the "Workshop 3 data" Excel file into R by following the steps below
 :::
 
-1. Save the Workshop 3 Excel file [link] in your **dedicated folder** for the R work on this module (this should be the same folder that your R script is saved in.)
+1. Save the Workshop 3 Excel file [link] in your dedicated folder for the R work on this module (this should be the same folder that your R script is saved in.)
 
-2. Set your working directory by clicking: Session > Set Working Directory > To Source File Location
+2. Set your working directory by clicking: Session > Set Working Directory > To Source File Location, as shown below.
 
 ![](../images/setwd.png){width="600" style="display:block; margin: 2em auto;"}
 
-3. Import the data using the `read_excel()` function and assign it the name "ws3data" using the following code:
+3. Copy the line of code below into your script and run it. This command imports the data using the `read_excel()` function and assigns it the name "ws3data".
 
 ```{r}
 #| results: hide
 ws3data <- read_excel("Workshop 3 data.xlsx")
 ```
 
-4. Check that a data frame called "ws3data" now appears in the Environment tab of the environment pane:
+4. Check that a data frame called "ws3data" now appears in the Environment tab of the environment pane, as shown below.
 
 ![](../images/ws3data.png){width="400" style="display:block; margin: 2em auto;"}
 
@@ -103,8 +103,20 @@ ws3data <- read_excel("Workshop 3 data.xlsx")
 
 ![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"
 
+## Workshop aims for analysing the data {#aims}
 
-## Recap: Exploring a data frame
+The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
+
+- Investigate whether adding a supplement to hamster pup diet will affect tail growth
+
+[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
+
+:::
+
+## Recap: Exploring the data
 
 It’s a good idea to explore and get to know the data you’re working with before starting any analysis. 
 
@@ -132,20 +144,6 @@ A group of scientists are investigating whether adding a supplement to hamster p
 A control group was given the standard diet, whilst a treatment group was given the supplement in addition to the standard diet.
 
 The tail length was recorded in mm after five months of development.
-
-
-## Workshop aims for analysing the data {#aims}
-
-The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
-
-- Investigate whether adding a supplement to hamster pup diet will affect tail growth
-
-[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
-
-:::
 
 
 ## Recap: Grouped descriptive statistics
@@ -220,3 +218,5 @@ We can compare the tail lengths in the control group versus the treatment group,
 
 
 
+
+[[[plotting - now can introduce more general ggplot template??]]]
