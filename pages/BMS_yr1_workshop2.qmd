@@ -11,8 +11,12 @@ number-sections: false
 
 By the end of this workshop, you should be able to:
 
-- xxxxxxxxxxxxxx
-- xxxxxxxxxxxxxx
+- Explore a data frame to understand its structure, contents and basic characteristics
+- Recognise when variables in a data frame should be stored as factors and convert them to factors
+- Generate descriptive summaries of data frames using the summary() and describe() functions
+- Use statistical functions to calculate descriptive statistics for individual columns of a data frame
+- Produce grouped descriptive statistics using the by() function
+- Produce a boxplot using the ggplot2 package
 :::
 
 ## Workshop outline
@@ -253,7 +257,7 @@ A couple of things to note about the video:
 
 - Explore a data frame to understand its structure, contents and basic characteristics
 - Recognise when variables in a data frame should be stored as factors and convert them to factors
-- [Generate descriptive statistics for data frames or columns using the summary() and describe() functions]
+- Generate descriptive summaries of data frames using the summary() and describe() functions
 
 :::
 
@@ -395,15 +399,50 @@ describe(penguins)
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
 
 - Use statistical functions to calculate descriptive statistics for individual columns of a data frame
+:::
 
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+
+Recall that our aim is to compare body mass between different species of penguins.
+
+In this section, we'll first generate some *overall* descriptive statistics for body mass across all penguins in the dataset.
 :::
 
 In workshop 1, we used several statistical functions to calculate descriptive statistics for individual columns in a data frame. Remember that a column of a data frame can be thought of as a vector, which means we can apply many of R's statistical functions directly to it.
 
+::: {.panel-tabset .panel-blue group="language"}
+## R
+
+**Applying a statistical function to a data frame colum - general template**
+
+```{r}
+#| eval = FALSE
+___________(__________________$_______________________)
+function      data frame name    column to summarise
+
+```
+:::
+
+::: {.panel-tabset .panel-blue group="language"}
+## R
+
+**Example**
+
+Find the mean of the body_mass_g columns in the penguins data frame (i.e. find the mean body mass of all penguins):
+
+```{r}
+mean(penguins$body_mass_g)
+```
+:::
+
+::: {style="margin-top: 2em;"}
+:::
+
 The table below summarises some of the most commonly used functions for calculating descriptive statistics, together with examples of how they can be applied to columns in our `penguins ` data frame.
 
-| Function | Statistic Calculated | Example | Result |
-|----------|---------------------|---------|--------|
+| Function | Statistic | Example | Result |
+|----------|------------|--------|----------|
 | `mean()` | Mean (average) | `mean(penguins$body_mass_g)` | Mean body mass |
 | `sd()` | Standard deviation | `sd(penguins$body_mass_g)` | Standard deviation of body mass |
 | `median()` | Median | `median(penguins$body_mass_g)` | Median body mass |
@@ -415,7 +454,10 @@ The table below summarises some of the most commonly used functions for calculat
 | `range()` | Range | `range(penguins$body_mass_g)` | Range of body mass |
 | `table()` | Frequency counts | `table(penguins$species)` | Counts of each species |
 
-Most of the functions in this table are designed for numeric variables, such as body mass, flipper length, or bill length. Applying these functions to character or factor variables will usually result in an error.
+::: {style="margin-top: 2em;"}
+:::
+
+Most of the functions in this table are designed to be applied to numeric vectors, for example things like body mass, flipper length, or bill length in our penguins data. Applying these functions to character or factor variables will usually result in an error.
 
 The exception is `table()`, which is commonly used with categorical variables (factors or character variables) to count the number of observations in each category.
 
@@ -424,8 +466,8 @@ The exception is `table()`, which is commonly used with categorical variables (f
 Apply relevant statistical functions to relevant columns of the penguins data frame to find:
 
 - The median body mass of all penguins
-- xx
-- xx
+- The mean flipper length of all penguins
+- The minimum bill depth of all penguins
 
 [Answers]
 :::
@@ -434,13 +476,20 @@ Apply relevant statistical functions to relevant columns of the penguins data fr
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-
 - Produce grouped descriptive statistics using the by() function
 :::
 
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
 
-[note I've changed from BMS2083 - so the first arg is specifically a coliumn]
-[okay for coursework?]
+Recall that our aim is to compare body mass between different species of penguins.
+
+In this section, we'll use grouped descriptive statistics to summarise body mass for each species separately.
+:::
+
+In the previous section, we calculated descriptive statistics for an entire variable. For example, we found the median body mass of *all* penguins in the dataset.
+
+The `by()` function allows us to calculate statistics for groups defined by another variable. It works by applying a function to one column after splitting the data according to the categories in a second column.
 
 ::: {.panel-tabset .panel-blue group="language"}
 ## R
@@ -449,15 +498,13 @@ Apply relevant statistical functions to relevant columns of the penguins data fr
 
 ```{r}
 #| eval = FALSE
-by(______________________, ____________________, ___________________)
-    column to summarise     column to group by    function to use
+by(______________________, ____________________, _______________)
+    column to summarise     column to group by    function
 ```
 
-- In the `object` space.....
-
-
-[complete and sort out the naming here]
-
+- In the `column to summarise` blank, enter the variable you want to calculate a statistic for. For example, penguins$body_mass_g.
+- In the `column to group by` blank, enter the variable that defines the groups. For example, penguins$species.
+- In the `function` blank, enter the summary statistic you want to calculate. For example, mean, median, or sd.
 :::
 
 ::: {.panel-tabset group="language"}
@@ -472,7 +519,15 @@ by(penguins$body_mass_g, penguins$species, median)
 
 ```
 
-- We want to xxxx so we put
+- We want to calculate a statistic for the body mass variable, so we put `penguins$body_mass_g` in the `column to summarise` position
+- We want to calculate the statistic separately for each species, so we put `penguins$species` in the `column to group by` position
+- We want to calculate the median, so we put `median` in the `function` position
+
+This tells R to:
+
+- Split the body mass data into groups based on species
+- Calculate the median body mass for each species
+- Return the results for each species separately
 
 [complete and use sample language as the template]
 
@@ -480,33 +535,32 @@ by(penguins$body_mass_g, penguins$species, median)
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Find...
+
+- Use the by() function to find the minimum body mass for each species
+- Use the by() function to find the maximum body mass for each species
+
 :::
 
 ## Creating a boxplot with ggplot2
 
 ::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims [EDIT!!!!!!]
-
-Recall that our [aims](Intermediate_R_2_Setup_data_and_workshop_aims.qmd#aims) were to:
-
-- Compare body mass across species
-
-Visually, we could compare with a box plot.... explain...
-
-In this section, we....
-
-In the previous chapter, we produced some descriptive statistics to start to compare life expectancy across continents. The main example in this chapter will focus around a boxplot which help us to *visualise* these differences.
-
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+- Produce a boxplot using the ggplot2 package
 :::
 
-Many types of plot can be produced using ggplot2
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
 
-Here we will focus on creating a box plot.
+Recall that our aim is to compare body mass between different species of penguins.
+
+Descriptive statistics are useful for summarising body mass within each species, but visualisations can make comparisons between groups easier. A boxplot displays the median, interquartile range, and overall spread of the data, making it a useful tool for comparing distributions across species.
+
+In this section, we'll use the ggplot2 package to create a boxplot of body mass grouped by species.
+:::
 
 ### The ggplot2 package
 
-Although Base R provides various functions for creating particular plot types, the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
+Although base R provides various functions for creating particular plot types, the syntax is inconsistent across functions and it can be difficult to implement more specific or complex customisations.
 
 `ggplot2` is an R package that provides a consistent system for building plots. Rather than having a separate function for each plot type, plots are built up layer by layer using a common syntax.
 
@@ -650,9 +704,5 @@ Suppose you want to compare bill length for males versus females
 
 ### Extension: additional customisation options
 
-[Can do this as a later date]
-
-.============================
-
-[[ the exercise for this workshop can be exactly the same just different variables - gender and another measure]]
+[To be added]
 
