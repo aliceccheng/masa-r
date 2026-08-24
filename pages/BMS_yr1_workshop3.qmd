@@ -6,6 +6,8 @@ number-sections: false
 
 ## Learning outcomes
 
+In the third and final workshop, you will use the skills you have developed so far to analyse a new dataset and conduct an independent samples t-test.
+
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
@@ -101,9 +103,11 @@ ws3data <- read_excel("Workshop 3 data.xlsx")
 [put common errors again]
 
 
-![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"
+![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"}
 
 ## Workshop aims for analysing the data {#aims}
+
+**THIS NEEDS UPDATING**
 
 The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
 
@@ -198,9 +202,320 @@ by(ws3data$tail_length_mm, ws3data$treat_group, mean)
 [Answers]
 :::
 
+## Recap: Creating a boxplot with ggplot2
+
+In workshop 2 we learnt how to create a boxplot using ggplot2 data.
+
+This is the template code:
+
+::: {.panel-tabset .panel-blue}
+## Template code: boxplot
+
+```{r}
+#| eval: false
+ggplot(_________, aes(x = _________, y = ________)) +
+  geom_boxplot() +
+  labs(x = "_______",
+       y = "_______")
+```
+
+- Fill in the first blank with the name of the data you want to use for plotting
+- Fill in the second blank (after x =) with the name of the variable (column) in the data you want to plot on the x-axis
+- Fill in the third blank (after y =) with the name of the variable (column) in the data you want to plot on the y-axis
+- Fill in the blanks inside the `labs()` function with the corresponding x and y labels that you want to add to your plot. These should be in quotation marks.
+
+:::
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Produce a boxplot to visually compare tail lengths between the two treatment groups.
+
+[Hint]
+
+[Answers]
+:::
+
+## Boxplot interpretation
+
+The bar graph produced in the task above should look like this:
+
+```{r}
+#| echo: false
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
+  geom_boxplot() +
+  labs(x = "Treatment group",
+       y = "Tail length(mm)")
+```
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+What observations can we make from the bar graph regarding the comparison between the groups?
+
+[Answers]
+:::
+
+::: callout-important
+### Adding a figure title
+
+This graph currently has no title. In practice, you can add a figure legend by copying the graph into Word and adding a figure legend below the graph.
+
+(It is not possible to add a proper figure caption in a standard R script.)
+:::
+
+
+## Optional: Further boxplot customisations
+
+### Changing the fill colour of the boxes
+
+**Variable**
+
+In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of the plot - things like position (x and y), colour, size, and shape - and how variables in your data are mapped to them.
+
+We have already used `x=` and `y=` inside the `aes()` function to map variables to the axes.
+
+We can also map variables to other properties such as colour.
+
+::: {.panel-tabset .panel-blue}
+## Template code: boxplot including fill colour by box
+
+In your existing boxplot code, add the argument `fill = ` as an additional argument inside the `aes()` function:
+
+```{r}
+#| eval: false
+ggplot(_________, aes(x = _________, y = ________, fill = _________)) +
+  geom_boxplot() +
+  labs(x = "_______",
+       y = "_______")
+```
+
+- In the blank after `fill =`, fill in the name of the variable used on the x-axis (i.e. the variable that defines the boxes) 
+- e.g. `fill = treatment_group`
+
+:::
+
+**Fixed**
+
+So far we have used `geom_boxplot()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments inside it.
+
+Whereas aesthetics specified inside the `aes()`function map a *variable* to a visual property, aesthetics can be specified inside `geom_boxplot()` to set a visual property to a constant value i.e. the same property for the whole plot.
+
+For example, if we put `fill = "blue"` will colour all of the boxes blue.
+
+::: {.panel-tabset .panel-blue}
+## Template code: boxplot including fill colour by box
+
+In your existing boxplot code, add the argument `fill = ` as an argument inside the `geom_boxplot()` function:
+
+```{r}
+#| eval: false
+ggplot(_________, aes(x = _________, y = ________)) +
+  geom_boxplot(fill = _________) +
+  labs(x = "_______",
+       y = "_______")
+```
+
+- In the blank after `fill =`, fill in a colour in quotations
+
+
+[link to all colour options]
+
+:::
+
+###Themes
+
+There are various theme components that can be added as a separate component to change the overall appearance of the plot (background, gridlines, fonts etc.).
+
+Some common one
+
+::: {.panel-tabset .panel-blue}
+## Template code: adding a theme to a boxplot
+```{r}
+#| eval: false
+ggplot(_________, aes(x = _________, y = ________)) +
+  geom_boxplot() +
+  labs(x = "_______",
+       y = "_______") +
+  theme_xxx()
+```
+
+- Add an additional theme component at the end of your code, replacing `theme_xxx` with the name of the specific theme you want to use.
+
+Some common ones are:
+
+- `theme_minimal()`
+- `theme_classic()`
+- `theme_bw()`
+::: 
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+In the previous section you produced a boxplot to compare tail lengths betwen treatment groups. Update your code to. Now:
+
+- Add the argument `fill = treat_group` to the `aes()` function to tell R to colour the boxes according to the treatment group
+- Add to a theme to your plot to change the overall look
+
+[Hint]
+
+[Answers]
+:::
+
+
+## Copying and saving plots
+
+Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
+
+### Copying a plot
+
+The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
+
+![](../images/clipboard-1982207542.png)
+
+### Saving a plot
+
+To save a plot as an image file, you can either:
+
+- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
+
+![](../images/clipboard-3693964577.png)
+
+- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
+
+```{r}
+#| eval: false 
+ggsave("my_plot.png", width = 8, height = 5)
+```
+
+`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
+
+
+## Statistical tests in R
+
+### Analysis of Workshop 3 data
+
+To investigate whether adding a supplement to hamster pup diet will affect tail growth, we are comparing the tail lengths of a group of hamster pups who were given the standard diet (control group), to a different group who received the supplement in additional to the standard diet (treated group).
+
+So far, we have summarised the data using descriptive statistics and visualised the comparison in a boxplot.
+
+To test whether there is a *statistically significant* difference between the groups, we can use an independent t-test, which compares the means of two unrelated groups.
+ 
+### Independent t-test
+
+In statistical testing, the **<span style="color:#D57903;">dependent variable</span>**, (also called the response variable or outcome variable) is the variable that we are trying to explain or predict.
+
+We want to see if the **<span style="color:#D57903;">dependent variable</span>** depends on, or is influenced by, one or more **<span style="color:#365AC4;">independent variables</span>**. 
+
+An independent t-test is used when we have a continuous **<span style="color:#D57903;">dependent variable</span>** (DV), and an **<span style="color:#365AC4;">independent variable</span>** that consists of two independent groups.
+
+For example, in our case, we are exploring:
+
+  Is **<span style="color:#D57903;">tail length</span>** influenced by **<span style="color:#365AC4;">treat group</span>**?
+  
+Or in other words:
+
+  Is there any difference in **<span style="color:#D57903;">tail length</span>** for the **<span style="color:#365AC4;">control vs. supplement</span>** group?
+
+![](../images/IV_DV_tail.png){width="400" style="display:block; margin: 2em auto;"}
+The independent t-test tests for a difference between the group means.
+
+### Assumptions for the independent t-test
+
+Statistical tests such as the t-test have **assumptions** – conditions that the data should meet to ensure that results from the test are valid.
+
+Two key assumptions for the independent t-test are:
+
+- The dependent variable is approximately normally distributed for each group of the independent variable
+- The dependent variable has roughly equal variances for each group of the independent variable
+
+In real world analyses, it is important to check these assumptions before performing the t-test.
+
+::: callout-important
+### Note
+
+For the purposes of the R work in this module, you do not need to check these assumptions - you can assume that these assumptions are met.
+:::
+
+### Carrying out an independent t-test:
+
+An R command to run a t-test follows the below structure:
+
+::: {.panel-tabset .panel-blue}
+## Template code: independent t-test
+
+```{r}
+#| eval: false
+_______________ <- t.test(_____~______, data = ____________, var.equal=TRUE)
+ results name              DV     IV            dataframe
+```
+
+- `results name` is a name you choose to store the results of the t-test
+- `dataframe` is the name of the dataframe containing the data you want to analyse (for example in this workshop, the data is called `ws3data`)
+- `DV` is the name of the column in your chosen dataframe containing the dependent variable (the numerical outcome you want to compare between groups)
+- `IV` is the name of the column in your chosen dataframe containing the independent variable (the grouping variable, which should have two groups)
+
+:::
+
+You can view the results by.......
+
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Using the template code, fill in the appropriate code to carry out an independent t-test to compare whether the mean tail length differs between hamster pups fed the standard diet (control) and those given the supplement.
+- View a summary of the results by printing the results object. Recall from Workshop 1 that you can do this by either typing and running the object name, or by using the print() function.
+- Add a comment to your code stating the p-value – is the difference statistically significant?
+
+[Answers]
+:::
+
+**maybe something more explicit about where to find the p-value in the results. and that this can sometimes be added to a graph.
+
+![](../images/ws3_ttest_results.png){width="700" style="display:block; margin: 2em auto;"}
+
+
+### Optional: Syntax for other statistical tests in R
+
+This information is for interest.
+
+Many statistical tests use a similar syntax to that shown above, with `t.test` replaced by the function for the appropriate test. Some examples are shown below.
+
+::: {.panel-tabset .panel-blue}
+## Template code: other statistical tests
+
+```{r}
+#| eval: false
+# Analysis of variance (ANOVA)
+
+_______________ <- aov(_____~______, data = ____________)
+ results name           DV     IV            dataframe
+ 
+# Simple linear regression
+ 
+_______________ <- lm(_____~______, data = ____________)
+ results name          DV     IV            dataframe
+
+# Multiple linear regression
+ 
+_______________ <- lm(_____~______ + ______ + ..., data = ____________)
+ results name          DV     IV1     IV2                  dataframe
+ 
+```
+:::
+
+Additional arguments may be included to adjust or customise the tests as needed.
+
+
+## Summary
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+
+- ...
+
+
+:::
+
+.========================================
 
 [Use slides]
-
 
 
 .===== work this in (slide 15) - "comparing groups" - Will / Sam's lectures

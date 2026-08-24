@@ -452,6 +452,17 @@ ggplot(gapminder_2007, aes(x = gdpPercap, y = lifeExp, colour = continent)) +
 :::
 ::::
 
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  aes() can be used inside geom_xxx() functions too
+
+Normally, mappings between variables and visual properties are defined within the `aes()` functions, with `ggplot()` (i.e. `ggplot(x = ..., y = ..., aes(...)`). These mappings are then inherited by all layers.
+
+However, you can also use `aes()` inside a specific `geom_xxx()` layer. In this case, the mapping applies *only to that layer*, leaving other layers unchanged.
+
+This is useful when different layers need different aesthetic mappings.
+:::
+
+
 ### Add labels using labs()
 
 Adding the `labs()` function as a component in your plot allows you to add or customise labels such as the title, axis labels, and legend title.

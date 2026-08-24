@@ -4,6 +4,8 @@ number-sections: false
 
 # R workshop 2: Descriptive statistics and graphing in R
 
+In the second workshop, you will learn how to produce descriptive statistics and create graphs in R. The workshop focuses on comparing groups and visualising data using boxplots.
+
 ## Learning outcomes
 
 ::: {.callout-tip icon="false"}
@@ -30,7 +32,7 @@ Often in statistics we want to compare groups of data. We'll used the penguins d
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
 
-Compare body mass between different species of penguins using
+Compare body mass between different species of penguins using:
 
 - Descriptive statistics
 - A box plot
@@ -53,12 +55,12 @@ Compare body mass between different species of penguins using
 
 **Step 1: Open RStudio**
 
-Open RStudio (you do not need to open R separately)
+Open RStudio (you do not need to open R separately).
 
 
 **Step 2: Create a new script**
 
-Create a new script and save it in your dedicated folder for the R work on this module
+Create a new script and save it in your dedicated folder for the R work on this module.
 
 **Step 3: Install required packages**
 
@@ -66,7 +68,7 @@ Copy the code below into your *console* and run it. This will install the readxl
 
 ```{r}
 #| eval: false
-install.packages ("readxl")
+install.packages("readxl")
 install.packages("ggplot2")
 ```
 
@@ -158,7 +160,7 @@ This will set the working directory to the folder where your script is saved, wh
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  An alternative way to set the working directory
 
-You can also set the working directory manually by selecting "Choose Directory" rather than "To Source File Location". For example, if your Excel file is stored in a different folder from your R script, you should choose the folder containing the Excel file as your working directory.
+You can also set the working directory manually by selecting "Choose Directory...", rather than "To Source File Location". For example, if your Excel file is stored in a different folder from your R script, you should choose the folder containing the Excel file as your working directory.
 :::
 
 ::: {style="margin-top: 2em;"}
@@ -170,7 +172,7 @@ After setting the working directory, you should see a line of code similar to th
 
 ![](../images/setwd_code.png){width="500" style="display:block; margin: 2em auto;"}
 
-Copy and paste this line of code into your script (not including the `>` symbol).
+Copy and paste this line of code into your script (not including the `>` symbol). (The file path in your line of code will be different, as it will refer to the specific folder on your computer where your files are saved.)
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Why did we do this?
@@ -354,7 +356,7 @@ penguins$sex <- as.factor(penguins$sex)
 
 [Answer]
 
-- Rerun `str(penguins)` or use the blue arrow next to the `penguins` object in the Environment pane to check that the variables have been converted to factors
+- Rerun `str(penguins)` or use the blue arrow next to the `penguins` object in the Environment pane to check that the variables have been converted to factors:
 
 ```{r}
 #| echo: false
@@ -424,7 +426,7 @@ function      data frame name    column to summarise
 ```
 :::
 
-::: {.panel-tabset .panel-blue group="language"}
+::: {.panel-tabset group="language"}
 ## R
 
 **Example**
@@ -645,7 +647,7 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 Below is...
 
 ::: {.panel-tabset .panel-blue}
-## Template code: boxplots
+## Template code: boxplot
 
 ```{r}
 #| eval: false
@@ -663,7 +665,7 @@ ggplot(_________, aes(x = _________, y = ________)) +
 :::
 
 ::: {.panel-tabset}
-## Examples: boxplots
+## Example: boxplot
 
 This is our original boxplot code, which produces a boxplot of body mass by species:
 
@@ -706,3 +708,13 @@ Suppose you want to compare bill length for males versus females
 
 [To be added]
 
+
+## Summary
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+
+- ...
+
+
+:::
