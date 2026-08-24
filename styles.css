@@ -304,4 +304,18 @@ figcaption p {
   display: inline;
 }
 
+/**********************/
+/* Penguins images */
+/**********************/
 
+<style>
+.peng-col .img-wrap {
+  height: 180px;              /* adjust until text lines up */
+  display: flex;
+  align-items: flex-end;      /* keeps image at bottom of box */
+}
+.peng-col .img-wrap img {
+  max-width: 100%;
+  height: auto;
+}
+</style>

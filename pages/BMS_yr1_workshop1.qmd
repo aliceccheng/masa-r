@@ -29,11 +29,11 @@ These course materials contain the same content as the workshops and workshop sl
 
 **Example code**
 
-Example code will appear in grey code blocks, like the one below. You can copy the code by hovering over it and clicking the clipboard icon that appears in the top-right corner of the code block and then paste it into R.
+Example code will appear in grey code blocks like the one below. You can copy the code by hovering over it and clicking the clipboard icon that appears in the top-right corner of the code block. You can then paste it directly into R.
 
 ```{r}
 #| eval: false
-# This is a code chunk. You can copy it it by clicking the clipboard
+# This is a code chunk. You can copy it it by clicking the clipboard icon.
 
 print("Welcome to R")
 ```
@@ -80,6 +80,8 @@ For help with R outside of these sessions, you can attend a drop-in session or b
 
 In the first workshop, you will learn how to navigate the RStudio interface, create and edit scripts, and run basic R code.
 
+Some more specific learning outcomes are given below - this may look like a lot, but most of these are small skills that fit together to help you become confident using the basics of R and RStudio.
+
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
@@ -96,11 +98,10 @@ By the end of this session, you should be able to:
 - Use built-in R functions with the correct basic syntax
 - Use the combine function (c()) to group multiple numeric or character values into a single vector
 - Describe the structure of a data frame and create one by combining vectors.
-
+- Use the $ operator to select a column from a data frame and apply functions to it
+- Identify the main data types used in R
 - Install and load R packages
 - Troubleshoot some common coding errors
-[update to match the individual LOs as we go]
-
 :::
 
 **Structure of the session**
@@ -130,10 +131,12 @@ Download and install these using default options:
 
 **Other options**
 
+[CHECKING THIS]
+
 If your laptop or device does not support the use of R/RStudio (e.g. tablets and some Chromebooks), or you are having difficulty downloading the program(s), there are couple of other options:
 
-- Online use of R/RStudio via Posit Cloud: https://posit.cloud/spaces/701987. This website allows you to use RStudio online through your web browser. A free account is required, and usage is limited under the free plan, but the platform functions much like the desktop version of RStudio.
-- Library laptops: https://my.surrey.ac.uk/it/laptop-loans. The library has laptops which can be borrowed for seven days. All library laptops have R & RStudio installed on them.
+- Online use of R/RStudio via <a href="https://posit.cloud/spaces/701987" target="_blank" rel="noopener">Posit Cloud</a>. This website allows you to use RStudio online through your web browser. A free account is required, and usage is limited under the free plan, but the platform functions much like the desktop version of RStudio.
+- Library laptops: The library has laptops which can be borrowed for seven days. All library laptops have R & RStudio installed on them.<a href="https://my.surrey.ac.uk/it/laptop-loans" target="_blank" rel="noopener">More information here</a>.
 
 For work outside the workshops, R and RStudio can also be accessed on all Library computers and in the AP (Austin Pearce) computer labs.
 
@@ -169,7 +172,7 @@ The table below explains what each pane is used for:
 | Output | The output pane has several tabs (Files, Plots, Packages etc.). In these workshops we'll use the packages tab, which lists the R packages installed on your computer (more on packages later), and the plots tab, which displays graphs that you create. |
 :::
 
-::: {.callout-note icon="false" collapse="false"}
+::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  You might not see the source pane to begin with
 
 Don't worry if you don't see the Source pane yet - this will appear when you open a new R Script, which we'll do in the next section.
@@ -277,11 +280,11 @@ Then to **run a line of code from your script** (i.e. ask R to execute it):
 1. Make sure your cursor is clicked somewhere on that line
 2. Either:
     - Click the "Run" button within the Source pane (show below)
-    - Press Ctrl + Enter (or Cmd + Enter on a Mac)
+    - Or press Ctrl + Enter (or Cmd + Enter on a Mac)
     
 ![](../images/run_code.png){width="600" style="display:block; margin: 2em auto;"} 
     
-The code will execute in the console, where you'll see both the code that was run and the result:
+The code will execute in the console, where you'll see both the code that was run, and the result:
 
 ![](../images/console_23.png){width="400" style="display:block; margin: 2em auto;"}
 
@@ -293,11 +296,11 @@ To run multiple lines of code from a script, highlight all of the lines you want
 
 **Writing and running code in the console**
 
-The second way to write and run R code is directly in the Console. This is generally not recommended, except for quick calculations, trying out a line of code, or testing something before adding it to your script.
+The second way to write and run R code is directly in the Console. This is generally not recommended, except for quick calculations or testing a piece of code before adding it to your script.
 
 Unlike code written in a script, code entered directly into the Console is not saved automatically, so it can be difficult to find and reuse later.
 
-To do write and run code in the console, type your code next to the command prompt (the `>` symbol) and press Enter on your keyboard. The code will run immediately, and any output will be displayed in the Console.
+To write and run code in the console, type your code next to the command prompt (the `>` symbol) and press Enter on your keyboard. The code will run immediately, and any output will be displayed in the Console.
 
 ![](../images/console_code.png){width="400" style="display:block; margin: 2em auto;"}
 
@@ -340,7 +343,7 @@ The video below below summarises and demonstrates writing and running code in R.
 
 We will base most of the remaining workshop examples and tasks around some data on penguins.
 
-Suppose we have three penguins. For each penguin, we have recorded its species and body mass in grams.
+Suppose we have three penguins. For each penguin, we have recorded its species and body mass in grams:
 
 :::: {.columns}
 ::: {.column width="33%" .peng-col}
@@ -374,6 +377,11 @@ Body mass (g): 3500
 :::
 ::::
 
+::: {style="margin-top: 2em;"}
+:::
+
+As we learn new R concepts, we'll return to these three penguins to explore different ways of storing, viewing and analysing data.
+
 ## Using R as a calculator
 
 ::: {.callout-tip icon="false"}
@@ -383,9 +391,9 @@ Body mass (g): 3500
 
 Although R is a powerful tool for data analysis and statistics, at its most basic it can be used like a normal calculator. Performing simple calculations is a useful way to start practising writing and running code.
 
-In the previous section, we ran the simple command `2 + 3`. The + symbol is an example of an **operator**. Operators tell R to perform a particular action.
+In the previous section, we ran the simple command `2 + 3`. The `+` symbol is an example of an **operator**. Operators tell R to perform a particular action.
 
-One type of operator is the arithmetic operator. These are the operators used for everyday mathematical calculations, such as addition, subtraction, multiplication, and division:
+One type of operator is arithmetic operators. These are the operators used for everyday mathematical calculations, such as addition, subtraction, multiplication, and division:
 
 ::: {#geomxxx-table}
 | Action | Operator |
@@ -394,6 +402,9 @@ One type of operator is the arithmetic operator. These are the operators used fo
 | Subtraction | `-` |
 | Multiplication | `*` |
 | Division | `/` |
+:::
+
+::: {style="margin-top: 2em;"}
 :::
 
 We'll come across some other operators through the workshops.
@@ -514,13 +525,13 @@ The video below demonstrates adding comments to an R script:
 
 **Expressions**
 
-An expression is code that R evaluates to produce a result. For example, earlier we ran the following code:
+An expression is a piece of code that R evaluates to produce a result. For example, earlier we ran the following code:
 
 ```{r}
 2 + 3    # this is an expression, which returns the value 5
 ```
 
-The expression produces a result (`5`), which is displayed in the console, but not saved for later use. 
+The expression produces a result (`5`), which is displayed in the console but is not saved for later use. 
 
 **Assignments**
 
@@ -528,7 +539,7 @@ Assignments *store* the result of an expression so that it can be used later.
 
 We do this using the assignment operator - a symbol (`<-`) which takes the result of the expression to its right, and assigns the result to the name on its left.
 
-::: {.panel-tabset .panel-blue group="language"}
+::: {.panel-tabset .panel-blue}
 ## Template code - assignment
 
 ```{r}
@@ -549,6 +560,9 @@ For example:
 ```{r}
 x <- 2 + 3  # assigns the result of 2 + 3 to an object called x 
 ```
+
+::: {style="margin-top: 2em;"}
+:::
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Can I use `=` instead of `<-` for assignments?
@@ -676,17 +690,17 @@ Instead of using the raw values:
 3750 + 4500 + 3500
 ```
 
-we can write the same expression using the names of the objects that store those values, to produce the same result:
+...we can write the same expression using the names of the objects that store those values, to produce the same result:
 
 ```{r}
 mass_1 + mass_2 + mass_3
 ```
 
-As with any expression, we can store its result in a new object. For example, we could store the total of the three masses as total_mass:
+As with any expression, we can store its result in a new object. For example, we could store the total of the three masses as "total_mass":
 
 ```{r}
 total_mass <- mass_1 + mass_2 + mass_3
-total_mass
+total_mass  
 ```
 
 The benefit may not be obvious in such a small example, but storing values in named objects becomes increasingly useful as datasets and calculations become more complex.
@@ -750,7 +764,7 @@ R is case sensitive — it distinguishes between uppercase and lowercase letters
 
 ### General function syntax
 
-Functions follow a general structure: the function name, followed by its inputs — called arguments — in brackets. For example, in `print(species_1)`, `print` is the function name and `species_1` is the argument - the object we want to print.
+Functions follow a general structure: the function name, followed by its inputs - called **arguments** - in brackets. For example, in `print(species_1)`, `print` is the function name and `species_1` is the argument - the object we want to print.
 
 Arguments are the inputs a function needs to carry out a task. Different functions require different arguments - some take just one, while others take several, separated by commas. What you provide depends on the function and what you want it to do.
 
@@ -782,9 +796,9 @@ ________________(______________)
 Examples of functions:
 ```{r}
 #| eval: false
-print(mass_1)                 # prints the value stored within the mass_1 variable
-class(mass_1)                 # displays the type (class) of data stored in mass_1
-sum(mass_1, mass_2)           # adds the values of mass_1 and mass_2 together
+print(mass_1)           # this prints the value stored within the mass_1 variable
+class(mass_1)           # this displays the type (class) of data stored in mass_1
+sum(mass_1, mass_2)     # this adds the values of mass_1 and mass_2 together
 ```
 :::
 
@@ -845,7 +859,7 @@ species <- c("Adelie","Gentoo","Chinstrap")
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Create the two vectors `body_mass_g` and species` as shown in the examples above
+- Create the two vectors `body_mass_g` and `species` as shown in the examples above
 - Use the `print` function to print each vector
 :::
 
@@ -858,7 +872,7 @@ species <- c("Adelie","Gentoo","Chinstrap")
 
 A data frame is another type of R object. Unlike vectors, which store a single collection of values, a data frame has a tabular structure - organised into rows and columns. Each row represents a single observation, and each column represents a variable. Data frames are useful because they keep all related information organised together in one place, making it easier to work with and analyse the data.
 
-For example, below is a data frame containing our penguin data. Each row represents a single penguin, with columns recording its species and body mass. 
+For example, below is a data frame containing our penguin data. Each row represents a single penguin, with columns recording its species and body mass: 
 
 ```{r}
 #| echo: false
@@ -870,7 +884,7 @@ Next, we'll see how to create this data frame.
 
 **Creating a data frame from vectors**
 
-Data frames can be created by combining vectors, where each vector becomes a column.
+Data frames can be created by combining vectors, where each vector becomes a column in the data frame.
 
 We already have two vectors containing our penguin data - `species` and `body_mass_g`. Rather than keeping them separate, we can combine them into a single data frame so that all of our penguin information is stored together:
 
@@ -880,7 +894,7 @@ penguins <- data.frame(species, body_mass_g)
 
 This is similar to how we created vectors using `c()` — but instead of combining individual values, we are combining vectors as columns. The arguments are the names of the vectors we want to include.
 
-::: callout-important
+::: {.callout-important collapse="true"}
 ### Rules for combining vectors into a data frame
 - All vectors must be the same length (i.e contain the same number of values)
 - The order of values must match across vectors - for example, the species and body mass for the first penguin should both be in position 1 of their respective vectors
@@ -907,7 +921,7 @@ The data frame will open in a new tab. To return to your script, either close th
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- As shown above, use the `data.frame()` function to combine your `species` and `body_mass_g` vectors into a single data frame called `penguins` data frame.
+- As shown above, use the `data.frame()` function to combine your `species` and `body_mass_g` vectors into a single data frame called `penguins`.
 - Click on the data frame name ("penguins") from within the Environment tab to open it in the source pane.
 :::
 
@@ -915,25 +929,29 @@ The data frame will open in a new tab. To return to your script, either close th
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- xx
+- Use the $ operator to select a column from a data frame and apply functions to it
 :::
 
-It is common to want to work with, or analyse, a specific variable i.e. column (vector) in a data frame.
+It is common to want to work with, or analyse, a specific variable (column) in a data frame.
 
-To [select] a column from a data frame, use the $ operator e.g. 
+To access a specific column in a data frame, use the `$` operator. Write the name of the data frame, followed by `$`, followed by the name of the column. For example:
 
 ```{r}
-penguins$species
-penguins$body_mass_g
+penguins$species      # access the species column of the penguins data frame
+penguins$body_mass_g  # access the body_mass_g column of the penguins data frame
 ```
 
-These are vectors which you can apply functions to as before. For example:
+Each column in a data frame is a vector. This means that once you have selected a column, you can apply functions to it just as you did with vectors earlier. For example:
 
 ```{r}
 print(penguins$species)
 ```
 
-[maybe introduce the sum function]
+Earlier, we used the `+` operator to add the three body masses together one at a time. A more convenient approach is to use the `sum()` function on the body mass column:
+
+```{r}
+sum(penguins$body_mass_g)
+```
 
 
 ::: {.callout-caution icon="false"}
@@ -941,36 +959,30 @@ print(penguins$species)
 
 Using your `penguins` data frame and appropriate functions:
 
-- print the body_mass_g
-- find the class (i.e. data type) of the body_mass_g column
-
+- Use the `print()` function to print the `body_mass_g` column of your `penguins` data frame
+- Use the `class()` function to find the class (i.e. data type) of the `body_mass_g` column
 :::
-
-[!! I think move installing and loading packages to next workshop, as this is where we actually use it?]
 
 ## Types of data
 
-[use Eva]
-
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-- xx
+- Identify the main data types used in R
 :::
 
-R represents different kinds of data using specific data types.
+We've already seen that R can store both numeric values (such as 3750) and character values (such as "Adelie"). More generally, R represents different kinds of data using different data types.
 
-The three main data types in R are:
+The three main data types we will encounter in these workshops are:
 
 - numeric – numbers!
 - character – text (or numbers stored as text)
-- factor – categorical data with fixed levels
+- factor – categorical data with a fixed set of possible values
 
-`class()`– We have seen that this function can be used to check object type i.e. class (for a scalar or vector this shows its data type).
+There are a couple of functions we can use to check data types:
 
-`str()` – Use this function to view the structure of an object, e.g. for a data frame it will give you info, such as data type, about each column.
+- `class()`– Use this function to check the class of an object. For simple objects such as values and vectors, the class usually corresponds to the data type.
 
-!!! Get them to change theirs to factor
-
+- `str()` – Use this function to view the structure of an object. For example, when applied to a data frame, it shows information about each column, including its data type.
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
@@ -982,9 +994,6 @@ Use the `str()` function to view the structure of:
 
 :::
 
-[functions can also be applied to data frames]
-
-
 ## Installing and loading packages
 
 ::: {.callout-tip icon="false"}
@@ -992,19 +1001,29 @@ Use the `str()` function to view the structure of:
 - Install and load R packages
 :::
 
-An R packageis a collection of pre-written code and functions that extend the capabilities of the R programming language.
+An R package is a collection of pre-written functions and other resources that add new tools and capabilities to your R session. Before you can use a package, it must be *installed* on your computer and *loaded* into your current R session.
 
-[remove?] Libraries are the directories where R packages are stored.
+Think of a package like an app on your phone:
 
-An R package needs to be installed onto your machine, and also then loaded, before it can be used. Think of this as like....
+- Installing a package is like downloading and installing an app. You only need to do this once.
+- Loading a package is like opening the app so that you can use it. You need to do this each time you start a new R session.
 
-Some standard packages come pre-installed *and* loaded.
-Some packages come pre-installed but need to be loaded.
-Additional packages need to be installed and then loaded.
+There are three common situations:
 
-**Installing and loading a package**
+- Some standard packages come pre-installed *and* loaded
+- Some packages come pre-installed but need to be loaded
+- Additional packages need to be installed and then loaded
 
-Functions, argument is the package name
+**Code for installing and loading a package**
+
+To install a package, use the `install.packages()` function. The argument (what you put inside the brackets) is the name of the package you want to install, and needs to be inside quotation marks.
+
+Once a package has been installed, use the `library()` function to load it into your current R session. The argument is the name of the package you want to load, this time *not* in quotation marks.
+
+This is shown in the template code below.
+
+::: {.panel-tabset .panel-blue}
+## Template code - installing and loading a package
 
 ```{r}
 #| eval: false
@@ -1016,41 +1035,50 @@ library(________________)
          package name
 
 ```
+:::
 
-For example:
+For example, the following code installs, then loads a package called `Hmisc`:
 
 ```{r}
 #| eval: false
 install.packages(Hmisc)
-```
-
-```{r}
-#| results: hide
 library(Hmisc)
 ```
 
+After a package has been loaded, you can use the functions it contains. For example, the `Hmisc` package provides the `describe()` function, which can be used to view a detailed summary of a dataset.
 
-The Hmisc package includes many useful functions for data analysis such as the `describe()` function.
+**Warning messages**
 
-
-
-
-You may get some warnings... if package is installed, should get something like this:
+You may see some warnings or messages while a package is being installed. This is normal and does not necessarily indicate a problem. 
+If the package installs successfully, you should see a message similar to the below:
 
 ![](../images/package_ready.png){width="600" style="display:block; margin: 2em auto;"}
-You may also get a warning message from loading the package. This is usally just to tell you that the package was built under a previous version as R.
+You may also see a warning message when loading a package. This is often just R telling you that the package was built using an older version of R. If the package loads successfully, there is usually no need to worry.
 
+If R says that a package "cannot be found", it may not have been installed yet. In that case, run `install.packages()` first, then try `library()` again. Also check spelling and capitalisation of the package name.
 
 **Checking a package is ready to use**
 
-[screenshot of box with tick]
+You can check that a package has been loaded successfully by looking in the Packages tab of the Output pane. All installed packages appear in the list. Packages that are currently loaded into your R session have a tick in the box next to their name.
 
+![](../images/tick_Hmisc.png){width="600" style="display:block; margin: 2em auto;"}
+::: {style="margin-top: 2em;"}
+:::
+
+In the next two workshops, we will use a range of packages to perform additional tasks in R.
+
+::: {style="margin-top: 2em;"}
+:::
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
-- Install and load the Hmisc package
+- Install and load the Hmisc package, as shown above.
+- Check that it now appears in your Packages list, with its box ticked.
 
+:::
+
+::: {style="margin-top: 2em;"}
 :::
 
 ***Video***
@@ -1082,103 +1110,83 @@ The video below demonstrates how to install and load an R package.
 - 4:22 – Installing the readxl package (and summary slide)
 :::
 
+## Extension: Exploring a data frame
+
+Have a go at using some of the functions below to explore the `penguins` data frame in more detail.
+
+With such a small dataset, some of these functions may seem unnecessary. For example, we can easily see that the data frame contains 3 rows and 2 columns just by looking at it. However, when working with larger datasets containing hundreds or thousands of rows, functions that summarise the structure and contents of a data frame become extremely useful.
+
 ## Summary
 
+In this session, we have learned the basics of using R and RStudio, including how to write and run code, store information in objects, and work with functions.
 
-[Why do data frames from scratch? - wrote this down somewhere - paper on desdk]
-E.g.
+Part of the session involved creating vectors and data frames from scratch. Although you may not often create data frames manually in this way when working with real datasets, it is a useful exercise for understanding how data frames are structured and for practising key R skills such as assignments, functions, vectors, and data types.
 
-- Show how data frames work: columns containing same types of data
-- Practise using function with multiple arguments (c, data.frame)
-- c() function is useful!
+Below is a summary of the main concepts covered in this workshop.
 
-Summary 
-- `c()` combines values together.
-- A vector stores multiple values of the same type.
-- Here, we have a numeric vector containing three values.
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} General key points
 
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
-
-- In R, comments begin with a hash symbol (#) and are used to document your code, making it easier to read, understand, and maintain.
-
-- Use an expression if you want to execute the code and display the result in the console.
-- Use an assignment (with <-) if you want to save the result of the expression for future use.
-
-- The `c()` function combines values of the same type (e.g. numeric or character) together into a vector
-- The `data.frame()` function combines multiple vectors together to form the columns of a data frame
-
-
+- R is a programming language for data analysis and statistics. RStudio provides a user-friendly interface for working with R.
+- It is good practice to write code in an **R script** rather than directly in the Console, as scripts can be saved, edited and reused.
+- The **Source** pane is used for writing code, the **Console** is where code runs, the **Environment** shows objects you have created, and the **Output** pane contains tabs such as Plots and Packages.
+- R can be used as a calculator using arithmetic operators such as `+`, `-`, `*` and `/`.
+- Comments begin with `#` and are ignored when code is run. They help make code easier to read and understand.
+- An **expression** produces a result. An **assignment** stores a result in an object using the assignment operator `<-`.
+- Numeric values are written without quotation marks, while character values must be enclosed in quotation marks.
+- Once a value has been assigned to an object, you can refer to it later using the object's name.
+- Functions perform specific tasks. Functions are called using the syntax `function_name(arguments)`.
+- R is **case sensitive**, so spelling and capitalisation matter.
 :::
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Vectors
 
-Exploring a data frame should come in somewhere - like Will Kay
+- The `c()` function combines values together.
+- A **vector** stores multiple values of the same type in a single object.
+- Vectors can contain numeric values or character values, but all values in a vector must be of the same type.
+- The `c()` function is widely used in R and is useful for creating vectors and supplying multiple values to functions.
+:::
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Data frames
 
-## Complete code
+- A **data frame** stores data in rows and columns.
+- Each row represents an observation and each column represents a variable.
+- Data frames can be created by combining vectors using the `data.frame()` function.
+- When creating a data frame, all vectors must contain the same number of values.
+- Each column of a data frame is itself a vector.
+- Use the `$` operator to access a column from a data frame, e.g. `penguins$body_mass_g`.
+- Functions can be applied directly to data frame columns because columns are vectors.
+:::
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Data types
 
+- The main data types encountered in these workshops are:
+  - **numeric** (numbers)
+  - **character** (text)
+  - **factor** (categorical data)
+- Use `class()` to check the class (type) of an object.
+- Use `str()` to view the structure of an object and the data types it contains.
+:::
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Packages
 
-===============================================================
+- An R package is a collection of pre-written functions and other resources that add tools and capabilities to R.
+- Before a package can be used, it must be installed and loaded.
+- **Install once, load each session.**
+- Use `install.packages()` to install a package and `library()` to load it.
+- Loaded packages have a tick next to their name in the **Packages** tab.
+:::
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Troubleshooting tips
 
-=======
-
-[[coursework data]]
-
-```{r}
-#| eval: FALSE
-
-weight_change <- c(10,15,12,18,13,6,29,21,24,20,28,30,25,21,15,21,23,22)
-group <- c(rep("control",9),rep("treated",9)) # note the boxplot stills works if it's not a factor
-
-cw <- data.frame(group,weight_change) 
-# note if you apply the factor function here it actually names the variable factor.group!
-
-# This is not by group currently
-
-library(ggplot2)
-hist(weight_change)
-ggplot(cw, aes(x=weight_change)) + geom_histogram(bins=3)
-qqnorm(cw$weight_change)
-qqline(cw$weight_change)
-
-ggplot(cw, aes(x = weight_change)) +
-  geom_histogram(bins=3) +
-  facet_wrap(~ group)
-
-ggplot(cw, aes(x = group, y = weight_change)) +
-  geom_boxplot() +
-  geom_point()
-```
-
-*=======================
-
-[Scroll up in "complete this github table" copilot chat - gave scaffolding for working up from values to data frames ]
-
-An object in R is a piece of information stored in memory.
-
-A variable name is a name that refers to an object.
-
-For example, when we run:
-
-```{r}
-x <- 2 + 3
-```
-
-R first evaluates the expression `2 + 3`, producing the value `5`. It then stores this value as an object and associates it with the variable name `x`.
-
-After this assignment has been run, we can use `x` elsewhere in our code:
-
-```{r}
-x
-```
-
-```{r}
-x * 10
-```
-
-*=======================
-
+- Check spelling and capitalisation carefully.
+- Character values need quotation marks.
+- Make sure object and column names match exactly.
+- If a package cannot be found, install it first and then load it.
+- If R is not responding as expected, check that the normal Console prompt (`>`) is displayed.
+:::

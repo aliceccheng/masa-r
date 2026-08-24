@@ -119,7 +119,6 @@ height_sample <- sample(uk_heights, size = 100)
 #| fig-height: 5
 # Histogram of the sample
 hist(height_sample,
-     breaks = 40,
      col = "skyblue",
      border = "white",
      main = "",

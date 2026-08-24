@@ -212,7 +212,7 @@ You should now see `penguins` in the Environment tab of the environment pane:
 :::
 
 ::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Things to check if the data has been imported successfully
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Things to check if you're having issues importing data
 
 - Make sure the Excel file is closed when you run the code to import the data
 - Check that the spelling of the file name inside the `read_excel()` function exactly matches the spelling of the file name
@@ -228,7 +228,7 @@ The video below demonstrates how to import a file from Excel, including some thi
 
 A couple of things to note about the video:
 
-- The video imports a file called "iris" - ours is called "penguins", so whenever the video refers to "iris", replace this with "penguins" in your code
+- The video imports a file called "iris" - ours is called "penguins", so whenever the video refers to "iris", replace this with "penguins" in your code.
 - The video uses [Session > Set Working Directory > *Choose Directory*] to import the data. We have used [Session > Set Working Directory > *To Source File Location*] since this is quicker if your Excel file is saved in the same location as your script, but either method is fine.
 - The "previous video" referred to in the video is the video about installing packages, which is included in the workshop 1 materials.
 
@@ -265,7 +265,7 @@ A couple of things to note about the video:
 
 It’s a good idea to explore and get to know the data you’re working with before starting any analysis. This helps you spot issues, understand what information is available, and avoid making incorrect assumptions before you begin analysing.
 
-We'll use some simple functions, some of which we saw in workshop 1, to explore the `penguins` dataset.
+We'll use some simple functions, some of which you may have seen in workshop 1, to explore the `penguins` dataset.
 
 ### Basic data exploration
 
@@ -416,7 +416,7 @@ In workshop 1, we used several statistical functions to calculate descriptive st
 ::: {.panel-tabset .panel-blue group="language"}
 ## R
 
-**Applying a statistical function to a data frame colum - general template**
+**Applying a statistical function to a data frame column - general template**
 
 ```{r}
 #| eval = FALSE
@@ -596,9 +596,12 @@ Before running this code, let's look at its components, which form the general s
 - Choose a [**geom_xxx()**]{style="color: #901A9D;"} function based on the type of plot you want (here, `geom_boxplot()` produces a boxplot)\
 - Customise the plot using additional components - here we add [**labels**]{style="color: #0070C0;"} using the [**labs()**]{style="color: #0070C0;"} function
 
-We can build the boxplot one component at a time.
+We can build the boxplot one component at a time, shown in the code tabs below.
 
-[TASK?] Click through the tabs below to see how each component contributes to building the boxplot step by step:
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- Click through the tabs below to see how each code component contributes to building up the boxplot step by step
+:::
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -638,13 +641,13 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Copy the code from the final tab to your script.
+- Copy the code from the final tab above to your script.
 - Run the code to produce the boxplot.
 :::
 
 ### Template code for a boxplot
 
-Below is...
+Below is a template for creating a boxplot with any dataset you like. Remember that the variable on the y-axis should be a continuous variable, while the variable on the x-axis should be a categorical variable representing the groups being compared.
 
 ::: {.panel-tabset .panel-blue}
 ## Template code: boxplot
@@ -665,7 +668,7 @@ ggplot(_________, aes(x = _________, y = ________)) +
 :::
 
 ::: {.panel-tabset}
-## Example: boxplot
+## Examples: boxplot
 
 This is our original boxplot code, which produces a boxplot of body mass by species:
 
@@ -692,6 +695,8 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 ```
 :::
 
+### Extension: additional boxplot task
+
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 Suppose you want to compare bill length for males versus females
@@ -704,17 +709,55 @@ Suppose you want to compare bill length for males versus females
 
 :::
 
-### Extension: additional customisation options
-
-[To be added]
-
-
 ## Summary
 
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Key points
+In this workshop, we worked with a larger dataset imported from Excel and used it to compare body mass between different penguin species.
 
-- ...
+Below is a summary of the main concepts covered.
 
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Data import and exploration
 
+- Use `read_excel()` to import Excel data into R.
+- Use `names()`, `head()`, `View()`, and `str()` to explore a data frame.
+- It is good practice to explore and understand a dataset before analysing it.
 :::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Factors and data types
+
+- Factors are used to store categorical variables with fixed levels.
+- Use `as.factor()` to convert a variable to a factor.
+- Use `str()` to check the data types of variables in a data frame.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Descriptive statistics
+
+- Use `summary()` and `describe()` to generate summaries of a data frame.
+- Use functions such as `mean()`, `median()`, `sd()`, `min()`, and `max()` to calculate descriptive statistics.
+- Use `table()` to count observations in categorical variables.
+- Use `by()` to calculate descriptive statistics separately for different groups.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Boxplots
+
+- Use the **ggplot2** package to create boxplots.
+- Use `ggplot()` to specify the data and variables.
+- Use `geom_boxplot()` to create a boxplot.
+- In a boxplot, the x-axis should contain a categorical variable and the y-axis should contain a continuous numeric variable.
+- Boxplots provide a visual way to compare groups.
+:::
+
+::: {.callout-tip icon="false" collapse="true"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"} Key workflow
+
+1. Import the data.
+2. Explore the data.
+3. Check data types and convert variables to factors where appropriate.
+4. Generate descriptive statistics.
+5. Compare groups using tables, summary statistics, and boxplots.
+:::
+
+In the next and final workshop, we will revisit and practise these skills using a new dataset, and learn how to statistically test for differences between two groups.

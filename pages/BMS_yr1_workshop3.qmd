@@ -13,8 +13,9 @@ In the third and final workshop, you will use the skills you have developed so f
 
 By the end of this workshop, you should be able to:
 
-- xxxxxxxxxxxxxx
-- xxxxxxxxxxxxxx
+- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a new dataset
+- Copy and save plots created with ggplot2
+- Run a t-test to statistically compare two groups of measurements
 :::
 
 ## Workshop structure
@@ -120,7 +121,15 @@ The main workshop examples are structured around some loose hypothetical researc
 
 :::
 
-## Recap: Exploring the data
+## Further practice: Exploring data, producing grouped descriptives and creating boxplots
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+
+- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a new dataset
+:::
+
+### Exploring the data
 
 It’s a good idea to explore and get to know the data you’re working with before starting any analysis. 
 
@@ -150,7 +159,7 @@ A control group was given the standard diet, whilst a treatment group was given 
 The tail length was recorded in mm after five months of development.
 
 
-## Recap: Grouped descriptive statistics
+### Grouped descriptive statistics
 
 Often, we want to obtain descriptive statistics broken down by certain subsets of data i.e. *grouped* descriptive statistics.
 
@@ -202,7 +211,7 @@ by(ws3data$tail_length_mm, ws3data$treat_group, mean)
 [Answers]
 :::
 
-## Recap: Creating a boxplot with ggplot2
+### Creating a boxplot with ggplot2
 
 In workshop 2 we learnt how to create a boxplot using ggplot2 data.
 
@@ -263,11 +272,44 @@ This graph currently has no title. In practice, you can add a figure legend by c
 :::
 
 
-## Optional: Further boxplot customisations
+## Copying and saving plots
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+
+- Copy and save plots created with ggplot2
+:::
+
+Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
+
+### Copying a plot
+
+The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
+
+![](../images/clipboard-1982207542.png)
+
+### Saving a plot
+
+To save a plot as an image file, you can either:
+
+- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
+
+![](../images/clipboard-3693964577.png)
+
+- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
+
+```{r}
+#| eval: false 
+ggsave("my_plot.png", width = 8, height = 5)
+```
+
+`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
+
+## Extension: Further boxplot customisations
 
 ### Changing the fill colour of the boxes
 
-**Variable**
+**Variable aesthetics**
 
 In ggplot2, `aes` (short for "aesthetics") refers to the visual properties of the plot - things like position (x and y), colour, size, and shape - and how variables in your data are mapped to them.
 
@@ -293,7 +335,7 @@ ggplot(_________, aes(x = _________, y = ________, fill = _________)) +
 
 :::
 
-**Fixed**
+**Fixed aesthetics**
 
 So far we have used `geom_boxplot()` with no arguments inside the brackets, but there are lots of additional customisation options available by specifying arguments inside it.
 
@@ -359,36 +401,13 @@ In the previous section you produced a boxplot to compare tail lengths betwen tr
 [Answers]
 :::
 
-
-## Copying and saving plots
-
-Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
-
-### Copying a plot
-
-The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
-
-![](../images/clipboard-1982207542.png)
-
-### Saving a plot
-
-To save a plot as an image file, you can either:
-
-- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
-
-![](../images/clipboard-3693964577.png)
-
-- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
-
-```{r}
-#| eval: false 
-ggsave("my_plot.png", width = 8, height = 5)
-```
-
-`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
-
-
 ## Statistical tests in R
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+
+- Run a t-test to statistically compare two groups of measurements
+:::
 
 ### Analysis of Workshop 3 data
 
@@ -471,9 +490,9 @@ You can view the results by.......
 ![](../images/ws3_ttest_results.png){width="700" style="display:block; margin: 2em auto;"}
 
 
-### Optional: Syntax for other statistical tests in R
+### Optional reading: Syntax for other statistical tests in R
 
-This information is for interest.
+This information is for interest only.
 
 Many statistical tests use a similar syntax to that shown above, with `t.test` replaced by the function for the appropriate test. Some examples are shown below.
 
@@ -535,3 +554,66 @@ We can compare the tail lengths in the control group versus the treatment group,
 
 
 [[[plotting - now can introduce more general ggplot template??]]]
+
+
+
+===============================================================
+
+
+=======
+
+[[coursework data]]
+
+```{r}
+#| eval: FALSE
+
+weight_change <- c(10,15,12,18,13,6,29,21,24,20,28,30,25,21,15,21,23,22)
+group <- c(rep("control",9),rep("treated",9)) # note the boxplot stills works if it's not a factor
+
+cw <- data.frame(group,weight_change) 
+# note if you apply the factor function here it actually names the variable factor.group!
+
+# This is not by group currently
+
+library(ggplot2)
+hist(weight_change)
+ggplot(cw, aes(x=weight_change)) + geom_histogram(bins=3)
+qqnorm(cw$weight_change)
+qqline(cw$weight_change)
+
+ggplot(cw, aes(x = weight_change)) +
+  geom_histogram(bins=3) +
+  facet_wrap(~ group)
+
+ggplot(cw, aes(x = group, y = weight_change)) +
+  geom_boxplot() +
+  geom_point()
+```
+
+*=======================
+
+[Scroll up in "complete this github table" copilot chat - gave scaffolding for working up from values to data frames ]
+
+An object in R is a piece of information stored in memory.
+
+A variable name is a name that refers to an object.
+
+For example, when we run:
+
+```{r}
+x <- 2 + 3
+```
+
+R first evaluates the expression `2 + 3`, producing the value `5`. It then stores this value as an object and associates it with the variable name `x`.
+
+After this assignment has been run, we can use `x` elsewhere in our code:
+
+```{r}
+x
+```
+
+```{r}
+x * 10
+```
+
+*=======================
