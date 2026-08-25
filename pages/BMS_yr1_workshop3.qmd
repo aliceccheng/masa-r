@@ -2,7 +2,7 @@
 number-sections: false
 ---
 
-# R workshop 3: Statistical analysis in R
+# R workshop 3:<br>Statistical analysis in R
 
 ## Learning outcomes
 

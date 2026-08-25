@@ -2,7 +2,7 @@
 number-sections: false
 ---
 
-# R workshop 1: Getting started in R and data handling
+# R workshop 1:<br>Getting started in R and data handling
 
 ## Introduction: R workshops overview
 
@@ -97,7 +97,7 @@ By the end of this session, you should be able to:
 - Refer to stored values using object names
 - Use built-in R functions with the correct basic syntax
 - Use the combine function (c()) to group multiple numeric or character values into a single vector
-- Describe the structure of a data frame and create one by combining vectors.
+- Describe the structure of a data frame and create one by combining vectors
 - Use the $ operator to select a column from a data frame and apply functions to it
 - Identify the main data types used in R
 - Install and load R packages
@@ -168,7 +168,7 @@ The table below explains what each pane is used for:
 |---------------------|---------------------------------------------------|
 | Source | The source pane is mainly used for writing and editing R scripts (documents containing code). |
 | Console | The Console is where your R code runs and where you can see the results. |
-| Environment | The Environment pane has 4 tabs: Environment, History, Connections, and Tutorial. You will mostly use the Environment tab, which displays information about the data and variables you have created. |
+| Environment | The Environment pane has 4 tabs: Environment, History, Connections, and Tutorial. You will mostly use the Environment tab, which displays information about the data and objects you have stored. |
 | Output | The output pane has several tabs (Files, Plots, Packages etc.). In these workshops we'll use the packages tab, which lists the R packages installed on your computer (more on packages later), and the plots tab, which displays graphs that you create. |
 :::
 
@@ -228,6 +228,8 @@ A new blank script will open in the source pane:
 Saving a script is similar to saving a Microsoft Word document. To save your script, go to <strong>File &gt; Save As...</strong> and choose a location and filename.
 
 You can also save your script using the keyboard shortcut <strong>Ctrl + S</strong> (or <strong>Cmd + S</strong> on a Mac).
+
+If a script contains unsaved changes, its name will appear in red with an asterisk (*) next to it.
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
@@ -419,6 +421,8 @@ Practise running some more simple calculations based on our three penguins:
 - Add together the body masses of penguin 1 (3750) and penguin 2 (4500)
 - Use a division to find penguin 1's body mass (3750g) in kg
 
+Run each calculation twice: once from your script and once directly in the Console.
+
 ::: {.callout-caution icon="false" collapse="true"}
 ### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
 
@@ -433,7 +437,7 @@ Practise running some more simple calculations based on our three penguins:
 
 ***Video***
 
-The video below demonstrates using R for some simple calculations:
+The video below demonstrates using R for some simple calculations. Note that the example and tasks differ slightly from those given above.
 
 <div style="text-align: center;">
   <iframe
@@ -537,7 +541,7 @@ The expression produces a result (`5`), which is displayed in the console but is
 
 Assignments *store* the result of an expression so that it can be used later.
 
-We do this using the assignment operator - a symbol (`<-`) which takes the result of the expression to its right, and assigns the result to the name on its left.
+We do this using the assignment operator, a symbol (`<-`) which takes the result of the expression to its right and stores it in an object with the name shown on its left (i.e. it *assigns* that name to the result).
 
 ::: {.panel-tabset .panel-blue}
 ## Template code - assignment
@@ -545,14 +549,14 @@ We do this using the assignment operator - a symbol (`<-`) which takes the resul
 ```{r}
 #| eval: false
 _______________ <- ______________
- variable name      expression
+ object name         expression
 ```
 
 Let's break this down:
 
 - Fill in the `expression` blank with an expression (the piece of code you want R to run)
 - `<-` is called the assignment operator. This operator takes the result of the expression to its right, and assigns the result to the name on its left.
-- Fill in the `variable name` blank with the name you want to give to the result
+- Fill in the `object name` blank with the name you want to give to the result
 :::
 
 For example:
@@ -575,9 +579,9 @@ Using `<-` makes your code easier to read because it clearly distinguishes assig
 ::: {style="margin-top: 2em;"}
 :::
 
-**Assigned variables**
+**Assigned objects**
 
-Whenever you assign something to a variable name, it will appear in the Environment tab of the Environment pane:
+Whenever you assign something to a named object, that object will appear in the Environment tab of the Environment pane:
 
 ![](../images/vars_env.png){width="400" style="display:block; margin: 2em auto;"}
 You can also view an object by simply running its name. For example, typing and running the code `x` will print whatever is stored in it (in our case, `5`).
@@ -588,26 +592,32 @@ x
 
 **Why are assignments useful?**
 
-At the moment this might seem a bit pointless. Why do we want to save `2 + 3` in a variable called `x`?
+At the moment this might seem a bit pointless. Why do we want to save `2 + 3` in an object called `x`?
 
 However, assignments become much more useful when we are working with larger calculations, datasets, and statistical analyses. By assigning a result to a name, we can refer to it again later without having to retype or recalculate it.
 
 You'll see the assignment operator (`<-`) used throughout these sessions, as it is one of the main ways that we store and work with information in R.
 
+::: callout-important
+### Write code in your script, not the console
+
+From now on, unless you're testing a small piece of code, write all of your code in the script rather than the console. This makes it easier to save, review, and rerun your work later.
+:::
+
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Calculate `3 - 2` and store the result in a variable named `y`.
+- Calculate `3 - 2` and store the result in an object named `y`.
 :::
 
 ***Video***
 
-The video below explains expressions and assignments:
+The video below explains expressions and assignments. Note the video refers to "variables" rather than "objects". Although these terms are often used interchangeably, we will use the term "object" in these workshops.
 
 <div style="text-align: center;">
   <iframe
     width="80%"
     style="aspect-ratio: 16 / 9;"
-    src="https://www.youtube.com/embed/wf__WxPF-uU&quot"
+    src="https://www.youtube.com/embed/wf__WxPF-uU?si=pcgDEYD-jS7OpFCM"
     title="YouTube video player"
     allowfullscreen>
   </iframe>
@@ -646,7 +656,7 @@ Let's explore this using our penguin data.
 
 When assigning numeric values, we simply type the numbers we want to store.
 
-For example, let's create 3 variables called `mass_1`, `mass_2` and `mass_3` to store our pengiuns' respective body masses.
+For example, let's create 3 objects called `mass_1`, `mass_2` and `mass_3` to store our pengiuns' respective body masses.
 
 ```{r}
 mass_1 <- 3750
@@ -658,7 +668,7 @@ mass_3 <- 3500
 
 When assigning character values (i.e. text), we need to use quotes around the values.
 
-For example, let's create 3 variables called `species_1`, `species_2` and `species_3` to store our penguins' respective body masses.
+For example, let's create 3 objects called `species_1`, `species_2` and `species_3` to store our penguins' respective body masses.
 
 ```{r}
 species_1 <- "Adelie"
@@ -705,8 +715,27 @@ total_mass
 
 The benefit may not be obvious in such a small example, but storing values in named objects becomes increasingly useful as datasets and calculations become more complex.
 
+::: {.callout-important collapse="true"}
+### Be careful not to overwrite your objects
+
+If you assign a new value to an object that already exists, the original contents will be replaced.
+
+For example:
+
+```{r}
+#| eval: false
+mass_1 <- 3750
+mass_1 <- 4000
+```
+After the second line runs, mass_1 will contain 4000. The original value (3750) will be lost.
+
+If you overwrite an object by mistake, you will usually need to rerun the code that created it in order to restore its original contents.
+:::
+
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+The mass of each penguin is currently given in grams.
+
 - Use your `mass_1` object to calculate the mass of penguin 1 in kilograms
 :::
 
@@ -725,22 +754,22 @@ R contains lots of built-in functions that are ready to use. Although each funct
 
 ### A simple example
 
-We saw earlier that we can type and run the name of a variable to see what is stored in it. For example:
+We saw earlier that we can type and run the name of an object to see what is stored in it. For example:
 
 ```{r}
-x       # print the information stored in the variable x
-mass_1  # print the information stored in the variable mass_1
+x       # print the information stored in the object called x
+mass_1  # print the information stored in the object called mass_1
 ```
 
 **The print function**
 
 We could alternatively use the `print` function, a function which tells R to display a value in the console.
 
-If you type `print()` and place the name of a variable inside the brackets, R will display the value stored in that variable. This is another way of viewing a variable's contents, and gives the same result as typing the variable name by itself.
+If you type `print()` and place the name of an object inside the brackets, R will display the value stored in that object. This is another way of viewing an object's contents, and gives the same result as typing the object name by itself.
 
 ```{r}
-print(x)       # print the information stored in the variable x
-print(mass_1)  # print the information stored in the variable mass_1
+print(x)       # print the information stored in the object x
+print(mass_1)  # print the information stored in the object mass_1
 ```
 
 This is a simple example of a function. R provides many other functions that can be used to perform a wide range of tasks.
@@ -796,7 +825,7 @@ ________________(______________)
 Examples of functions:
 ```{r}
 #| eval: false
-print(mass_1)           # this prints the value stored within the mass_1 variable
+print(mass_1)           # this prints the value stored within the mass_1 object
 class(mass_1)           # this displays the type (class) of data stored in mass_1
 sum(mass_1, mass_2)     # this adds the values of mass_1 and mass_2 together
 ```
@@ -816,7 +845,7 @@ sum(mass_1, mass_2)     # this adds the values of mass_1 and mass_2 together
 - Use the combine function (c()) to group multiple numeric or character values into a single vector
 :::
 
-So far, we've been storing single values. A vector is another type of R object that stores an ordered collection of values of the same type. This is more practical when working with lots of values.
+So far, we've been storing single values. A vector is another type of data structure in R that stores an ordered collection of values of the same type. This is more practical when working with lots of values.
 
 To create a vector, we use the `c()` function - the `c` stands for "combine". This is an example of a function with multiple arguments, where each value we want to include is supplied as a separate argument, separated by commas.
 
@@ -827,10 +856,10 @@ This general code structure is shown in the template code below:
 ```{r}
 #| eval: false
 _______________ <- c(_____________, _______________, ______________ ...)
- vector name         first value     second value     third value
+ object name         first value     second value     third value
 ```
 
-- Replace the first blank (`vector name`) with the name you want to give your vector
+- Replace the first blank (`object name`) with the name you want to give your vector
 - Replace the remaining blanks with the values you want to include in the vector, separated by commas
 :::
 
@@ -842,7 +871,7 @@ _______________ <- c(_____________, _______________, ______________ ...)
 
 **Examples**
 
-Rather than storing each penguin's body mass in a separate variable, we can use a vector to store all the values together in a single vector:
+Rather than storing each penguin's body mass in a separate object, we can store all the values together in a single vector:
 
 ```{r}
 body_mass_g <- c(3750, 4500, 3500)
@@ -870,7 +899,7 @@ species <- c("Adelie","Gentoo","Chinstrap")
 - Describe the structure of a data frame and create one by combining vectors.
 :::
 
-A data frame is another type of R object. Unlike vectors, which store a single collection of values, a data frame has a tabular structure - organised into rows and columns. Each row represents a single observation, and each column represents a variable. Data frames are useful because they keep all related information organised together in one place, making it easier to work with and analyse the data.
+A data frame is another type of data structure in R. Unlike vectors, which store a single collection of values, a data frame has a tabular structure - organised into rows and columns. Each row represents a single observation, and each column represents a variable. Data frames are useful because they keep all related information organised together in one place, making it easier to work with and analyse the data.
 
 For example, below is a data frame containing our penguin data. Each row represents a single penguin, with columns recording its species and body mass: 
 
@@ -912,11 +941,11 @@ As with other objects, stored data frames will appear in the environment pane, b
 
 To view a data frame in the source pane, click on the data frame name (i.e. "penguins" here).
 
-[screenshot]
+![](../images/env_peng.png){width="400" style="display:block; margin: 2em auto;"}
 
 The data frame will open in a new tab. To return to your script, either close the tab by clicking the "x", or click directly on the script tab.
 
-[screenshot]
+![](../images/peng_source.png){width="400" style="display:block; margin: 2em auto;"}
 :::
 
 ::: {.callout-caution icon="false"}
@@ -956,11 +985,8 @@ sum(penguins$body_mass_g)
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-
-Using your `penguins` data frame and appropriate functions:
-
 - Use the `print()` function to print the `body_mass_g` column of your `penguins` data frame
-- Use the `class()` function to find the class (i.e. data type) of the `body_mass_g` column
+- Use the `class()` function to find the class (i.e. data type) of the `body_mass_g` column of your `penguins` data frame
 :::
 
 ## Types of data
@@ -1114,7 +1140,28 @@ The video below demonstrates how to install and load an R package.
 
 Have a go at using some of the functions below to explore the `penguins` data frame in more detail.
 
-With such a small dataset, some of these functions may seem unnecessary. For example, we can easily see that the data frame contains 3 rows and 2 columns just by looking at it. However, when working with larger datasets containing hundreds or thousands of rows, functions that summarise the structure and contents of a data frame become extremely useful.
+::: {style="margin-top: 2em;"}
+:::
+
+| Task | Code |
+|------|------|
+| Find the number of columns | `ncol(penguins)` |
+| Find the number of rows | `nrow(penguins)` |
+| Select a single column (variable) | `penguins$species` |
+| Look at the first few rows of data | `head(penguins)` |
+| Look at the structure of the data | `str(penguins)` |
+| Count the number of each species | `table(penguins$species)` |
+| Find the mean body mass | `mean(penguins$body_mass_g)` |
+| Find the minimum body mass | `min(penguins$body_mass_g)` |
+| Generate basic summary statistics | `summary(penguins)` |
+| Generate more detailed summary statistics | `describe(penguins)` |
+
+::: {style="margin-top: 2em;"}
+:::
+
+With such a small dataset, some of these functions are not very useful. For example, we can easily see that the data frame contains 3 rows and 2 columns just by looking at it. However, when working with larger datasets containing hundreds or thousands of rows, functions that summarise the structure and contents of a data frame become extremely useful.
+
+In the next workshop, we'll continue to look at functions for exploring and summarising data frames and their columns.
 
 ## Summary
 

@@ -2,7 +2,7 @@
 number-sections: false
 ---
 
-# R workshop 2: Descriptive statistics and graphing in R
+# R workshop 2:<br>Descriptive statistics and graphing in R
 
 In the second workshop, you will learn how to produce descriptive statistics and create graphs in R. The workshop focuses on comparing groups and visualising data using boxplots.
 
@@ -695,7 +695,7 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm)) +
 ```
 :::
 
-### Extension: additional boxplot task
+## Extension: additional boxplot task
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
