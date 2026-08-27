@@ -41,7 +41,7 @@ Investigate whether adding a supplement to hamster pup diet will affect tail gro
 
 1.  Open RStudio (you do not need to open R separately)
 
-2.  Create a new script and save it in your dedicated folder for the R work on this module
+2.  Create a new script (File > New File > R Script) and save it in your dedicated folder for the R work on this module
 
 3.  Below is the code for installing the packages that are needed for this workshop. Copy and paste the code for any packages you have not previously installed into your **console** and run it.
 

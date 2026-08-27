@@ -120,6 +120,8 @@ We will now import the penguins.xlsx Excel spreadsheet into R. This is the datas
 
 Before importing the data, we need to set the working directory. The working directory is the folder on your computer that R is currently using. When you ask R to open a file, it will first look for that file in the working directory, so we need to make sure it is set to the location of the penguins.xlsx spreadsheet.
 
+### Steps for importing Excel data
+
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Import the penguins Excel file into R by following the steps below
@@ -213,17 +215,6 @@ You should now see `penguins` in the Environment tab of the environment pane:
 ::: {style="margin-top: 2em;"}
 :::
 
-::: {.callout-note icon="false" collapse="true"}
-### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Things to check if you're having issues importing data
-
-- Make sure the Excel file is closed when you run the code to import the data
-- Check that the spelling of the file name inside the `read_excel()` function exactly matches the spelling of the file name
-- Check that the file extension is correct (e.g. `.xlsx` rather than `.xls`)
-- Make sure the Excel file is saved in your current working directory.
-- Check that you have set the working directory to the correct folder (you can run the command `getwd()` to check what the working directory is set to)
-- Ensure that you have loaded the `readxl` package 
-:::
-
 ***Video***
 
 The video below demonstrates how to import a file from Excel, including some things to check if it is not working.
@@ -252,6 +243,19 @@ A couple of things to note about the video:
 - 2:28 – Importing data (.xls and .xlsx files) using the read_excel function
 - 2:59 – Common errors when importing Excel files
 - 4:13 – Viewing the imported data
+:::
+
+### Troubleshooting
+
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Things to check if you're having issues importing data
+
+- Make sure the Excel file is closed when you run the code to import the data
+- Check that the spelling of the file name inside the `read_excel()` function exactly matches the spelling of the file name
+- Check that the file extension is correct (e.g. `.xlsx` rather than `.xls`)
+- Make sure the Excel file is saved in your current working directory.
+- Check that you have set the working directory to the correct folder (you can run the command `getwd()` to check what the working directory is set to)
+- Ensure that you have loaded the `readxl` package 
 :::
 
 ## Exploring a data frame
