@@ -4,21 +4,33 @@ number-sections: false
 
 # R workshop 3:<br>Statistical analysis in R
 
-## Learning outcomes
+## Workshop 3 overview
 
 In the third and final workshop, you will use the skills you have developed so far to analyse a new dataset and conduct an independent samples t-test.
+
+### Learning outcomes
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
 
 By the end of this workshop, you should be able to:
 
-- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a new dataset
+- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a given dataset
 - Copy and save plots created with ggplot2
 - Run a t-test to statistically compare two groups of measurements
 :::
 
-## Workshop structure
+### Workshop structure??
+
+We'll start by....
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aim
+
+Investigate whether adding a supplement to hamster pup diet will affect tail growth
+
+[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
+:::
 
 ## Setup {#setup}
 
@@ -76,57 +88,104 @@ From now on, unless you're testing a small piece of code, write all of your code
 
 ## Importing workshop 3 data
 
-In workshop 2, we learnt how to import data from an Excel file into R.
+In workshop 2, we learnt how to import data from an Excel file into R. We will repeat this process to import our workshop 3 data.
 
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Import the "Workshop 3 data" Excel file into R by following the steps below
 :::
 
-1. Save the Workshop 3 Excel file [link] in your dedicated folder for the R work on this module (this should be the same folder that your R script is saved in.)
+**Step 1: Check that the readxl package is installed and loaded**
 
-2. Set your working directory by clicking: Session > Set Working Directory > To Source File Location, as shown below.
+Confirm that the `readxl` package has successfully installed and loaded in your session by checking that `readxl` is ticked in the Packages tab of the Output pane (as shown in the screenshot below).
+
+![](../images/package_readxl.png){width="500" style="display:block; margin: 2em auto;"}
+
+**Step 2: Save the Excel file**
+
+Download the Workshop 3 data.xlsx file from SurreyLearn [link] and save it in your dedicated folder for the R work on this module. This should be the same location as where your R script is saved.
+
+**Step 3: Set your working directory**
+
+Set your working directory by clicking: Session > Set Working Directory > To Source File Location, as shown below.
 
 ![](../images/setwd.png){width="600" style="display:block; margin: 2em auto;"}
+You can also set the working directory manually by selecting "Choose Directory...", rather than "To Source File Location". For example, if your Excel file is stored in a different folder from your R script, you should choose the folder containing the Excel file as your working directory.
 
-3. Copy the line of code below into your script and run it. This command imports the data using the `read_excel()` function and assigns it the name "ws3data".
+**Step 4: Copy the code for setting the working directory into your script**
+
+After setting the working directory, you should see a line of code similar to the one below appear in the Console. (The `setwd() function` tells R which folder to use as the working directory, and the text inside the brackets is the file path to that folder.)
+
+![](../images/setwd_code.png){width="500" style="display:block; margin: 2em auto;"}
+
+Copy and paste this line of code into your script (not including the `>` symbol). (The file path in your line of code will be different, as it will refer to the specific folder on your computer where your files are saved.)
+
+**Step 5: Import the data using the read_excel() function**
+
+Copy the line of code below into your script and run it. This command imports the data using the `read_excel()` function and assigns it the name "ws3data".
 
 ```{r}
 #| results: hide
 ws3data <- read_excel("Workshop 3 data.xlsx")
 ```
 
-4. Check that a data frame called "ws3data" now appears in the Environment tab of the environment pane, as shown below.
+**Step 6: Check the data has imported successfully**
+
+Check that a data frame called "ws3data" now appears in the Environment tab of the environment pane, as shown below.
 
 ![](../images/ws3data.png){width="400" style="display:block; margin: 2em auto;"}
 
-[see workshop 2 for video - link]
-[put common errors again]
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Things to check if you're having issues importing data
 
+- Make sure the Excel file is closed when you run the code to import the data
+- Check that the spelling of the file name inside the `read_excel()` function exactly matches the spelling of the file name
+- Check that the file extension is correct (e.g. `.xlsx` rather than `.xls`)
+- Make sure the Excel file is saved in your current working directory.
+- Check that you have set the working directory to the correct folder (you can run the command `getwd()` to check what the working directory is set to)
+- Ensure that you have loaded the `readxl` package 
+:::
 
-![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"}
+***Video***
 
-## Workshop aims for analysing the data {#aims}
+The video below demonstrates how to import a file from Excel, including some things to check if it is not working.
 
-**THIS NEEDS UPDATING**
+A couple of things to note about the video:
 
-The main workshop examples are structured around some loose hypothetical research aims relating to the gapminder data:
+- The video imports a file called "iris" - ours is called "penguins", so whenever the video refers to "iris", replace this with "penguins" in your code.
+- The video uses [Session > Set Working Directory > *Choose Directory*] to import the data. We have used [Session > Set Working Directory > *To Source File Location*] since this is quicker if your Excel file is saved in the same location as your script, but either method is fine.
+- The "previous video" referred to in the video is the video about installing packages, which is included in the workshop 1 materials.
 
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Aims
+<div style="text-align: center;">
+  <iframe
+    width="80%"
+    style="aspect-ratio: 16 / 9;"
+    src="https://www.youtube.com/embed/rJljmh2CEZU"
+    title="YouTube video player"
+    allowfullscreen>
+  </iframe>
+</div>
 
-- Investigate whether adding a supplement to hamster pup diet will affect tail growth
-
-[specifically, compare tail growth between the hamsters that were given the standard diet (the control group) and the hamsters that were given the supplement in addition to the standard diet (the treatment group).]
-
+::: {.callout-note icon="false" collapse="true"}
+### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Video timestamps
+- 0:00 – Introduction (and recap of installing the readxl package)
+- 0:40 – Setting the working directory - how and why
+- 2:09 – Checking your current working directory using getwd()
+- 2:28 – Importing data (.xls and .xlsx files) using the read_excel function
+- 2:59 – Common errors when importing Excel files
+- 4:13 – Viewing the imported data
 :::
 
 ## Further practice: Exploring data, producing grouped descriptives and creating boxplots
 
+In Workshop 2, we explored the penguins dataset and used descriptive statistics and a boxplot to compare body mass across species.
+
+We will now follow the same process to investigate differences in tail growth between two groups of hamsters.
+
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
 
-- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a new dataset
+- Apply data exploration, grouped descriptive statistics, and boxplots to compare groups in a given dataset
 :::
 
 ### Exploring the data
@@ -147,6 +206,8 @@ We could view the entire data frame in the console by typing its name and runnin
 View(ws3data)   
 ```
 :::
+
+![](../images/view_ws3data.png){width="400" style="display:block; margin: 2em auto;"}
 
 This is quite a small dataframe, so we can get to know it visually rather than using functions.
 
@@ -244,67 +305,6 @@ ggplot(_________, aes(x = _________, y = ________)) +
 [Answers]
 :::
 
-## Boxplot interpretation
-
-The bar graph produced in the task above should look like this:
-
-```{r}
-#| echo: false
-ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
-  geom_boxplot() +
-  labs(x = "Treatment group",
-       y = "Tail length(mm)")
-```
-
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-What observations can we make from the bar graph regarding the comparison between the groups?
-
-[Answers]
-:::
-
-::: callout-important
-### Adding a figure title
-
-This graph currently has no title. In practice, you can add a figure legend by copying the graph into Word and adding a figure legend below the graph.
-
-(It is not possible to add a proper figure caption in a standard R script.)
-:::
-
-
-## Copying and saving plots
-
-::: {.callout-tip icon="false"}
-### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
-
-- Copy and save plots created with ggplot2
-:::
-
-Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
-
-### Copying a plot
-
-The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
-
-![](../images/clipboard-1982207542.png)
-
-### Saving a plot
-
-To save a plot as an image file, you can either:
-
-- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
-
-![](../images/clipboard-3693964577.png)
-
-- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
-
-```{r}
-#| eval: false 
-ggsave("my_plot.png", width = 8, height = 5)
-```
-
-`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
-
 ## Extension: Further boxplot customisations
 
 ### Changing the fill colour of the boxes
@@ -400,6 +400,67 @@ In the previous section you produced a boxplot to compare tail lengths betwen tr
 
 [Answers]
 :::
+
+## Boxplot interpretation
+
+The bar graph produced in the task above should look like this:
+
+```{r}
+#| echo: false
+ggplot(ws3data, aes(x = treat_group, y = tail_length_mm)) +
+  geom_boxplot() +
+  labs(x = "Treatment group",
+       y = "Tail length(mm)")
+```
+
+::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+What observations can we make from the bar graph regarding the comparison between the groups?
+
+[Answers]
+:::
+
+::: callout-important
+### Adding a figure title
+
+This graph currently has no title. In practice, you can add a figure legend by copying the graph into Word and adding a figure legend below the graph.
+
+(It is not possible to add a proper figure caption in a standard R script.)
+:::
+
+
+## Copying and saving plots
+
+::: {.callout-tip icon="false"}
+### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcome
+
+- Copy and save plots created with ggplot2
+:::
+
+Once you are happy with a plot, you may want to save it to use elsewhere - for example in a report or presentation.
+
+### Copying a plot
+
+The simplest way to copy a plot is to click the **Export** button in the Plots pane in RStudio, then select **Copy to Clipboard**. You can then paste it directly into a Word document or PowerPoint presentation.
+
+![](../images/clipboard-1982207542.png)
+
+### Saving a plot
+
+To save a plot as an image file, you can either:
+
+- Click **Export** in the Plots pane, then select **Save as Image** and choose the file format, size, and destination
+
+![](../images/clipboard-3693964577.png)
+
+- Use `ggsave()` in your code, which saves the most recently generated plot to a file:
+
+```{r}
+#| eval: false 
+ggsave("my_plot.png", width = 8, height = 5)
+```
+
+`ggsave()` automatically detects the file format from the file extension - common options include `.png`, `.pdf`, and `.jpeg`.
 
 ## Statistical tests in R
 

@@ -4,9 +4,11 @@ number-sections: false
 
 # R workshop 2:<br>Descriptive statistics and graphing in R
 
+## Workshop 2 overview
+
 In the second workshop, you will learn how to produce descriptive statistics and create graphs in R. The workshop focuses on comparing groups and visualising data using boxplots.
 
-## Learning outcomes
+### Learning outcomes
 
 ::: {.callout-tip icon="false"}
 ### [{{< fa regular lightbulb >}}]{style="color: #872046;"}  Learning outcomes
@@ -21,7 +23,7 @@ By the end of this workshop, you should be able to:
 - Produce a boxplot using the ggplot2 package
 :::
 
-## Workshop outline
+### Workshop outline
 
 In workshop 1 we constructed a very small penguins dataset from scratch. In this workshop we'll look at a larger dataset.
 
@@ -135,7 +137,7 @@ Confirm that the `readxl` package has successfully installed and loaded in your 
 
 **Step 2: Save the Excel file**
 
-Download the penguins.xlsx from SurreyLearn [link] save it in your dedicated folder for the R work on this module. This should be the same location as where your R script is saved.
+Download the penguins.xlsx file from SurreyLearn [link] and save it in your dedicated folder for the R work on this module. This should be the same location as where your R script is saved.
 
 ::: {.callout-important collapse="true"}
 ### Make sure your script and the penguins.xlsx file are saved in the same folder
@@ -201,7 +203,7 @@ How this command works:
 ::: {style="margin-top: 2em;"}
 :::
 
-**Step 7: Check the data has imported**
+**Step 6: Check the data has imported successfully**
 
 You should now see `penguins` in the Environment tab of the environment pane:
 
@@ -506,7 +508,7 @@ by(______________________, ____________________, _______________)
 
 - In the `column to summarise` blank, enter the variable you want to calculate a statistic for. For example, penguins$body_mass_g.
 - In the `column to group by` blank, enter the variable that defines the groups. For example, penguins$species.
-- In the `function` blank, enter the summary statistic you want to calculate. For example, mean, median, or sd.
+- In the `function` blank, enter the summary statistic you want to calculate. For example, mean, median, sd etc.
 :::
 
 ::: {.panel-tabset group="language"}
@@ -514,11 +516,10 @@ by(______________________, ____________________, _______________)
 
 **Example**
 
-Calculate the median body mass for each species (i.e. calcuate the median body mass *grouped by* species)
+Calculate the median body mass of each species (i.e. calculate the median body mass *grouped by* species)
 
 ```{r}
 by(penguins$body_mass_g, penguins$species, median)
-
 ```
 
 - We want to calculate a statistic for the body mass variable, so we put `penguins$body_mass_g` in the `column to summarise` position
@@ -538,8 +539,8 @@ This tells R to:
 ::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
-- Use the by() function to find the minimum body mass for each species
-- Use the by() function to find the maximum body mass for each species
+- Use the by() function to find the minimum body mass of each species
+- Use the by() function to find the maximum body mass of each species
 
 :::
 
