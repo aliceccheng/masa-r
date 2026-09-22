@@ -23,9 +23,7 @@ book:
     logo: images/LLS_SUBBRAND_LOGOS_PNG_Maths_Left_White@600x.png
     title: "R & RStudio"
     right:
-      - icon: github
-        href: https://github.com/aliceccheng/masa-r
-        aria-label: GitHub
+      - text: "![](images/stag_logo.png){fig-alt='University of Surrey logo'}"
   page-footer:
     left: "© 2026 University of Surrey"
     right: "Built with Quarto"
