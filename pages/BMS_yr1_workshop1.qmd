@@ -42,8 +42,8 @@ print("Welcome to R")
 
 Sometimes you will see code displayed in blue panels, such as the one below. These examples are designed to show the general structure of a particular function or piece of code and cannot be copied directly into R and run as they are. Instead, they contain blank spaces or placeholders that indicate the information you need to add.
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
+::: {.panel-tabset .panel-blue}
+## Template code - example
 
 Template code is shown in blue panels like this one
 
@@ -131,14 +131,11 @@ Download and install these using default options:
 
 **Other options**
 
-[CHECKING THIS]
+If you do not have a personal laptop, if your device does not support R/RStudio (for example, tablets and some Chromebooks), or if you are experiencing difficulties downloading the software, there are a couple of alternative options:
 
-If your laptop or device does not support the use of R/RStudio (e.g. tablets and some Chromebooks), or you are having difficulty downloading the program(s), there are couple of other options:
-
-- Online use of R/RStudio via <a href="https://posit.cloud/spaces/701987" target="_blank" rel="noopener">Posit Cloud</a>. This website allows you to use RStudio online through your web browser. A free account is required, and usage is limited under the free plan, but the platform functions much like the desktop version of RStudio.
-- Library laptops: The library has laptops which can be borrowed for seven days. All library laptops have R & RStudio installed on them.<a href="https://my.surrey.ac.uk/it/laptop-loans" target="_blank" rel="noopener">More information here</a>.
-
-For work outside the workshops, R and RStudio can also be accessed on all Library computers and in the AP (Austin Pearce) computer labs.
+- **Library laptops:** The library has laptops which can be borrowed for seven days. All library laptops have R & RStudio installed on them. <a href="https://my.surrey.ac.uk/it/laptop-loans" target="_blank" rel="noopener">More information on library laptop loans can be found here</a>.
+- **Online use of R/RStudio** via <a href="https://posit.cloud/spaces/701987" target="_blank" rel="noopener">Posit Cloud</a>. This website allows you to use RStudio online through your web browser. A free account is required, and usage is limited under the free plan, but the platform functions much like the desktop version of RStudio.
+- Outside of the workshops, R and RStudio are available on **all Library computers** and in the AP (Austin Pearce) computer labs.
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -424,15 +421,21 @@ Practise running some more simple calculations based on our three penguins:
 Run each calculation twice: once from your script and once directly in the Console.
 
 ::: {.callout-caution icon="false" collapse="true"}
-### [{{< fa magnifying-glass >}}]{style="color: #872046;"} Answer
-
-[To be added]
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
 
 ```{r}
-# 
+#| eval: false
+# Add together the body masses of penguin 1 (3750) and penguin 2 (4500)
+3750 + 4500
 
+# Use a division to find penguin 1's body mass (3750g) in kg
+3750/1000
 ```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
 ::::
 
 ***Video***
@@ -489,10 +492,34 @@ As your scripts become longer and more complex, comments become increasingly imp
 ::: {style="margin-top: 2em;"}
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 Add a couple of comments to your script e.g. a title / section heading / note about the calculations.
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+Example:
+
+```{r}
+#| eval: false
+# R WORKSHOP 1
+
+# Simple addition 
+2 + 3
+
+# Add the body masses of penguin 1 and penguin 2
+3750 + 4500
+
+# Find penguin 1's body mass in kg
+3750/1000
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -571,7 +598,15 @@ x <- 2 + 3  # assigns the result of 2 + 3 to an object called x
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  Can I use `=` instead of `<-` for assignments?
 
-In R, both `<-` and `=` can be used to assign values to objects. However, we recommend using `<-` for assignments.
+In R, both `<-` and `=` can be used to assign values to objects. For example, both lines of code below do the same thing.
+
+```{r}
+#| eval: false
+x <- 2 + 3
+x = 2 + 3
+```
+
+However, we recommend using `<-` for assignments.
 
 Using `<-` makes your code easier to read because it clearly distinguishes assignment from the use of `=` inside functions.
 :::
@@ -604,10 +639,27 @@ You'll see the assignment operator (`<-`) used throughout these sessions, as it 
 From now on, unless you're testing a small piece of code, write all of your code in the script rather than the console. This makes it easier to save, review, and rerun your work later.
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Calculate `3 - 2` and store the result in an object named `y`.
+- Type and run the object name (`y`) to see the value which is stored in it.
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Calculate 3 - 2 and store the result in an object named y
+y <- 3-2
+
+# Type and run the object name to to see the value which is stored in it
+y
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ***Video***
 
@@ -656,31 +708,55 @@ Let's explore this using our penguin data.
 
 When assigning numeric values, we simply type the numbers we want to store.
 
-For example, let's create 3 objects called `mass_1`, `mass_2` and `mass_3` to store our pengiuns' respective body masses.
+For example, let's create an object called `mass_1` which stores the body mass of penguin 1 (3750g):
 
 ```{r}
 mass_1 <- 3750
-mass_2 <- 4500
-mass_3 <- 3500
 ```
 
 **Assigning character values**
 
 When assigning character values (i.e. text), we need to use quotes around the values.
 
-For example, let's create 3 objects called `species_1`, `species_2` and `species_3` to store our penguins' respective body masses.
+For example, let's create an object called `species_1` which stores the species of penguin 1 (Adelie):
 
 ```{r}
+species_1 <- "Adelie"
+```
+
+:::: {.callout-caution icon="false"}
+### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
+- As shown above, create an object called `mass_1` which contains the body mass of penguin 1 (`3750`)
+- Create an object called `mass_2` which contains the body mass of penguin 2 (`4500`)
+- Create an object called `mass_3` which contains the body mass of penguin 3 (`3500`)
+- As shown above, create an object called `species_1` which contains the species of penguin 1 (`Adelie`)
+- Create an object called `species_2` which contains the species of penguin 2 (`Gentoo`)
+- Create an object called `species_3` which contains the species of penguin 3 (`Chinstrap`)
+
+Check all of these objects appears in the environment pane.
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Create objects containing the three penguin body masses
+mass_1 <- 3750
+mass_2 <- 4500
+mass_3 <- 3500
+
+# Create objects containing the three penguin species
 species_1 <- "Adelie"
 species_2 <- "Gentoo"
 species_3 <- "Chinstrap"
 ```
+:::
 
-::: {.callout-caution icon="false"}
-### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
-- Create the mass_1, mass_2 and mass_3 objects as shown above
-- Create the species_1, species_2 and species_3 objects as shown above
-- Check all of these objects appear in the Envorinment pane
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
+
+::: {style="margin-top: 2em;"}
 :::
 
 ## Using stored objects
@@ -724,20 +800,38 @@ For example:
 
 ```{r}
 #| eval: false
-mass_1 <- 3750
-mass_1 <- 4000
+mass_4 <- 3200
+mass_4 <- 3350
 ```
-After the second line runs, mass_1 will contain 4000. The original value (3750) will be lost.
+After the second line runs, mass_4 will contain 3350. The original value (3200) will be lost.
 
-If you overwrite an object by mistake, you will usually need to rerun the code that created it in order to restore its original contents.
+If you overwrite an object by mistake, you will usually need to rerun the code that created it in order to restore its original contents:
+
+```{r}
+#| eval: false
+mass_4 <- 3200
+```
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 The mass of each penguin is currently given in grams.
 
 - Use your `mass_1` object to calculate the mass of penguin 1 in kilograms
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Calculate the mass of penguin 1 in kilograms using mass_1
+mass_1/1000
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Functions
 
@@ -746,7 +840,7 @@ The mass of each penguin is currently given in grams.
 - Use built-in R functions with the correct basic syntax
 :::
 
-If you've worked with Excel, you'll be familiar with the idea of functions. For example, to add cells values in Excel, you can use the SUM() function.
+You may already have encountered functions in software such as Excel. For example, the SUM() function is used to add values together. Functions in R follow the same general idea.
 
 A function is a block of code that carries out a specific task. This could be something simple, like finding the average of a set of numbers, or something more complex, like creating a graph.
 
@@ -774,7 +868,7 @@ print(mass_1)  # print the information stored in the object mass_1
 
 This is a simple example of a function. R provides many other functions that can be used to perform a wide range of tasks.
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
 Type and run the following commands (do they all work?):
@@ -782,7 +876,28 @@ Type and run the following commands (do they all work?):
 - `print(species_1)`
 - `print(Species_2)`
 - `Print(mass_1)`
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+#| eval: false
+# This will print the value stored in species_1
+print(species_1) 
+
+# This will give an error message
+# R is case-sensitive, so 'Species_2' and 'species_2' are treated as different
+print(Species_2) 
+
+# This will give an error message - the 'p' in 'print' should be lower case
+Print(mass_1)    
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ::: {.callout-note icon="false" collapse="true"}
 ### [{{< fa info-circle >}}]{style="color: #9e9e9e;"}  R is case sensitive
@@ -799,8 +914,8 @@ Arguments are the inputs a function needs to carry out a task. Different functio
 
 This structure is shown in the template code below:
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
+::: {.panel-tabset .panel-blue}
+## Template code - functions
 ```{r}
 #| eval: false
 # Using a function with one argument:
@@ -831,11 +946,27 @@ sum(mass_1, mass_2)     # this adds the values of mass_1 and mass_2 together
 ```
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Use the `class()` function to find the class (type) of the `species_1` object
 - Use the `sum()` function to add together the three penguin masses
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Find the class of the species_1 object
+class(species_1) 
+
+# Use the `sum()` function to add together the three penguin masses
+sum(mass_1,mass_2,mass_3)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 
 ## Vectors
@@ -851,8 +982,8 @@ To create a vector, we use the `c()` function - the `c` stands for "combine". Th
 
 This general code structure is shown in the template code below:
 
-::: {.panel-tabset .panel-blue group="language"}
-## R
+::: {.panel-tabset .panel-blue}
+## Template code - creating a vector
 ```{r}
 #| eval: false
 _______________ <- c(_____________, _______________, ______________ ...)
@@ -886,11 +1017,30 @@ species <- c("Adelie","Gentoo","Chinstrap")
 ```
 
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Create the two vectors `body_mass_g` and `species` as shown in the examples above
-- Use the `print` function to print each vector
+- Use the `print` function to print each vector to the console to check it looks as you expect
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Create vectors called body_mass_g and species containing the body masses and
+# species of the three penguins
+body_mass_g <- c(3750, 4500, 3500)
+species <- c("Adelie","Gentoo","Chinstrap")
+
+# Print each vector to the console
+print(body_mass_g)
+print(species)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Data frames
 
@@ -921,7 +1071,7 @@ We already have two vectors containing our penguin data - `species` and `body_ma
 penguins <- data.frame(species, body_mass_g)
 ```
 
-This is similar to how we created vectors using `c()` — but instead of combining individual values, we are combining vectors as columns. The arguments are the names of the vectors we want to include.
+This is similar to how we created vectors using `c()` — but instead of combining individual values, we are combining vectors. The arguments are the names of the vectors we want to include, and will form the columns of the data frame.
 
 ::: {.callout-important collapse="true"}
 ### Rules for combining vectors into a data frame
@@ -948,11 +1098,24 @@ The data frame will open in a new tab. To return to your script, either close th
 ![](../images/peng_source.png){width="400" style="display:block; margin: 2em auto;"}
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - As shown above, use the `data.frame()` function to combine your `species` and `body_mass_g` vectors into a single data frame called `penguins`.
 - Click on the data frame name ("penguins") from within the Environment tab to open it in the source pane.
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Combine the `species` and `body_mass_g` vectors into a single data frame called penguins
+penguins <- data.frame(species, body_mass_g)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Data frames - accessing columns
 
@@ -983,11 +1146,27 @@ sum(penguins$body_mass_g)
 ```
 
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 - Use the `print()` function to print the `body_mass_g` column of your `penguins` data frame
 - Use the `class()` function to find the class (i.e. data type) of the `body_mass_g` column of your `penguins` data frame
+
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# Print the body_mass_g column of the penguins data frame
+print(penguins$body_mass_g)
+
+# Find the class of the body_mass_g column of the penguins data frame
+class(penguins$body_mass_g)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Types of data
 
@@ -1010,7 +1189,7 @@ There are a couple of functions we can use to check data types:
 
 - `str()` – Use this function to view the structure of an object. For example, when applied to a data frame, it shows information about each column, including its data type.
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
 Use the `str()` function to view the structure of:
@@ -1018,7 +1197,22 @@ Use the `str()` function to view the structure of:
 - the whole `penguins` data frame
 - the `species` column only
 
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+# View the structure of the whole penguins data frame
+str(penguins)
+
+# View the structure of the species column of the penguins data frame
+str(penguins$species)
+```
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
 
 ## Installing and loading packages
 
@@ -1088,6 +1282,7 @@ If R says that a package "cannot be found", it may not have been installed yet. 
 You can check that a package has been loaded successfully by looking in the Packages tab of the Output pane. All installed packages appear in the list. Packages that are currently loaded into your R session have a tick in the box next to their name.
 
 ![](../images/tick_Hmisc.png){width="600" style="display:block; margin: 2em auto;"}
+
 ::: {style="margin-top: 2em;"}
 :::
 
@@ -1096,13 +1291,30 @@ In the next two workshops, we will use a range of packages to perform additional
 ::: {style="margin-top: 2em;"}
 :::
 
-::: {.callout-caution icon="false"}
+:::: {.callout-caution icon="false"}
 ### [{{< fa laptop-code >}}]{style="color: #2E6B4E;"}  Task
 
 - Install and load the Hmisc package, as shown above.
 - Check that it now appears in your Packages list, with its box ticked.
 
+::: {.callout-caution icon="false" collapse="true"}
+### [{{< fa magnifying-glass >}}]{style="color: #2E6B4E;"} Answer
+
+```{r}
+#| eval: false
+# Install and load the Hmisc package, as shown above
+install.packages(Hmisc)
+library(Hmisc)
+```
+
+To check the package has been loaded successfully, click on the "Packages" tab within the Output pane. Scroll down (or search for Hmisc in the search box), and you should see the Hmisc package, with the box to the left of its name ticked.
 :::
+
+::: {style="margin-top: 0.1em;"}
+:::
+
+::::
+
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -1154,7 +1366,9 @@ Have a go at using some of the functions below to explore the `penguins` data fr
 | Find the mean body mass | `mean(penguins$body_mass_g)` |
 | Find the minimum body mass | `min(penguins$body_mass_g)` |
 | Generate basic summary statistics | `summary(penguins)` |
-| Generate more detailed summary statistics | `describe(penguins)` |
+| Generate more detailed summary statistics | `describe(penguins)`* |
+
+*the describe function is contained within the Hmisc package (which we installed in the previous section). Therefore, this function will only run properly if you have the Hmisc package installed and loaded.
 
 ::: {style="margin-top: 2em;"}
 :::
@@ -1162,6 +1376,12 @@ Have a go at using some of the functions below to explore the `penguins` data fr
 With such a small dataset, some of these functions are not very useful. For example, we can easily see that the data frame contains 3 rows and 2 columns just by looking at it. However, when working with larger datasets containing hundreds or thousands of rows, functions that summarise the structure and contents of a data frame become extremely useful.
 
 In the next workshop, we'll continue to look at functions for exploring and summarising data frames and their columns.
+
+## Feedback
+
+
+<iframe width="100%" height="600px" src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=kyaQa3QQqkCeIdiURqLrtVgcZHyUszJDvoXhoILzj8dUMVdSMEQ4SVoxUDhaTkdEUDRVMkZSNUE4My4u&embed=true" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+
 
 ## Summary
 
@@ -1234,6 +1454,6 @@ Below is a summary of the main concepts covered in this workshop.
 - Check spelling and capitalisation carefully.
 - Character values need quotation marks.
 - Make sure object and column names match exactly.
-- If a package cannot be found, install it first and then load it.
+- If an error message tells you a package or function "cannot be found", check it is installed and loaded. Also check the spelling and capilisation.
 - If R is not responding as expected, check that the normal Console prompt (`>`) is displayed.
 :::
